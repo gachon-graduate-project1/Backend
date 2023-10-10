@@ -1,6 +1,4 @@
 package homemate.domain.admin;
-
-
 import homemate.constant.Role;
 import homemate.constant.Status;
 import homemate.domain.TimeStamp;

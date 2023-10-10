@@ -1,5 +1,4 @@
 package homemate.domain.user;
-
 import homemate.constant.Status;
 import homemate.domain.TimeStamp;
 import jakarta.persistence.*;

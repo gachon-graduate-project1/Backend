@@ -1,6 +1,4 @@
 package homemate.domain.area;
-
-
 import homemate.constant.District;
 import homemate.constant.Status;
 import homemate.domain.TimeStamp;

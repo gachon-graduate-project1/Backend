@@ -1,5 +1,4 @@
 package homemate.domain.user;
-
 import homemate.constant.Role;
 import homemate.constant.SocialType;
 import homemate.constant.Status;
@@ -20,7 +19,7 @@ public class UserEntity extends TimeStamp {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String userName;
+    private String userName; //소셜로그인 아이디
 
     private String nickName;
 

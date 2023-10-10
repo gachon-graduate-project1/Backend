@@ -1,6 +1,4 @@
 package homemate.domain.area;
-
-
 import homemate.constant.BuildingField;
 import homemate.constant.Status;
 import homemate.constant.TransactionType;
@@ -59,11 +57,6 @@ public class BuildingEntity extends TimeStamp {
 
     @Enumerated(EnumType.STRING)
     private TransactionType transactioonType; //거래유형
-
-
-
-
-
 
 
 }

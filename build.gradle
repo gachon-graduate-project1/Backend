@@ -28,12 +28,17 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-	//H2 Database
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	runtimeOnly 'com.h2database:h2'
 
 	// mysql
 	implementation 'mysql:mysql-connector-java:8.0.32'
+
+	//MapStruct
+	implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+	implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.1.Final"
+
 
 
 }
