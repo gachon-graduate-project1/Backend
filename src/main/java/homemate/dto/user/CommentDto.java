@@ -31,7 +31,7 @@ public class CommentDto {
     public static class CommentResponseDto {
 
 
-        private ArticleDto articleDto; //댓글이 달린 게시글 dto
+        private ArticleDto.ArticleResponseDto article; //댓글이 달린 게시글 dto
 
         private String content; //내용
 

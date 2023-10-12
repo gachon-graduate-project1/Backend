@@ -33,6 +33,8 @@ public class ArticleDto {
     @Builder
     public static class ArticleResponseDto {
 
+        private UserDto.UserResponseDto user;
+
 
         private String title; //제목
 
