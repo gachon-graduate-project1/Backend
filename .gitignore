@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+*.yml
+*.properties
+*.p12
+/src/main/generated/
+/nohup/
