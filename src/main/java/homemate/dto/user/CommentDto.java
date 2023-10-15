@@ -30,8 +30,9 @@ public class CommentDto {
     @Builder
     public static class CommentResponseDto {
 
+        private Long userId; //댓글 작성한 사용자 id
 
-        private ArticleDto.ArticleResponseDto article; //댓글이 달린 게시글 dto
+        private Long articleId; //댓글이 달린 게시글 id
 
         private String content; //내용
 

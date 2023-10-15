@@ -33,8 +33,7 @@ public class ArticleDto {
     @Builder
     public static class ArticleResponseDto {
 
-        private UserDto.UserResponseDto user;
-
+        private Long userId; //게시글 작성한 사용자 id
 
         private String title; //제목
 
