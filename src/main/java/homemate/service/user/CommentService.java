@@ -1,4 +1,4 @@
 package homemate.service.user;
 
-public class CommnentService {
+public class CommentService {
 }
