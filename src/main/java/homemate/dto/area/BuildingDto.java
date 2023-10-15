@@ -4,6 +4,8 @@ import homemate.constant.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.List;
+
 public class BuildingDto {
 
     @Getter
@@ -84,6 +86,8 @@ public class BuildingDto {
 
         private TransactionType transactioonType; //거래유형
 
+        private List<String> images; //매물 사진
+
     }
 
     @Getter
@@ -123,6 +127,8 @@ public class BuildingDto {
 
         @NotBlank
         private TransactionType transactioonType; //거래유형
+
+        private List<String> images; //매물 사진
 
     }
 

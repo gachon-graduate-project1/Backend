@@ -6,6 +6,9 @@ import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 매물 정보 Entity
  */
@@ -58,6 +61,12 @@ public class BuildingEntity extends TimeStamp {
     @Enumerated(EnumType.STRING)
     private TransactionType transactioonType; //거래유형
 
-
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(
+            name = "building_images",
+            joinColumns = @JoinColumn(name = "building_id")
+    )
+    @Column(name = "image_url")
+    private List<String> images = new ArrayList<>(); //매물 사진
 }
 
