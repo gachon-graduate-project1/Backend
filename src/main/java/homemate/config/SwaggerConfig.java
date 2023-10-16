@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
         info = @Info(title = "HomeMate",
-                description = "HomeMate api명세",
+                description = "HomeMate api명세서",
                 version = "v1"))
 @RequiredArgsConstructor
 @Configuration

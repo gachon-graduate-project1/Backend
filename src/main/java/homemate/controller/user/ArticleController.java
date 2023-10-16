@@ -14,7 +14,7 @@ public class ArticleController {
      * 게시글 수정 X
      */
 
-    private ArticleService articleService;
+    private final ArticleService articleService;
 
     @PostMapping("/create")
     public ResponseEntity<ArticleDto.ArticleResponseDto> createArticle(@RequestParam("userId") Long userId, @RequestBody ArticleDto.ArticleRequestDto articleRequestDto) {

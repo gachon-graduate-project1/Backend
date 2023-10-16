@@ -21,9 +21,9 @@ import java.util.NoSuchElementException;
 @Transactional(readOnly = true)
 public class CommentService {
 
-    private CommentRepository commentRepository;
-    private CommentMapper commentMapper;
-    private UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
+    private final UserRepository userRepository;
 
     /**
      * 댓글 수정 X, 삭제만 가능

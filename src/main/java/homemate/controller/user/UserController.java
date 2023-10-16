@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     //TODO: 소셜로그인 구현 후 join, login 작성
     /**
