@@ -1,6 +1,4 @@
 package homemate.controller.user;
-
-import homemate.dto.area.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.service.user.UserService;
 import lombok.RequiredArgsConstructor;
