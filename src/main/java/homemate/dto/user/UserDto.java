@@ -11,16 +11,14 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class UserPostDto {
+    public static class UserRequestDto {
 
         /**
-         * 클라이언트에서 넘어오는 data
+         * 소셜 서버에서 넘어오는 data - nickName
          */
 
         @NotNull
         private String nickName;
-
-
 
 
     }

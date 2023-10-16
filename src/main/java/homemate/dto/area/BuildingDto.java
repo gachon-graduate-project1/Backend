@@ -13,9 +13,9 @@ public class BuildingDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class BuildingPostDto {
+    public static class BuildingRequestDto {
 
-        private String areaDetail;  //소재지(매물 세부 주소)
+        private String address;  //소재지(매물 세부 주소)
 
         private String content; //매물특징
 
@@ -46,6 +46,9 @@ public class BuildingDto {
         @NotBlank
         private TransactionType transactioonType; //거래유형
 
+        private List<String> images; //매물 사진
+
+
 
     }
 
@@ -58,7 +61,7 @@ public class BuildingDto {
 
         private AreaDto.AreaResponseDto area;
 
-        private String areaDetail;  //소재지(매물 세부 주소)
+        private String address;  //소재지(매물 세부 주소)
 
         private String content; //매물특징
 
@@ -97,7 +100,7 @@ public class BuildingDto {
     @Builder
     public static class BuildingPatchDto {
 
-        private String areaDetail;  //소재지(매물 세부 주소)
+        private String address;  //소재지(매물 세부 주소)
 
         private String content; //매물특징
 

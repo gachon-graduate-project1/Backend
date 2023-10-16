@@ -1,4 +1,5 @@
 package homemate.mapper.area;
+import homemate.domain.admin.AdminEntity;
 import homemate.domain.area.BuildingEntity;
 import homemate.dto.area.BuildingDto;
 import org.mapstruct.*;
@@ -22,6 +23,12 @@ public interface BuildingMapper {
     @Mapping(target="status", ignore = true)
     @Mapping(target="area", ignore = true)
     BuildingEntity toResponseEntity(BuildingDto.BuildingResponseDto buildingResponseDto);
+
+
+    @Mapping(target="id", ignore = true)
+    @Mapping(target="status", ignore = true)
+    @Mapping(target="area", ignore = true)
+    BuildingEntity toReqeustEntity(BuildingDto.BuildingRequestDto buildingRequestDto, AdminEntity adminEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target="id", ignore = true)

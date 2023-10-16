@@ -13,7 +13,7 @@ public class AreaDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class AreaPostDto {
+    public static class AreaRequestDto {
 
         private String district;
 

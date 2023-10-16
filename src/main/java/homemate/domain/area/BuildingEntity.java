@@ -29,7 +29,7 @@ public class BuildingEntity extends TimeStamp {
     @JoinColumn(name = "area_id")
     private AreaEntity area;
 
-    private String areaDetail;  //소재지(매물 세부 주소)
+    private String address;  //소재지(매물 세부 주소)
 
     private String content; //매물특징
 

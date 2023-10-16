@@ -12,8 +12,7 @@ public class ArticleDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class ArticlePostDto {
-
+    public static class ArticleRequestDto {
 
         @NotBlank
         private String title; //제목
