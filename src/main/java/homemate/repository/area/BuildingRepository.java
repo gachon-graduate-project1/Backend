@@ -12,4 +12,7 @@ public interface BuildingRepository extends JpaRepository<BuildingEntity,Long> {
     @Query("SELECT b FROM BuildingEntity b WHERE b.address LIKE %:keyword% ")
     List<BuildingEntity> findKeyword(String keyword);
 
+    @Query("SELECT b FROM BuildingEntity b")
+    List<BuildingEntity> getAllBuilding();
+
 }

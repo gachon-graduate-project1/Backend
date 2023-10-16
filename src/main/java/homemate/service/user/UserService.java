@@ -1,5 +1,7 @@
 package homemate.service.user;
+import homemate.domain.area.BuildingEntity;
 import homemate.domain.user.UserEntity;
+import homemate.dto.area.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.user.UserRepository;
@@ -57,13 +59,22 @@ public class UserService {
     }
 
 
-    //TODO: 전체회원조회 로직 필요한지 ?
-//    @Transactional
-//    public List<UserDto.UserResponseDto> getAllUser(){
-//
-//
-//    }
-//
+    /**
+     * 전체 회원 조회
+     */
+    @Transactional
+    public List<UserDto.UserResponseDto> getAllUser(){
+
+        List<UserEntity> userEntities = userRepository.getAllUser();
+        List<UserDto.UserResponseDto> userResponseDtos = new ArrayList<>();
+
+        for (UserEntity userEntity : userEntities) {
+            UserDto.UserResponseDto userResponseDto = userMapper.toResponseDto(userEntity);
+            userResponseDtos.add(userResponseDto);
+        }
+
+        return userResponseDtos;
+    }
     
     
     

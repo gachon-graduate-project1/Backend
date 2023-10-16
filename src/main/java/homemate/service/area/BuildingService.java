@@ -5,10 +5,13 @@ import homemate.dto.area.BuildingDto;
 import homemate.mapper.area.BuildingMapper;
 import homemate.repository.admin.AdminRepository;
 import homemate.repository.area.BuildingRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -50,12 +53,24 @@ public class BuildingService {
 
     }
 
+
+    @Transactional
+    public BuildingDto.BuildingResponseDto updateBuilding(BuildingDto.BuildingPatchDto buildingPatchDto) {
+        BuildingEntity buildingEntity = buildingRepository.findById(buildingPatchDto.getId())
+                .orElseThrow(()-> new NoSuchElementException("등록되지 않은 building: " + buildingPatchDto.getId()));
+
+        buildingMapper.updateFromPatchDto(buildingPatchDto,buildingEntity);
+
+        //TODO : 나중에 에러 처리하게 코드 변경
+        return buildingMapper.toResponseDto(buildingEntity);
+    }
+
     @Transactional
     public void deleteBuilding(Long buildingId) {
         buildingRepository.deleteById(buildingId);
         log.info("삭제된 building: {}",buildingId);
     }
-    
+
 
     //TODO : 이미지 수정 코드 작성 (클라우드 스토리지 정한 후)
 //    @Transactional
@@ -63,11 +78,11 @@ public class BuildingService {
 //        BuildingEntity buildingEntity = buildingRepository.findById(BuildingId)
 //                .orElseThrow(()->new NoSuchElementException("등록되지 않은 Building: " + BuildingId));
 //
-//        //TODO : 기존이미지 삭제 코드 작성 
+//        //TODO : 기존이미지 삭제 코드 작성
 //        buildingEntity.getImages().forEach(s3Service::deleteFile);
 //
 //        //TODO : 새로운 이미지 업로드
-//       
+//
 //
 //        return ;
 //    }
@@ -86,6 +101,23 @@ public class BuildingService {
         for (BuildingEntity BuildingEntity :buildingEntities){
             BuildingDto.BuildingResponseDto buildingResponseDto = buildingMapper.toResponseDto(BuildingEntity);
              buildingResponseDtos.add(buildingResponseDto);
+        }
+
+        return buildingResponseDtos;
+    }
+
+    /**
+     * 전체 매물 조회
+     */
+    @Transactional
+    public List<BuildingDto.BuildingResponseDto> getAllBuilding(){
+
+        List<BuildingEntity> buildingEntities = buildingRepository.getAllBuilding();
+        List<BuildingDto.BuildingResponseDto> buildingResponseDtos = new ArrayList<>();
+
+        for (BuildingEntity buildingEntity : buildingEntities) {
+            BuildingDto.BuildingResponseDto buildingResponseDto = buildingMapper.toResponseDto(buildingEntity);
+            buildingResponseDtos.add(buildingResponseDto);
         }
 
         return buildingResponseDtos;

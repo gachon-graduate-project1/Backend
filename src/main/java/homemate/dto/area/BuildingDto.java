@@ -100,6 +100,8 @@ public class BuildingDto {
     @Builder
     public static class BuildingPatchDto {
 
+        private Long id;
+
         private String address;  //소재지(매물 세부 주소)
 
         private String content; //매물특징

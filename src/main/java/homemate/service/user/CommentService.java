@@ -49,7 +49,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteArticle(Long commentId) {
+    public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
         log.info("삭제된 Comment: {}",commentId);
     }
