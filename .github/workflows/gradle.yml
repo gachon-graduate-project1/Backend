@@ -50,9 +50,9 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
+            pkill -f "java -jar homemate-backend-0.0.1-SNAPSHOT.jar"
             cd Backend
             git pull origin master
             cd build/libs
-            pkill -f "java -jar homemate-backend-0.0.1-SNAPSHOT.jar"
             nohup java -jar homemate-backend-0.0.1-SNAPSHOT.jar &
             exit
