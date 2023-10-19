@@ -24,7 +24,8 @@ public class ArticleController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getArticle(@RequestParam("articleId") Long articleId) {
-        return ResponseEntity.ok().body(articleService.getArticle(articleId));
+        ArticleDto.ArticleResponseDto article = articleService.getArticle(articleId);
+        return ResponseEntity.ok().body(article);
     }
 
     @DeleteMapping("/delete")

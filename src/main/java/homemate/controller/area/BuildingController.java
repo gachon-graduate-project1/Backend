@@ -23,7 +23,8 @@ public class BuildingController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getBuilding(@RequestParam("buildingId") Long buildingId) {
-        return ResponseEntity.ok().body(buildingService.getBuilding(buildingId));
+        BuildingDto.BuildingResponseDto building = buildingService.getBuilding(buildingId);
+        return ResponseEntity.ok().body(building);
     }
 
     @PatchMapping("/update")

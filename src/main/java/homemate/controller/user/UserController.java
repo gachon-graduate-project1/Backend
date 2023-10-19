@@ -1,4 +1,5 @@
 package homemate.controller.user;
+import homemate.domain.user.UserEntity;
 import homemate.dto.user.UserDto;
 import homemate.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,8 @@ public class UserController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getUser (@RequestParam("userId") Long userId) {
-        userService.getUser(userId);
-        return ResponseEntity.ok().body("조회된 Id: " + userId);
+        UserDto.UserResponseDto user = userService.getUser(userId);
+        return ResponseEntity.ok().body(user);
     }
 
     @PatchMapping("/update")
