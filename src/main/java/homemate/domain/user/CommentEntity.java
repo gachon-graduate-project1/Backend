@@ -17,6 +17,7 @@ public class CommentEntity extends TimeStamp {
 
     @Id
     @Column(name = "comment_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

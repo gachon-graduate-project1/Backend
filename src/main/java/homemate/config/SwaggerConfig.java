@@ -6,10 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.HashSet;
-import java.util.Set;
-
 @OpenAPIDefinition(
         info = @Info(title = "HomeMate",
                 description = "HomeMate api명세서",
