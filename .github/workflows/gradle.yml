@@ -52,7 +52,7 @@ jobs:
           script: |
             cd Backend
             git pull origin master
-            cd /build/libs
+            cd build/libs
             java -jar homemate-backend-0.0.1-SNAPSHOT.jar
             pkill java -jar homemate-backend-0.0.1-SNAPSHOT.jar
             nohup java -jar homemate-backend-0.0.1-SNAPSHOT.jar &
