@@ -26,7 +26,8 @@ public class CommentController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getComment(@RequestParam("commentId") Long commentId) {
-        return ResponseEntity.ok().body(commentService.getComment(commentId));
+        CommentDto.CommentResponseDto comment = commentService.getComment(commentId);
+        return ResponseEntity.ok().body(comment);
     }
 
     @DeleteMapping("/delete")
