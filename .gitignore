@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+/src/main/resources/application-local.yml
+*.properties
+*.p12
+/src/main/generated/
+/nohup/
