@@ -1,5 +1,4 @@
 package homemate.controller.user;
-import homemate.dto.building.BuildingDto;
 import homemate.dto.user.ArticleDto;
 import homemate.service.user.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -40,10 +39,20 @@ public class ArticleController {
     /**
      * 게시글 검색
      */
+
     @GetMapping("/search")
     public ResponseEntity<List<ArticleDto.ArticleResponseDto>> searchArticle(@RequestParam String keyword) {
         List<ArticleDto.ArticleResponseDto> articles = articleService.searchArticle(keyword);
         return ResponseEntity.ok().body(articles);
 
+    }
+
+    /**
+     * 게시글 신고
+     */
+
+    @PatchMapping("/addComplain")
+    public ResponseEntity<?> addComplain(@RequestParam("articleId") Long articleId) {
+        return ResponseEntity.ok().body(articleService.complainArticle(articleId));
     }
 }

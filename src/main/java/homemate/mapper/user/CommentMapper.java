@@ -1,5 +1,4 @@
 package homemate.mapper.user;
-import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.CommentDto;

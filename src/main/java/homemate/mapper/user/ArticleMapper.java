@@ -1,12 +1,8 @@
 package homemate.mapper.user;
-
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.ArticleDto;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 @Mapper(
         componentModel = "spring",
@@ -35,6 +31,9 @@ public interface ArticleMapper {
 
     @Mapping(target = "user", ignore = true)
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
+
+
+
 
 
 

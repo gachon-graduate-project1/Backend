@@ -38,5 +38,14 @@ public class CommentController {
         return ResponseEntity.ok().body("삭제된 Comment Id : " + commentId);
     }
 
+    /**
+     * 댓글 신고
+     */
+
+    @PatchMapping("/addComplain")
+    public ResponseEntity<?> addComplain(@RequestParam("commentId") Long commentId) {
+        return ResponseEntity.ok().body(commentService.complainComment(commentId));
+    }
+
 
 }

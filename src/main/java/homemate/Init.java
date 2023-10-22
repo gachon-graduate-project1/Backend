@@ -101,7 +101,7 @@ public class Init {
             article.setTitle("게시글" + i);
             article.setContent("내용" + i);
             article.setStatus(Status.ACTIVE);
-            article.setComplain(i);
+            article.setComplain(0);
             articleRepository.save(article);
         }
     }
