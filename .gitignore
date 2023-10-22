@@ -36,8 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 
-application.yml
-application-local.yml
+*.yml
 *.properties
 *.p12
 /src/main/generated/
