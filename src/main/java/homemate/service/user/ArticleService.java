@@ -1,5 +1,4 @@
 package homemate.service.user;
-import homemate.domain.admin.AdminEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.ArticleDto;
@@ -11,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -50,6 +51,26 @@ public class ArticleService {
     public void deleteArticle(Long articleId) {
         articleRepository.deleteById(articleId);
         log.info("삭제된 Article: {}",articleId);
+    }
+
+    @Transactional
+    public List<ArticleDto.ArticleResponseDto> searchArticle(String keyword) {
+
+        List<ArticleEntity> articleEntities = articleRepository.findKeyword(keyword);
+        List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
+
+        //Todo: 예외처리 추후 수정
+        if (articleEntities.isEmpty()) {
+            throw new NoSuchElementException("No results found for the keyword: " + keyword);
+        }
+
+
+        for (ArticleEntity ArticleEntity :articleEntities){
+            ArticleDto.ArticleResponseDto articleResponseDto = articleMapper.toResponseDto(ArticleEntity);
+            articleResponseDtos.add(articleResponseDto);
+        }
+
+        return articleResponseDtos;
     }
 
 

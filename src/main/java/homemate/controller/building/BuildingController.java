@@ -58,7 +58,7 @@ public class BuildingController {
      */
     @GetMapping("/search")
     public ResponseEntity<List<BuildingDto.BuildingResponseDto>> searchBuilding(@RequestParam String keyword) {
-        List<BuildingDto.BuildingResponseDto> buildings = buildingService.search(keyword);
+        List<BuildingDto.BuildingResponseDto> buildings = buildingService.searchBuilding(keyword);
         return ResponseEntity.ok().body(buildings);
 
     }

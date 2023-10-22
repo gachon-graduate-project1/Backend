@@ -1,9 +1,6 @@
 package homemate.service.user;
-
-import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
-import homemate.dto.user.ArticleDto;
 import homemate.dto.user.CommentDto;
 import homemate.mapper.user.CommentMapper;
 import homemate.repository.user.CommentRepository;
@@ -13,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -53,4 +52,5 @@ public class CommentService {
         commentRepository.deleteById(commentId);
         log.info("삭제된 Comment: {}",commentId);
     }
+
 }

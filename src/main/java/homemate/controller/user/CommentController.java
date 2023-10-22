@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("comment")
@@ -35,4 +37,6 @@ public class CommentController {
         commentService.deleteComment(commentId);
         return ResponseEntity.ok().body("삭제된 Comment Id : " + commentId);
     }
+
+
 }

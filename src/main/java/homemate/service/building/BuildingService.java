@@ -88,7 +88,7 @@ public class BuildingService {
      * 매물 검색 시 (주소에서 결과 나오게)
      */
     @Transactional
-    public List<BuildingDto.BuildingResponseDto> search(String keyword) {
+    public List<BuildingDto.BuildingResponseDto> searchBuilding(String keyword) {
 
         List<BuildingEntity> buildingEntities = buildingRepository.findKeyword(keyword);
         List<BuildingDto.BuildingResponseDto> buildingResponseDtos = new ArrayList<>();
