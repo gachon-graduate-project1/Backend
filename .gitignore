@@ -35,8 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-
-application-local.yml
-*.properties
-*.p12
