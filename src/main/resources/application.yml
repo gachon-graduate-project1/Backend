@@ -19,4 +19,4 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-    password: 2^!2K"Gy=9ThPXE
+    password: &{{ secrets.JAS_KEY }}
