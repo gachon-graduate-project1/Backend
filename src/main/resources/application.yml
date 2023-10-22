@@ -10,13 +10,13 @@ spring:
         jdbc:
           time_zone: Asia/Seoul
     open-in-view: false
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: ENC(cw1Xv4VHESL5EoFrPKhuO1te2FYiqmkQhBJssnuAuKM73JK7LqhUxVkqlLBzZs/b)
-    username: ENC(8kFHBv/0LPMT1tsnOEfAnA==)
-    password: ENC(rQGhzeAG2gi94UXhSUebLXsxpAi8Torr)
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: ENC(cw1Xv4VHESL5EoFrPKhuO1te2FYiqmkQhBJssnuAuKM73JK7LqhUxVkqlLBzZs/b)
+#    username: ENC(8kFHBv/0LPMT1tsnOEfAnA==)
+#    password: ENC(rQGhzeAG2gi94UXhSUebLXsxpAi8Torr)
 
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-    password: &{{ secrets.JAS_KEY }}
+    password: 2^!2K"Gy=9ThPXE
