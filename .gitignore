@@ -37,7 +37,6 @@ out/
 .vscode/
 
 *.yml
-*.properties
 *.p12
 /src/main/generated/
 /nohup/
