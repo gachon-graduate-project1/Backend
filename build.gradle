@@ -61,8 +61,8 @@ dependencies {
 	// jasypt
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
 
-	//MariaDB
-	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.7'
+//	//MariaDB
+//	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.7'
 
 
 
