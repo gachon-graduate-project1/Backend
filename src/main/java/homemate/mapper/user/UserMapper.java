@@ -22,6 +22,19 @@ public interface UserMapper {
     @Mapping(target ="status", ignore = true )
     UserEntity toResponseEntity(UserDto.UserResponseDto userResponseDto);
 
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target="id", ignore = true)
+    @Mapping(target="status", ignore = true)
+    @Mapping(target="userName", ignore = true)
+    @Mapping(target="password", ignore = true)
+    @Mapping(target="email", ignore = true)
+    @Mapping(target="socialType", ignore = true)
+    @Mapping(target="socialId", ignore = true)
+    @Mapping(target="refreshToken", ignore = true)
+    UserEntity toRequestEntity(UserDto.UserRequestDto userRequestDto);
+
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target="id", ignore = true)
     @Mapping(target="createAt", ignore = true)

@@ -1,5 +1,5 @@
-package homemate.repository.area;
-import homemate.domain.area.BuildingEntity;
+package homemate.repository.building;
+import homemate.domain.building.BuildingEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

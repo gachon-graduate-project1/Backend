@@ -1,5 +1,6 @@
-package homemate.domain.area;
+package homemate.domain.building;
 import homemate.constant.BuildingField;
+import homemate.constant.District;
 import homemate.constant.Status;
 import homemate.constant.TransactionType;
 import homemate.domain.TimeStamp;
@@ -25,9 +26,8 @@ public class BuildingEntity extends TimeStamp {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "area_id")
-    private AreaEntity area;
+    @Enumerated(EnumType.STRING)
+    private District district;
 
     private String address;  //소재지(매물 세부 주소)
 

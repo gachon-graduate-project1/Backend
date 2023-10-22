@@ -1,7 +1,7 @@
-package homemate.mapper.area;
+package homemate.mapper.building;
 import homemate.domain.admin.AdminEntity;
-import homemate.domain.area.BuildingEntity;
-import homemate.dto.area.BuildingDto;
+import homemate.domain.building.BuildingEntity;
+import homemate.dto.building.BuildingDto;
 import org.mapstruct.*;
 
 @Mapper(
@@ -21,13 +21,11 @@ public interface BuildingMapper {
      */
     @Mapping(target="id", ignore = true)
     @Mapping(target="status", ignore = true)
-    @Mapping(target="area", ignore = true)
     BuildingEntity toResponseEntity(BuildingDto.BuildingResponseDto buildingResponseDto);
 
 
     @Mapping(target="id", ignore = true)
     @Mapping(target="status", ignore = true)
-    @Mapping(target="area", ignore = true)
     BuildingEntity toReqeustEntity(BuildingDto.BuildingRequestDto buildingRequestDto, AdminEntity adminEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -35,7 +33,6 @@ public interface BuildingMapper {
     @Mapping(target="createAt", ignore = true)
     @Mapping(target="modifiedAt", ignore = true)
     @Mapping(target="status", ignore = true)
-    @Mapping(target="area", ignore = true)
     void updateFromPatchDto(BuildingDto.BuildingPatchDto buildingPatchDto, @MappingTarget BuildingEntity buildingEntity);
 
 }

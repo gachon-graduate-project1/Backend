@@ -1,7 +1,5 @@
 package homemate.service.user;
-import homemate.domain.area.BuildingEntity;
 import homemate.domain.user.UserEntity;
-import homemate.dto.area.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.user.UserRepository;
@@ -25,6 +23,8 @@ public class UserService {
     
     //회운가입은 소셜로그인 통해 createUser X
 
+
+
     public UserDto.UserResponseDto getUser(Long userId) {
         // Entity 조회
         UserEntity userEntity = userRepository.findById(userId)
@@ -34,6 +34,9 @@ public class UserService {
         return userMapper.toResponseDto(userEntity);
     }
 
+    /**
+     * 온보딩 기능
+     */
 
     @Transactional
     public UserDto.UserResponseDto updateUser(Long userId,UserDto.UserPatchDto userPatchDto) {
@@ -43,7 +46,7 @@ public class UserService {
                 .orElseThrow(() -> new NoSuchElementException("등록되지 않은 User ID: " + userId));
 
         //회원정보 수정은 닉네임만 가능
-        if(userPatchDto.getNickName()!=null) userPatchDto.setNickName(userPatchDto.getNickName());
+        userPatchDto.setNickName(userPatchDto.getNickName());
 
         // UserPatchDto에서 변경된 필드 UserEntity에 반영
         userMapper.updateFromPatchDto(userPatchDto,userEntity);

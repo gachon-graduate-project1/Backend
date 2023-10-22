@@ -26,7 +26,6 @@ public interface CommentMapper {
      * Dto -> Entity
      */
 
-    @Mapping(target ="id", ignore = true )
     @Mapping(target ="status", ignore = true )
     @Mapping(source = "userId", target = "user.id") //게시글 작성자 매핑
     @Mapping(source = "articleId", target = "article.id") //게시글 작성자 매핑

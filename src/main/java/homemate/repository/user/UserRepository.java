@@ -1,5 +1,4 @@
 package homemate.repository.user;
-import homemate.domain.area.BuildingEntity;
 import homemate.domain.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

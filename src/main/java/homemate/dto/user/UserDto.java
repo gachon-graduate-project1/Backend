@@ -14,7 +14,7 @@ public class UserDto {
     public static class UserRequestDto {
 
         /**
-         * 소셜 서버에서 넘어오는 data - nickName
+         * 소셜 서버에서 넘어오는 data 외 - nickName
          */
 
         @NotNull

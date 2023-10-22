@@ -1,5 +1,6 @@
-package homemate.dto.area;
+package homemate.dto.building;
 import homemate.constant.BuildingField;
+import homemate.constant.District;
 import homemate.constant.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -14,6 +15,8 @@ public class BuildingDto {
     @NoArgsConstructor
     @Builder
     public static class BuildingRequestDto {
+
+        private District district;
 
         private String address;  //소재지(매물 세부 주소)
 
@@ -59,7 +62,9 @@ public class BuildingDto {
     @Builder
     public static class BuildingResponseDto {
 
-        private AreaDto.AreaResponseDto area;
+        private Long id;
+
+        private District district;
 
         private String address;  //소재지(매물 세부 주소)
 
@@ -101,6 +106,8 @@ public class BuildingDto {
     public static class BuildingPatchDto {
 
         private Long id;
+
+        private District district;
 
         private String address;  //소재지(매물 세부 주소)
 
