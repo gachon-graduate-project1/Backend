@@ -1,18 +1,14 @@
-package homemate.service.area;
+package homemate.service.building;
 import homemate.domain.admin.AdminEntity;
-import homemate.domain.area.BuildingEntity;
-import homemate.dto.area.BuildingDto;
-import homemate.mapper.area.BuildingMapper;
+import homemate.domain.building.BuildingEntity;
+import homemate.dto.building.BuildingDto;
+import homemate.mapper.building.BuildingMapper;
 import homemate.repository.admin.AdminRepository;
-import homemate.repository.area.BuildingRepository;
-import jakarta.validation.Valid;
+import homemate.repository.building.BuildingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +53,7 @@ public class BuildingService {
     @Transactional
     public BuildingDto.BuildingResponseDto updateBuilding(BuildingDto.BuildingPatchDto buildingPatchDto) {
         BuildingEntity buildingEntity = buildingRepository.findById(buildingPatchDto.getId())
-                .orElseThrow(()-> new NoSuchElementException("등록되지 않은 building: " + buildingPatchDto.getId()));
+                .orElseThrow(()-> new NoSuchElementException("No results found for the building: " + buildingPatchDto.getId()));
 
         buildingMapper.updateFromPatchDto(buildingPatchDto,buildingEntity);
 
@@ -89,13 +85,18 @@ public class BuildingService {
 
 
     /**
-     * 매물 전체 검색 시 (주소에서 결과 나오게)
+     * 매물 검색 시 (주소에서 결과 나오게)
      */
     @Transactional
-    public List<BuildingDto.BuildingResponseDto> search(String keyword) {
+    public List<BuildingDto.BuildingResponseDto> searchBuilding(String keyword) {
 
         List<BuildingEntity> buildingEntities = buildingRepository.findKeyword(keyword);
         List<BuildingDto.BuildingResponseDto> buildingResponseDtos = new ArrayList<>();
+
+        //Todo: 예외처리 추후 수정
+        if (buildingEntities.isEmpty()) {
+            throw new NoSuchElementException("No results found for the keyword: " + keyword);
+        }
 
 
         for (BuildingEntity BuildingEntity :buildingEntities){

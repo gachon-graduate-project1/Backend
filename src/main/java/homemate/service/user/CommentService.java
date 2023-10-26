@@ -1,5 +1,4 @@
 package homemate.service.user;
-
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
@@ -13,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -53,4 +54,34 @@ public class CommentService {
         commentRepository.deleteById(commentId);
         log.info("삭제된 Comment: {}",commentId);
     }
+
+
+    /**
+     * 댓글 신고
+     */
+    @Transactional
+    public CommentDto.CommentResponseDto complainComment(Long commentId) {
+
+        CommentEntity commentEntity = commentRepository.findById(commentId)
+                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 Comment: " + commentId));
+
+        //신고 + 1
+        int complain = commentEntity.getComplain();
+        complain++;
+
+        //10회 이상일 경우 게시글 삭제
+        if(complain >= 10){
+
+            //댓글 삭제
+            deleteComment(commentId);
+            return null;
+        }
+        else {
+            commentEntity.setComplain(complain);
+            log.info("Complain count: ", complain);
+            return commentMapper.toResponseDto(commentEntity);
+
+        }
+    }
+
 }

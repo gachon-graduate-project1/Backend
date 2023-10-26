@@ -1,15 +1,8 @@
 package homemate.mapper.user;
-
-import homemate.domain.admin.AdminEntity;
-import homemate.domain.area.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
-import homemate.dto.area.BuildingDto;
 import homemate.dto.user.ArticleDto;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 @Mapper(
         componentModel = "spring",
@@ -31,7 +24,6 @@ public interface ArticleMapper {
      * Dto -> Entity
      */
 
-    @Mapping(target ="id", ignore = true )
     @Mapping(target ="status", ignore = true )
     @Mapping(source = "userId", target = "user.id") //게시글 작성자 매핑
     ArticleEntity toResponseEntity(ArticleDto.ArticleResponseDto articleResponseDto);
@@ -39,6 +31,9 @@ public interface ArticleMapper {
 
     @Mapping(target = "user", ignore = true)
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
+
+
+
 
 
 

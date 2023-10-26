@@ -30,6 +30,8 @@ public class CommentDto {
     @Builder
     public static class CommentResponseDto {
 
+        private Long id;
+
         private Long userId; //댓글 작성한 사용자 id
 
         private Long articleId; //댓글이 달린 게시글 id
@@ -39,6 +41,8 @@ public class CommentDto {
         private Integer complain; // 게시글 신고 횟수 (최대 10회)
 
     }
+
+
 
 
 }

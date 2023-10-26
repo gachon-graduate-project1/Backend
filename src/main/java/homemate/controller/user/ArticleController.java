@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("article")
@@ -32,5 +34,25 @@ public class ArticleController {
     public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
         articleService.deleteArticle(articleId);
         return ResponseEntity.ok().body("삭제된 Article Id : " + articleId);
+    }
+
+    /**
+     * 게시글 검색
+     */
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> searchArticle(@RequestParam String keyword) {
+        List<ArticleDto.ArticleResponseDto> articles = articleService.searchArticle(keyword);
+        return ResponseEntity.ok().body(articles);
+
+    }
+
+    /**
+     * 게시글 신고
+     */
+
+    @PatchMapping("/addComplain")
+    public ResponseEntity<?> addComplain(@RequestParam("articleId") Long articleId) {
+        return ResponseEntity.ok().body(articleService.complainArticle(articleId));
     }
 }

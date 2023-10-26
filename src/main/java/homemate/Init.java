@@ -1,14 +1,12 @@
 package homemate;
 import homemate.constant.*;
 import homemate.domain.admin.AdminEntity;
-import homemate.domain.area.AreaEntity;
-import homemate.domain.area.BuildingEntity;
+import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
 import homemate.repository.admin.AdminRepository;
-import homemate.repository.area.AreaRepository;
-import homemate.repository.area.BuildingRepository;
+import homemate.repository.building.BuildingRepository;
 import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.CommentRepository;
 import homemate.repository.user.UserRepository;
@@ -30,13 +28,11 @@ public class Init {
     private final ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
     private final BuildingRepository buildingRepository;
-    private final AreaRepository areaRepository;
 
     @PostConstruct
     private void initFirst(){
         initAdmins();
         initUsers();
-        initAreas();
         initBuildings();
         initArticles();
         initComments();
@@ -70,27 +66,14 @@ public class Init {
         }
     }
 
-    @Transactional
-    public void initAreas() {
 
-        AreaEntity area1 = new AreaEntity();
-        area1.setDistrict(District.SEOUL);
-        area1.setStatus(Status.ACTIVE);
-        areaRepository.save(area1);
-
-        AreaEntity area2 = new AreaEntity();
-        area2.setDistrict(District.Gyeonggi);
-        area2.setStatus(Status.ACTIVE);
-        areaRepository.save(area2);
-
-    }
 
     @Transactional
     public void initBuildings() {
-        List<AreaEntity> area = areaRepository.findAll();
         for (int i = 0; i < 5; i++) {
             BuildingEntity building = new BuildingEntity();
-            building.setArea(area.get(1));
+            building.setBuildingName("가천건물" + i);
+            building.setDistrict(District.Gyeonggi);
             building.setAddress("성남시 수정구 - " + i);
             building.setContent("건물" + i + "입니다.");
             building.setFloor(i + "층");
@@ -103,7 +86,6 @@ public class Init {
             building.setRealterName("가천중개사" + i);
             building.setRealterNumber("010-0000-000" + i);
             building.setBuildingField(BuildingField.APARTMENT);
-            building.setBuildingName("가천건물" + i);
             building.setStatus(Status.ACTIVE);
             building.setTransactioonType(TransactionType.MONTHLY_RENT);
             buildingRepository.save(building);
@@ -119,7 +101,7 @@ public class Init {
             article.setTitle("게시글" + i);
             article.setContent("내용" + i);
             article.setStatus(Status.ACTIVE);
-            article.setComplain(i);
+            article.setComplain(0);
             articleRepository.save(article);
         }
     }

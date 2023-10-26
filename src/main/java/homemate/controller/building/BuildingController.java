@@ -1,7 +1,7 @@
-package homemate.controller.area;
+package homemate.controller.building;
 
-import homemate.dto.area.BuildingDto;
-import homemate.service.area.BuildingService;
+import homemate.dto.building.BuildingDto;
+import homemate.service.building.BuildingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,9 +48,19 @@ public class BuildingController {
      * 전체 매물 조회
      */
     @GetMapping("/getAll")
-    public ResponseEntity<List<BuildingDto.BuildingResponseDto>> getAllNotice() {
+    public ResponseEntity<List<BuildingDto.BuildingResponseDto>> getAllBuilding() {
         List<BuildingDto.BuildingResponseDto> buildings = buildingService.getAllBuilding();
         return ResponseEntity.ok().body(buildings);
+    }
+
+    /**
+     * 매물 검색
+     */
+    @GetMapping("/search")
+    public ResponseEntity<List<BuildingDto.BuildingResponseDto>> searchBuilding(@RequestParam String keyword) {
+        List<BuildingDto.BuildingResponseDto> buildings = buildingService.searchBuilding(keyword);
+        return ResponseEntity.ok().body(buildings);
+
     }
 
 

@@ -42,12 +42,18 @@ public class UserController {
      * logout api -> 시큐리티에서 처리
      */
 
-    @GetMapping("/get")
+
+
+    @GetMapping("/getUser")
     public ResponseEntity<?> getUser (@RequestParam("userId") Long userId) {
         UserDto.UserResponseDto user = userService.getUser(userId);
         return ResponseEntity.ok().body(user);
     }
 
+    /**
+     *
+     * update -> 닉네임만 수정 가능 -> 온보딩 
+     */
     @PatchMapping("/update")
     public ResponseEntity<?> updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.UserPatchDto userPatchDto) {
         return ResponseEntity.ok().body(userService.updateUser(userId, userPatchDto));
