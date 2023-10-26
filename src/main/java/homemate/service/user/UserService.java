@@ -1,4 +1,5 @@
 package homemate.service.user;
+
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.UserDto;
 import homemate.mapper.user.UserMapper;
@@ -21,9 +22,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     
-    //회운가입은 소셜로그인 통해 createUser X
+    //회원가입은 소셜로그인 통해 createUser X
+    @Transactional
+    public void addJoinUserInfo(String email, String nickName){
+        log.info("회원가입 service 실행");
+        UserEntity userEntity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("회원가입 안 된 email"));
 
+        // 회원 추가 정보(닉네임) 저장 및 권한 변경
+        userEntity.authorizeUser();
+        userEntity.setNickName(nickName);
+        userRepository.save(userEntity);
 
+    }
 
     public UserDto.UserResponseDto getUser(Long userId) {
         // Entity 조회
@@ -34,9 +45,6 @@ public class UserService {
         return userMapper.toResponseDto(userEntity);
     }
 
-    /**
-     * 온보딩 기능
-     */
 
     @Transactional
     public UserDto.UserResponseDto updateUser(Long userId,UserDto.UserPatchDto userPatchDto) {
@@ -46,7 +54,7 @@ public class UserService {
                 .orElseThrow(() -> new NoSuchElementException("등록되지 않은 User ID: " + userId));
 
         //회원정보 수정은 닉네임만 가능
-        userPatchDto.setNickName(userPatchDto.getNickName());
+        if(userPatchDto.getNickName()!=null) userPatchDto.setNickName(userPatchDto.getNickName());
 
         // UserPatchDto에서 변경된 필드 UserEntity에 반영
         userMapper.updateFromPatchDto(userPatchDto,userEntity);

@@ -1,8 +1,10 @@
 package homemate.controller.user;
-import homemate.domain.user.UserEntity;
+
 import homemate.dto.user.UserDto;
 import homemate.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,21 +13,33 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("user")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
 
     //TODO: 소셜로그인 구현 후 join, login 작성
     /**
-     * join 컨틀롤러
+     * 회원가입 시 추가 정보 저장 api
      */
+    @GetMapping("/sign-up")
+    public String signUpForm() {
+        return "user/sign-up"; // signup.html 또는 다른 뷰 페이지를 반환
+    }
+    @PostMapping("/sign-up")
+    public ResponseEntity<?> joinUser(@RequestBody UserDto.UserRequestDto userRequestDto){
+        log.info("회원가입 api 실행");
+        try{
+            userService.addJoinUserInfo(userRequestDto.getEmail(), userRequestDto.getNickName());
+            return ResponseEntity.ok("회원가입 완료");
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원가입 오류 발생");
+        }
+    }
+
 
     /**
-     * login 컨트롤러
-     */
-
-    /**
-     * logout 컨트롤러
+     * logout api -> 시큐리티에서 처리
      */
 
 
