@@ -36,7 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-*.yml
 *.p12
 /src/main/generated/
 /nohup/
