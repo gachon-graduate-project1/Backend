@@ -1,4 +1,5 @@
 package homemate.dto.user;
+import homemate.constant.Role;
 import homemate.constant.SocialType;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,6 +17,8 @@ public class UserDto {
         /**
          * 소셜 서버에서 넘어오는 data - nickName
          */
+        @NotNull
+        private String email;
 
         @NotNull
         private String nickName;
@@ -39,6 +42,8 @@ public class UserDto {
         private String password;
 
         private String email;
+
+        private Role role;
 
         private SocialType socialType;
 

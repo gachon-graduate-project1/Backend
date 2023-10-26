@@ -28,7 +28,7 @@ public class UserEntity extends TimeStamp {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private final Role role = Role.USER;
+    private Role role = Role.GUEST;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -40,5 +40,19 @@ public class UserEntity extends TimeStamp {
 
     private String refreshToken;
 
+    // refreshToken 관련 연관관계 편의 메소드
+    public void updateRefreshToken(String updateRefreshToken) {
+        this.refreshToken = updateRefreshToken;
+    }
+
+    // 유저 권한 설정 메소드
+    public void authorizeUser() {
+        this.role = Role.USER;
+    }
+
+    //== 유저 필드 업데이트 ==//
+    public void updateNickname(String updateNickname) {
+        this.nickName = updateNickname;
+    }
 
 }

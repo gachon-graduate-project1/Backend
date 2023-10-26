@@ -1,7 +1,6 @@
 package homemate.service.user;
-import homemate.domain.area.BuildingEntity;
+
 import homemate.domain.user.UserEntity;
-import homemate.dto.area.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.user.UserRepository;
@@ -23,7 +22,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     
-    //회운가입은 소셜로그인 통해 createUser X
+    //회원가입은 소셜로그인 통해 createUser X
+    @Transactional
+    public void addJoinUserInfo(String email, String nickName){
+        log.info("회원가입 service 실행");
+        UserEntity userEntity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new NoSuchElementException("회원가입 안 된 email"));
+
+        // 회원 추가 정보(닉네임) 저장 및 권한 변경
+        userEntity.authorizeUser();
+        userEntity.setNickName(nickName);
+        userRepository.save(userEntity);
+
+    }
 
     public UserDto.UserResponseDto getUser(Long userId) {
         // Entity 조회
