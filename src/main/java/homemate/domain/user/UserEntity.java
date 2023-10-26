@@ -30,6 +30,7 @@ public class UserEntity extends TimeStamp {
     @Enumerated(EnumType.STRING)
     private Role role = Role.GUEST;
 
+
     @Enumerated(EnumType.STRING)
     private Status status;
 
@@ -39,6 +40,7 @@ public class UserEntity extends TimeStamp {
     private String socialId;
 
     private String refreshToken;
+
 
     // refreshToken 관련 연관관계 편의 메소드
     public void updateRefreshToken(String updateRefreshToken) {
@@ -54,5 +56,6 @@ public class UserEntity extends TimeStamp {
     public void updateNickname(String updateNickname) {
         this.nickName = updateNickname;
     }
+
 
 }
