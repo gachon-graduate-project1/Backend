@@ -56,15 +56,6 @@ jobs:
             echo "1. 현재 PID 조회"
             CURRENT_PID=$(pgrep -f homemate-backend)
             echo "현재 PID: $CURRENT_PID"
-            
-            echo "1-1. nohup으로 실행된 프로세스 종료"
-            NOHUP_PID=$(pgrep -f "java -jar ./Backend/build/libs/homemate-backend-0.0.1-SNAPSHOT.jar")
-            if [ -n "$NOHUP_PID" ]; then
-            kill -9 $NOHUP_PID
-            echo "nohup으로 실행된 프로세스를 종료했습니다."
-            else
-            echo "nohup으로 실행된 프로세스가 찾을 수 없습니다."
-            fi
 
             echo "2. 기존 프로세스 종료"
             kill -9 $CURRENT_PID
