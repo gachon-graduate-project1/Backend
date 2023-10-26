@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 public class Init {
 
-    //테스트
+    //init.
 
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
