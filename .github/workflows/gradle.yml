@@ -50,9 +50,24 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
-            CURRENT_PID = $(pgrep -f homemate-backend)
+            echo "1. 현재 PID 조회"
+            CURRENT_PID=$(pgrep -f homemate-backend)
+            echo "현재 PID: $CURRENT_PID"
+
+            echo "2. 기존 프로세스 종료"
             kill -9 $CURRENT_PID
+            echo "기존 프로세스를 종료했습니다."
+
+            echo "3. Backend 디렉토리로 이동"
             cd Backend
+
+            echo "4. Git 리포지토리 업데이트"
             git pull origin master
+
+            echo "5. build/libs 디렉토리로 이동"
             cd build/libs
+
+            echo "6. 백그라운드에서 애플리케이션 실행"
             nohup java -jar homemate-backend-0.0.1-SNAPSHOT.jar > nohup.out 2> nohup.err < /dev/null &
+
+            echo "애플리케이션을 실행"
