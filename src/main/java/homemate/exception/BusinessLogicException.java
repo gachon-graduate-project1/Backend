@@ -2,7 +2,6 @@ package homemate.exception;
 
 import lombok.Getter;
 
-
 public class BusinessLogicException extends RuntimeException{
 
     @Getter

@@ -1,0 +1,3 @@
+[submodule "server-private"]
+	path = server-private
+	url = https://github.com/gachon-graduate-project1/server-private.git

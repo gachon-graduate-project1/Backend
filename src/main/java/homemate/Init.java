@@ -23,6 +23,8 @@ import java.util.List;
 @Slf4j
 public class Init {
 
+    //init.
+
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
     private final ArticleRepository articleRepository;
