@@ -28,11 +28,16 @@ public class UserService {
         log.info("회원가입 service 실행");
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException("회원가입 안 된 email"));
+        // 닉네임 중복 체크
+        if(userRepository.existsByNickName(nickName)){
+            throw new DuplicateNicknameException("이미 사용중인 닉네임입니다.");
+        } else {
+            // 회원 추가 정보(닉네임) 저장 및 권한 변경
+            userEntity.authorizeUser();
+            userEntity.setNickName(nickName);
+            userRepository.save(userEntity);
+        }
 
-        // 회원 추가 정보(닉네임) 저장 및 권한 변경
-        userEntity.authorizeUser();
-        userEntity.setNickName(nickName);
-        userRepository.save(userEntity);
 
     }
 
@@ -86,6 +91,17 @@ public class UserService {
 
         return userResponseDtos;
     }
+
+    /**
+     * 닉네임 중복 에러
+     */
+    public class DuplicateNicknameException extends RuntimeException {
+        public DuplicateNicknameException(String message) {
+            super(message);
+        }
+    }
+
+
     
     
     

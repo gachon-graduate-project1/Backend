@@ -10,8 +10,7 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+
 
 permissions:
   contents: read
@@ -24,9 +23,7 @@ jobs:
     steps:
       - name: 저장소 Checkout
         uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          token: ${{ secrets.ACTION_TOKEN }}
+
         # Git 저장소를 워크스페이스로 체크아웃합니다.
 
       - name: Set up JDK 17
