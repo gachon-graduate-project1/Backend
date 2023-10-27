@@ -10,6 +10,7 @@ spring:
         format_sql: true
         jdbc:
           time_zone: Asia/Seoul
+        dialect: org.hibernate.dialect.MariaDBDialect
     open-in-view: false
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
