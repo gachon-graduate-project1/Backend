@@ -14,13 +14,14 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
 
     @Override
     public String getEmail() {
-        Map<String, Object> account = (Map<String, Object>) attributes.get("kakao_account");
-        Map<String, Object> profile = (Map<String, Object>) account.get("profile");
-
-        if(account == null || profile == null) {
-            return null;
-        }
-        return (String) account.get("email");
+//        Map<String, Object> account = (Map<String, Object>) attributes.get("kakao_account");
+//        Map<String, Object> profile = (Map<String, Object>) account.get("profile");
+//
+//        if(account == null || profile == null) {
+//            return null;
+//        }
+//        return (String) account.get("email");
+        return (String) attributes.get("email");
     }
 
 //    @Override

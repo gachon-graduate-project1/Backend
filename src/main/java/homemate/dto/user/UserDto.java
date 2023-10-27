@@ -1,8 +1,10 @@
 package homemate.dto.user;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 public class UserDto {
@@ -20,7 +22,8 @@ public class UserDto {
         @NotNull
         private String email;
 
-        @NotNull
+        @NotBlank(message = "닉네임을 입력해주세요.")
+        @Size(min = 2, max = 10, message = "닉네임은 2자 이상 10자 이하로 입력해주세요.")
         private String nickName;
 
 
