@@ -4,6 +4,9 @@ import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -31,6 +34,9 @@ public class ArticleEntity extends TimeStamp {
     private Status status;
 
     private Integer complain; // 게시글 신고 횟수 (최대 10회)
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments = new ArrayList<>();
 
 
 
