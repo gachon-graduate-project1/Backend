@@ -33,6 +33,8 @@ public interface UserMapper {
     @Mapping(target="socialType", ignore = true)
     @Mapping(target="socialId", ignore = true)
     @Mapping(target="refreshToken", ignore = true)
+    @Mapping(target = "articles", ignore = true)
+    @Mapping(target = "comments", ignore = true)
     UserEntity toRequestEntity(UserDto.UserRequestDto userRequestDto);
 
 
@@ -48,5 +50,7 @@ public interface UserMapper {
     @Mapping(target="socialType", ignore = true)
     @Mapping(target="socialId", ignore = true)
     @Mapping(target="refreshToken", ignore = true)
+    @Mapping(target = "articles", ignore = true)
+    @Mapping(target = "comments", ignore = true)
     void updateFromPatchDto(UserDto.UserPatchDto userPatchDto, @MappingTarget UserEntity userEntity);
 }

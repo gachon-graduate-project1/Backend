@@ -6,6 +6,9 @@ import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -26,6 +29,13 @@ public class UserEntity extends TimeStamp {
     private String password;
 
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ArticleEntity> articles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments = new ArrayList<>();
+
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.GUEST;
