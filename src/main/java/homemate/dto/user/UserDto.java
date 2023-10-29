@@ -78,4 +78,17 @@ public class UserDto {
         private String nickName;
 
     }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class AdminPatchUserDto{
+        @NotNull
+        private String password;
+
+        @NotNull
+        private String nickName;
+    }
 }
