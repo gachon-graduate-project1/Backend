@@ -13,6 +13,7 @@ public enum ExceptionCode {
     /**
      * 200 SUCCESSFUL : 정상처리
      */
+    SUCCESSFULL(OK, "정상처리 되었습니다"),
 
 
     /**
@@ -38,7 +39,9 @@ public enum ExceptionCode {
     ADMIN_NOT_FOUND(NOT_FOUND, "해당 관리자 정보를 찾을 수 업습니다"),
     REFRESH_TOKEN_NOT_FOUND(NOT_FOUND, "로그아웃 된 사용자입니다"),
     BUILDING_IS_NOT_EXIST(NOT_FOUND, "해당 매물이 존재하지 않습니다"),
-    ARTICLE_IS_NOT_EXIST(NOT_FOUND, "게시글이 존재하지 않습니다"),
+    ARTICLE_IS_NOT_EXIST(NOT_FOUND, "해당 게시글이 존재하지 않습니다"),
+    COMMENT_IS_NOT_EXIST(NOT_FOUND, "해당 댓글이 존재하지 않습니다"),
+    KEYWORD_IS_NOT_EXIST(NOT_FOUND, "해당 키워드가 존재하지 않습니다"),
     FILE_IS_NOT_EXIST(NOT_FOUND, "해당 파일이 존재하지 않습니다"),
 
 
@@ -48,7 +51,7 @@ public enum ExceptionCode {
     UPDATE_FAIL_ADMIN(CONFLICT, "관리자 정보수정에 실패하였습니다"),
     UPDATE_FAIL_USER(CONFLICT, "유저 정보수정에 실패하였습니다"),
     UPDATE_FAIL_BUILDING(CONFLICT, "매물 정보 수정에 실패하였습니다"),
-    DUPLICATE_RESOURCE(CONFLICT, "해당 데이터가 이미 존재합니다"),
+    DUPLICATE_NICKNAME(CONFLICT, "해당 닉네임은 이미 존재합니다"),
     LOGIN_IS_WRONG(CONFLICT, "아이디 또는 비밀번호가 잘못 입력되었습니다."),
     FILE_IS_NOT_EXIST_IN_BUCKET(CONFLICT, "해당 데이터가 존재하지 않습니다"),
     NONE_IMAGE_EXCEPTION(CONFLICT, "해당 이미지가 존재하지 않습니다"),

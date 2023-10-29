@@ -41,7 +41,7 @@ public class BuildingController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteBuilding(@RequestParam Long buildingId) {
         buildingService.deleteBuilding(buildingId);
-        return ResponseEntity.ok().body("삭제된 BuildingId : " + buildingId);
+        return ResponseEntity.ok().body("Deleted BuildingId : " + buildingId);
     }
 
     /**

@@ -2,6 +2,8 @@ package homemate.service.building;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.building.BuildingEntity;
 import homemate.dto.building.BuildingDto;
+import homemate.exception.BusinessLogicException;
+import homemate.exception.ExceptionCode;
 import homemate.mapper.building.BuildingMapper;
 import homemate.repository.admin.AdminRepository;
 import homemate.repository.building.BuildingRepository;
@@ -29,7 +31,7 @@ public class BuildingService {
     public BuildingDto.BuildingResponseDto createBuilding(Long adminId, BuildingDto.BuildingRequestDto buildingRequestDto) {
 
         AdminEntity adminEntity = adminRepository.findById(adminId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 admin ID: " + adminId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ADMIN_NOT_FOUND));
 
         BuildingEntity savedBuilding = buildingRepository.save(buildingMapper.toReqeustEntity(buildingRequestDto, adminEntity));
         BuildingDto.BuildingResponseDto responseDto = buildingMapper.toResponseDto(savedBuilding);
@@ -42,7 +44,7 @@ public class BuildingService {
     public BuildingDto.BuildingResponseDto getBuilding(Long buildingId) {
         //Entity 조회
         BuildingEntity buildingEntity = buildingRepository.findById(buildingId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 building: " + buildingId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.BUILDING_IS_NOT_EXIST));
 
         //Entity를 DTO로 변환 후 return
         return buildingMapper.toResponseDto(buildingEntity);
@@ -53,7 +55,7 @@ public class BuildingService {
     @Transactional
     public BuildingDto.BuildingResponseDto updateBuilding(BuildingDto.BuildingPatchDto buildingPatchDto) {
         BuildingEntity buildingEntity = buildingRepository.findById(buildingPatchDto.getId())
-                .orElseThrow(()-> new NoSuchElementException("No results found for the building: " + buildingPatchDto.getId()));
+                .orElseThrow(()-> new BusinessLogicException(ExceptionCode.BUILDING_IS_NOT_EXIST));
 
         buildingMapper.updateFromPatchDto(buildingPatchDto,buildingEntity);
 
@@ -93,9 +95,9 @@ public class BuildingService {
         List<BuildingEntity> buildingEntities = buildingRepository.findKeyword(keyword);
         List<BuildingDto.BuildingResponseDto> buildingResponseDtos = new ArrayList<>();
 
-        //Todo: 예외처리 추후 수정
+
         if (buildingEntities.isEmpty()) {
-            throw new NoSuchElementException("No results found for the keyword: " + keyword);
+            throw new BusinessLogicException(ExceptionCode.KEYWORD_IS_NOT_EXIST);
         }
 
 

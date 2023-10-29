@@ -2,6 +2,8 @@ package homemate.service.admin;
 
 import homemate.domain.admin.AdminEntity;
 import homemate.dto.admin.AdminDto;
+import homemate.exception.BusinessLogicException;
+import homemate.exception.ExceptionCode;
 import homemate.mapper.admin.AdminMapper;
 import homemate.repository.admin.AdminRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ public class AdminService {
     public AdminDto.AdminResponseDto getAdmin(Long adminId) {
         // Entity 조회
         AdminEntity adminEntity = adminRepository.findById(adminId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 ID: " + adminId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ADMIN_NOT_FOUND));
 
         // Entity를 DTO로 변환 후 return
         return adminMapper.toResponseDto(adminEntity);
@@ -37,7 +39,7 @@ public class AdminService {
     public AdminDto.AdminResponseDto updateAdmin(Long adminId,AdminDto.AdminPatchDto adminPatchDto) {
 
         AdminEntity adminEntity = adminRepository.findById(adminId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 ID: " + adminId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ADMIN_NOT_FOUND));
 
 
         //TODO 시큐리티 적용 후 패스워드 수정 (관리자 아이디 하나로 패스워드만 변경 가능)
