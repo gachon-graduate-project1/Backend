@@ -1,6 +1,7 @@
 package homemate.controller.building;
 
 import homemate.dto.building.BuildingDto;
+import homemate.dto.user.UserDto;
 import homemate.service.building.BuildingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,12 @@ public class BuildingController {
         return ResponseEntity.ok().body(building);
     }
 
-    @PatchMapping("/update")
-    public ResponseEntity<?> updateBuilding(@RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
 
-        return ResponseEntity.ok().body(buildingService.updateBuilding(buildingPatchDto));
+    @PatchMapping("/update")
+    public ResponseEntity<?> updateBuilding(@RequestParam("buildingId") Long buildingId,
+                                            @RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
+
+        return ResponseEntity.ok().body(buildingService.updateBuilding(buildingId, buildingPatchDto));
     }
 
 

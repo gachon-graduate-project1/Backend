@@ -1,7 +1,9 @@
 package homemate.service.building;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.building.BuildingEntity;
+import homemate.domain.user.UserEntity;
 import homemate.dto.building.BuildingDto;
+import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.building.BuildingMapper;
@@ -52,9 +54,18 @@ public class BuildingService {
     }
 
 
-    @Transactional
-    public BuildingDto.BuildingResponseDto updateBuilding(BuildingDto.BuildingPatchDto buildingPatchDto) {
-        BuildingEntity buildingEntity = buildingRepository.findById(buildingPatchDto.getId())
+
+//    @Transactional
+//    public UserDto.UserResponseDto updateUser(Long userId, UserDto.UserPatchDto userPatchDto) {
+//
+//        UserEntity userEntity = userRepository.findById(userId)
+//                .orElseThrow(() ->new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+        @Transactional
+    public BuildingDto.BuildingResponseDto updateBuilding(Long buildingId, BuildingDto.BuildingPatchDto buildingPatchDto) {
+
+
+        BuildingEntity buildingEntity = buildingRepository.findById(buildingId)
                 .orElseThrow(()-> new BusinessLogicException(ExceptionCode.BUILDING_IS_NOT_EXIST));
 
         buildingMapper.updateFromPatchDto(buildingPatchDto,buildingEntity);

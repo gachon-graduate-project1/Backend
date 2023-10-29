@@ -14,6 +14,7 @@ public enum ExceptionCode {
      * 200 SUCCESSFUL : 정상처리
      */
     SUCCESSFULL(OK, "정상처리 되었습니다"),
+    DELETE_SUCCESSFUL(OK, "정상적으로 삭제되었습니다."),
 
 
     /**
