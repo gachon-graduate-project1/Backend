@@ -30,5 +30,7 @@ public interface AdminMapper {
     @Mapping(target="status", ignore = true)
     void updateFromPatchDto(AdminDto.AdminPatchDto adminPatchDto, @MappingTarget AdminEntity adminEntity);
 
+
+
 }
 
