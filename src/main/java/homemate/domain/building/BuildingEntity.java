@@ -68,5 +68,9 @@ public class BuildingEntity extends TimeStamp {
     )
     @Column(name = "image_url")
     private List<String> images = new ArrayList<>(); //매물 사진
+
+    public void updateBuildingImages(List<String> noticeImages) {
+        this.images = noticeImages;
+    }
 }
 
