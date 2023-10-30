@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,10 +32,13 @@ public class AdminService {
     private final UserRepository userRepository;
     private final AdminMapper adminMapper;
     private final UserMapper userMapper;
-//   private final BCryptPasswordEncoder bCryptPasswordEncoder; TODO 시큐리티 적용 후 패스워드 수정
+    private final PasswordEncoder passwordEncoder;
+
     /**
-     * admin 회원가입 create x
+     * admin 회원가입 create x (한 개의 계정으로 비밀번호만 변경 가능)
      */
+
+
 
     public AdminDto.AdminResponseDto getAdmin(Long adminId) {
         // Entity 조회
@@ -44,15 +49,16 @@ public class AdminService {
         return adminMapper.toResponseDto(adminEntity);
     }
 
+    /**
+     * 비밀번호만 수정
+     */
     @Transactional
     public AdminDto.AdminResponseDto updateAdmin(Long adminId,AdminDto.AdminPatchDto adminPatchDto) {
 
         AdminEntity adminEntity = adminRepository.findById(adminId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ADMIN_NOT_FOUND));
 
-
-        //TODO 시큐리티 적용 후 패스워드 수정 (관리자 아이디 하나로 패스워드만 변경 가능)
-       // if(adminPatchDto.getPassword()!=null) adminPatchDto.setPassword(bCryptPasswordEncoder.encode(adminPatchDto.getPassword()));
+        if(adminPatchDto.getPassword()!=null) adminPatchDto.setPassword(passwordEncoder.encode(adminPatchDto.getPassword()));
 
         // UserPatchDto에서 변경된 필드 UserEntity에 반영
         adminMapper.updateFromPatchDto(adminPatchDto,adminEntity);
