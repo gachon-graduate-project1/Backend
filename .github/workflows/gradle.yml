@@ -55,7 +55,7 @@ jobs:
             echo "현재 PID: $CURRENT_PID"
 
             echo "2. 기존 프로세스 종료"
-            kill -TERM $CURRENT_PID
+            kill -15 $CURRENT_PID
             echo "기존 프로세스를 종료했습니다."
 
             echo "3. Backend 디렉토리로 이동"
