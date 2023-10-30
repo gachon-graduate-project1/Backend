@@ -1,4 +1,5 @@
 package homemate.mapper.user;
+
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.UserDto;
 import org.mapstruct.*;
@@ -14,6 +15,7 @@ public interface UserMapper {
      * Entity -> Dto
      */
     UserDto.UserResponseDto toResponseDto(UserEntity userEntity);
+
 
     /**
      * Dto -> Entity
@@ -53,4 +55,6 @@ public interface UserMapper {
     @Mapping(target = "articles", ignore = true)
     @Mapping(target = "comments", ignore = true)
     void updateFromPatchDto(UserDto.UserPatchDto userPatchDto, @MappingTarget UserEntity userEntity);
+
+
 }
