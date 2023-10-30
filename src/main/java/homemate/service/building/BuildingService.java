@@ -1,4 +1,5 @@
 package homemate.service.building;
+import homemate.config.S3.S3Service;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.UserEntity;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class BuildingService {
     private final BuildingRepository buildingRepository;
     private final BuildingMapper buildingMapper;
     private final AdminRepository adminRepository;
+    private final S3Service s3Service;
 
 
     @Transactional
@@ -80,21 +83,20 @@ public class BuildingService {
         log.info("삭제된 building: {}",buildingId);
     }
 
+    @Transactional
+    public List<String> updateBuildingImages(Long buildingId, List<MultipartFile> imageList) {
+        BuildingEntity buildingEntity = buildingRepository.findById(buildingId)
+                .orElseThrow(()->new BusinessLogicException(ExceptionCode.BUILDING_IS_NOT_EXIST));
 
-    //TODO : 이미지 수정 코드 작성 (클라우드 스토리지 정한 후)
-//    @Transactional
-//    public List<String> updateBuildingImages(Long BuildingId, List<MultipartFile> imageList) {
-//        BuildingEntity buildingEntity = buildingRepository.findById(BuildingId)
-//                .orElseThrow(()->new NoSuchElementException("등록되지 않은 Building: " + BuildingId));
-//
-//        //TODO : 기존이미지 삭제 코드 작성
-//        buildingEntity.getImages().forEach(s3Service::deleteFile);
-//
-//        //TODO : 새로운 이미지 업로드
-//
-//
-//        return ;
-//    }
+        //기존 이미지 삭제
+        buildingEntity.getImages().forEach(s3Service::deleteFile);
+
+        //새로운 이미지 업로드
+        List<String> newImageUrls = s3Service.uploadFileList(imageList);
+        buildingEntity.updateBuildingImages(newImageUrls);
+
+        return newImageUrls;
+    }
 
 
     /**
