@@ -62,7 +62,7 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestParam("userId") long userId) {
         userService.deleteUser(userId);
-        return ResponseEntity.ok().body("삭제된 UserId: " + userId);
+        return ResponseEntity.ok().body("Deleted UserId: " + userId);
     }
 
     /**

@@ -4,6 +4,8 @@ import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.ArticleDto;
 import homemate.dto.user.CommentDto;
+import homemate.exception.BusinessLogicException;
+import homemate.exception.ExceptionCode;
 import homemate.mapper.user.CommentMapper;
 import homemate.repository.user.CommentRepository;
 import homemate.repository.user.UserRepository;
@@ -33,7 +35,7 @@ public class CommentService {
     public CommentDto.CommentResponseDto createComment(Long userId, CommentDto.CommentRequestDto commentRequestDto) {
 
         UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 User ID: " + userId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
 
 
         CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity));
@@ -42,10 +44,12 @@ public class CommentService {
         return responseDto;
     }
 
+
+
     public CommentDto.CommentResponseDto getComment(Long commentId) {
 
         return commentMapper.toResponseDto(commentRepository.findById(commentId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 Comment: " + commentId)));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.COMMENT_IS_NOT_EXIST)));
 
     }
 
@@ -63,7 +67,7 @@ public class CommentService {
     public CommentDto.CommentResponseDto complainComment(Long commentId) {
 
         CommentEntity commentEntity = commentRepository.findById(commentId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 Comment: " + commentId));
+                .orElseThrow(() ->  new BusinessLogicException(ExceptionCode.COMMENT_IS_NOT_EXIST));
 
         //신고 + 1
         int complain = commentEntity.getComplain();

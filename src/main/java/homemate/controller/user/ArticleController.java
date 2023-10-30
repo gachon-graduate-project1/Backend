@@ -33,7 +33,7 @@ public class ArticleController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
         articleService.deleteArticle(articleId);
-        return ResponseEntity.ok().body("삭제된 Article Id : " + articleId);
+        return ResponseEntity.ok().body("Deleted Article Id : " + articleId);
     }
 
     /**

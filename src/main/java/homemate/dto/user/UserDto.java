@@ -1,11 +1,15 @@
 package homemate.dto.user;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
+import homemate.domain.user.ArticleEntity;
+import homemate.domain.user.CommentEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.List;
 
 public class UserDto {
 
@@ -46,6 +50,10 @@ public class UserDto {
 
         private String email;
 
+        private List<ArticleEntity> articles;
+
+        private List<CommentEntity> comments;
+
         private Role role;
 
         private SocialType socialType;
@@ -69,5 +77,18 @@ public class UserDto {
         @NotNull
         private String nickName;
 
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class AdminPatchUserDto{
+        @NotNull
+        private String password;
+
+        @NotNull
+        private String nickName;
     }
 }

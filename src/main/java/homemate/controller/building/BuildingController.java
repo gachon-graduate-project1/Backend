@@ -1,10 +1,13 @@
 package homemate.controller.building;
 
 import homemate.dto.building.BuildingDto;
+import homemate.dto.user.UserDto;
 import homemate.service.building.BuildingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,21 +30,20 @@ public class BuildingController {
         return ResponseEntity.ok().body(building);
     }
 
-    @PatchMapping("/update")
-    public ResponseEntity<?> updateBuilding(@RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
 
-        return ResponseEntity.ok().body(buildingService.updateBuilding(buildingPatchDto));
+    @PatchMapping("/update")
+    public ResponseEntity<?> updateBuilding(@RequestParam("buildingId") Long buildingId,
+                                            @RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
+
+        return ResponseEntity.ok().body(buildingService.updateBuilding(buildingId, buildingPatchDto));
     }
 
-
-    //TODO: 이미지 수정 컨트롤러 작성
-    //@PostMapping(value = "/updateImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteBuilding(@RequestParam Long buildingId) {
         buildingService.deleteBuilding(buildingId);
-        return ResponseEntity.ok().body("삭제된 BuildingId : " + buildingId);
+        return ResponseEntity.ok().body("Deleted BuildingId : " + buildingId);
     }
 
     /**
@@ -61,6 +63,15 @@ public class BuildingController {
         List<BuildingDto.BuildingResponseDto> buildings = buildingService.searchBuilding(keyword);
         return ResponseEntity.ok().body(buildings);
 
+    }
+
+    /**
+     * 매물 사진 수정
+     */
+
+    @PostMapping(value = "/updateBuildingImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateBuildingImages(@RequestParam Long buildingId, @RequestPart List<MultipartFile> imageList) {
+        return ResponseEntity.ok().body(buildingService.updateBuildingImages(buildingId, imageList));
     }
 
 

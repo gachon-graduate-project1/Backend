@@ -44,8 +44,8 @@ public class Init {
     public void initAdmins() {
 
         AdminEntity admin = new AdminEntity();
-        admin.setAdminName("admin" + 0);
-        admin.setPassword("adminPassword" + 0);
+        admin.setAdminName("admin");
+        admin.setPassword("homematePassword");
         admin.setStatus(Status.ACTIVE);
         adminRepository.save(admin);
 

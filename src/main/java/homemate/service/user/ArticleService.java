@@ -2,6 +2,8 @@ package homemate.service.user;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.ArticleDto;
+import homemate.exception.BusinessLogicException;
+import homemate.exception.ExceptionCode;
 import homemate.mapper.user.ArticleMapper;
 import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.CommentRepository;
@@ -33,7 +35,7 @@ public class ArticleService {
     public ArticleDto.ArticleResponseDto createArticle(Long userId, ArticleDto.ArticleRequestDto articleRequestDto) {
 
         UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 User ID: " + userId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
 
 
         ArticleEntity savedArticle = articleRepository.save(articleMapper.toReqeustEntity(articleRequestDto, userEntity));
@@ -45,7 +47,7 @@ public class ArticleService {
     public ArticleDto.ArticleResponseDto getArticle(Long articleId) {
 
         ArticleEntity articleEntity = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 Article: " + articleId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_IS_NOT_EXIST));
 
         return articleMapper.toResponseDto(articleEntity);
 
@@ -63,9 +65,8 @@ public class ArticleService {
         List<ArticleEntity> articleEntities = articleRepository.findKeyword(keyword);
         List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
 
-        //Todo: 예외처리 추후 수정
         if (articleEntities.isEmpty()) {
-            throw new NoSuchElementException("No results found for the keyword: " + keyword);
+            throw new BusinessLogicException(ExceptionCode.KEYWORD_IS_NOT_EXIST);
         }
 
 
@@ -84,7 +85,7 @@ public class ArticleService {
     public ArticleDto.ArticleResponseDto complainArticle(Long articleId) {
 
         ArticleEntity articleEntity = articleRepository.findById(articleId)
-                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 Article: " + articleId));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_IS_NOT_EXIST));
 
         //신고 + 1
         int complain = articleEntity.getComplain();

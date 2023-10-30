@@ -79,3 +79,17 @@ jwt:
   refresh:
     expiration: 1209600000 #  (1000L(ms -> s) * 60L(s -> m) * 60L(m -> h) * 24L(h -> 하루) * 14(2주))
     header: Authorization-refresh
+
+
+#S3
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIASXWWPBCBDIU5Q5LA
+      secretKey: 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
+    s3: #버킷이름
+      bucket: palgongtea
+    region:
+      static: ap-northeast-2
+      stack:
+        auto: false

@@ -26,6 +26,8 @@ public class CommentController {
         return ResponseEntity.ok().body(responseDto);
     }
 
+
+
     @GetMapping("/get")
     public ResponseEntity<?> getComment(@RequestParam("commentId") Long commentId) {
         CommentDto.CommentResponseDto comment = commentService.getComment(commentId);
@@ -35,7 +37,7 @@ public class CommentController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteComment(@RequestParam Long commentId) {
         commentService.deleteComment(commentId);
-        return ResponseEntity.ok().body("삭제된 Comment Id : " + commentId);
+        return ResponseEntity.ok().body("Deleted Comment Id : " + commentId);
     }
 
     /**

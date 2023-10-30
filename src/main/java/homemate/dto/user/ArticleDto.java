@@ -47,6 +47,8 @@ public class ArticleDto {
 
         private Integer complain; // 게시글 신고 횟수 (최대 10회)
 
+        private List<CommentEntity> comments;
+
 
 
     }
