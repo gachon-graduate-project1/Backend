@@ -35,15 +35,17 @@ public class BuildingEntity extends TimeStamp {
 
     private String floor; // 층수
 
-    private String cost; //가격
+    private String warantPrice; //보증금
+
+    private String dealPrice; //매매가
+
+    private String rentPrice; //임대료
 
     private String moveInDate; //입주가능일
 
     private String checkDuplex; //복층여부
 
     private String direction; //방향
-
-    private String numberOfRoom; // 방수/욕실수
 
     private String numberOfParking; //주차 가능 수
 
@@ -54,6 +56,8 @@ public class BuildingEntity extends TimeStamp {
     private BuildingField buildingField; //매물종류
 
     private String buildingName;  //매물이름
+
+    private String numberOfRoom; // 방수/욕실수
 
     @Enumerated(EnumType.STRING)
     private Status status;
