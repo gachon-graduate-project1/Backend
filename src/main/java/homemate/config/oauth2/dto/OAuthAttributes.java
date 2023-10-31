@@ -1,5 +1,7 @@
 package homemate.config.oauth2.dto;
 
+import homemate.config.jwt.util.PasswordUtil;
+import homemate.config.oauth2.userinfo.KakaoOAuth2UserInfo;
 import homemate.config.oauth2.userinfo.NaverOAuth2UserInfo;
 import homemate.config.oauth2.userinfo.OAuth2UserInfo;
 import homemate.constant.Role;
@@ -35,7 +37,7 @@ public class OAuthAttributes {
     public static OAuthAttributes ofKakao(String usernameAttributeName, Map<String, Object> attributes){
         return OAuthAttributes.builder()
                 .nameAttributeKey(usernameAttributeName)
-                .oAuth2UserInfo(new NaverOAuth2UserInfo(attributes))
+                .oAuth2UserInfo(new KakaoOAuth2UserInfo(attributes))
                 .build();
     }
 
@@ -51,6 +53,7 @@ public class OAuthAttributes {
                 .socialType(socialType)
                 .socialId(oAuth2UserInfo.getId())
                 .email(oAuth2UserInfo.getEmail())
+                .password(PasswordUtil.generateRandomPassword())
                 .role(Role.GUEST)
                 .nickName("aaa")
                 .userName("")

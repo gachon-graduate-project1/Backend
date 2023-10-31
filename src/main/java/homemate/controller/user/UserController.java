@@ -31,9 +31,9 @@ public class UserController {
         log.info("회원가입 api 실행");
         try{
             userService.addJoinUserInfo(userRequestDto.getEmail(), userRequestDto.getNickName());
-            return ResponseEntity.ok().body("회원가입 완료");
+            return ResponseEntity.ok().body("sign-up complete");
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원가입 오류 발생");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("sign-up error");
         }
     }
 
