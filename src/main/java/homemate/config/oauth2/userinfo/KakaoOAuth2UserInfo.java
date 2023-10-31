@@ -2,6 +2,11 @@ package homemate.config.oauth2.userinfo;
 
 import java.util.Map;
 
+/**
+ * Kakao OAuth2 사용자 정보를 처리하는 클래스
+ * OAuth2UserInfo 추상 클래스를 상속받아 구현합니다.
+ */
+
 public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
 
     public KakaoOAuth2UserInfo(Map<String, Object> attributes){
