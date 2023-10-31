@@ -1,4 +1,6 @@
 package homemate.domain.user;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import homemate.constant.Status;
 import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
@@ -22,10 +24,12 @@ public class CommentEntity extends TimeStamp {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id")
+    @JsonManagedReference
     private ArticleEntity article;
 
     @Lob

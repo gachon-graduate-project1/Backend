@@ -35,7 +35,7 @@ public class Init {
     private void initFirst(){
         initAdmins();
         initUsers();
-        initBuildings();
+        //initBuildings();
         initArticles();
         initComments();
     }
@@ -70,29 +70,29 @@ public class Init {
 
 
 
-    @Transactional
-    public void initBuildings() {
-        for (int i = 0; i < 5; i++) {
-            BuildingEntity building = new BuildingEntity();
-            building.setBuildingName("가천건물" + i);
-            building.setDistrict(District.Gyeonggi);
-            building.setAddress("성남시 수정구 - " + i);
-            building.setContent("건물" + i + "입니다.");
-            building.setFloor(i + "층");
-            building.setCost("월세 5" + i );
-            building.setMoveInDate("2024-01-0" + i);
-            building.setCheckDuplex("복층 없음");
-            building.setDirection("남동");
-            building.setNumberOfRoom("방" + i + "개");
-            building.setNumberOfParking("주차 가능 " + i + "대");
-            building.setRealterName("가천중개사" + i);
-            building.setRealterNumber("010-0000-000" + i);
-            building.setBuildingField(BuildingField.APARTMENT);
-            building.setStatus(Status.ACTIVE);
-            building.setTransactioonType(TransactionType.MONTHLY_RENT);
-            buildingRepository.save(building);
-        }
-    }
+//    @Transactional
+//    public void initBuildings() {
+//        for (int i = 0; i < 5; i++) {
+//            BuildingEntity building = new BuildingEntity();
+//            building.setBuildingName("가천건물" + i);
+//            building.setDistrict(District.Gyeonggi);
+//            building.setAddress("성남시 수정구 - " + i);
+//            building.setContent("건물" + i + "입니다.");
+//            building.setFloor(i + "층");
+//            building.setCost("월세 5" + i );
+//            building.setMoveInDate("2024-01-0" + i);
+//            building.setCheckDuplex("복층 없음");
+//            building.setDirection("남동");
+//            building.setNumberOfRoom("방" + i + "개");
+//            building.setNumberOfParking("주차 가능 " + i + "대");
+//            building.setRealterName("가천중개사" + i);
+//            building.setRealterNumber("010-0000-000" + i);
+//            building.setBuildingField(BuildingField.APARTMENT);
+//            building.setStatus(Status.ACTIVE);
+//            building.setTransactioonType(TransactionType.MONTHLY_RENT);
+//            buildingRepository.save(building);
+//        }
+//    }
 
     @Transactional
     public void initArticles() {

@@ -3,9 +3,9 @@ package homemate.service.admin;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.admin.AdminDto;
+import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
-import homemate.dto.user.UserDto;
 import homemate.mapper.admin.AdminMapper;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.admin.AdminRepository;
@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,8 +75,10 @@ public class AdminService {
         // 페이지 설정
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<UserEntity> userEntities = userRepository.findAll(pageable);
+        Page<UserEntity> userEntities = userRepository.getAllUser(pageable);
         // 페이지를 Dto로 변환
+
+        log.info("dto 변환 시작");
         Page<UserDto.UserResponseDto> userList = userEntities.map(m ->
                 UserDto.UserResponseDto.builder()
                         .id(m.getId())

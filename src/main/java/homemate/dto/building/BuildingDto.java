@@ -24,7 +24,11 @@ public class BuildingDto {
 
         private String floor; // 층수
 
-        private String cost; //가격
+        private String warantPrice; //보증금
+
+        private String dealPrice; //매매가
+
+        private String rentPrice; //임대료
 
         private String moveInDate; //입주가능일
 
@@ -32,12 +36,12 @@ public class BuildingDto {
 
         private String direction; //방향
 
-        private String numberOfRoom; // 방수/욕실수
-
         private String numberOfParking; //주차 가능 수
 
+        @NotBlank
         private String realterName; //중개소이름
 
+        @NotBlank
         private String realterNumber; //중개소번호
 
         @NotBlank
@@ -47,7 +51,10 @@ public class BuildingDto {
         private String buildingName;  //매물이름
 
         @NotBlank
-        private TransactionType transactioonType; //거래유형
+        private String numberOfRoom; // 방수/욕실수
+
+        @NotBlank
+        private TransactionType transactioonType;
 
         private List<String> images; //매물 사진
 
@@ -62,8 +69,6 @@ public class BuildingDto {
     @Builder
     public static class BuildingResponseDto {
 
-        private Long id;
-
         private District district;
 
         private String address;  //소재지(매물 세부 주소)
@@ -72,15 +77,17 @@ public class BuildingDto {
 
         private String floor; // 층수
 
-        private String cost; //가격
+        private String warantPrice; //보증금
+
+        private String dealPrice; //매매가
+
+        private String rentPrice; //임대료
 
         private String moveInDate; //입주가능일
 
         private String checkDuplex; //복층여부
 
         private String direction; //방향
-
-        private String numberOfRoom; // 방수/욕실수
 
         private String numberOfParking; //주차 가능 수
 
@@ -92,9 +99,11 @@ public class BuildingDto {
 
         private String buildingName;  //매물이름
 
-        private TransactionType transactioonType; //거래유형
+        private String numberOfRoom; // 방수/욕실수
 
         private List<String> images; //매물 사진
+
+        private TransactionType transactioonType;
 
     }
 
@@ -105,8 +114,6 @@ public class BuildingDto {
     @Builder
     public static class BuildingPatchDto {
 
-        private Long id;
-
         private District district;
 
         private String address;  //소재지(매물 세부 주소)
@@ -115,7 +122,11 @@ public class BuildingDto {
 
         private String floor; // 층수
 
-        private String cost; //가격
+        private String warantPrice; //보증금
+
+        private String dealPrice; //매매가
+
+        private String rentPrice; //임대료
 
         private String moveInDate; //입주가능일
 
@@ -123,12 +134,12 @@ public class BuildingDto {
 
         private String direction; //방향
 
-        private String numberOfRoom; // 방수/욕실수
-
         private String numberOfParking; //주차 가능 수
 
+        @NotBlank
         private String realterName; //중개소이름
 
+        @NotBlank
         private String realterNumber; //중개소번호
 
         @NotBlank
@@ -138,7 +149,10 @@ public class BuildingDto {
         private String buildingName;  //매물이름
 
         @NotBlank
-        private TransactionType transactioonType; //거래유형
+        private String numberOfRoom; // 방수/욕실수
+
+        @NotBlank
+        private TransactionType transactioonType;
 
         private List<String> images; //매물 사진
 

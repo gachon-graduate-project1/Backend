@@ -1,4 +1,6 @@
 package homemate.domain.user;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
 import homemate.constant.Status;
@@ -31,9 +33,11 @@ public class UserEntity extends TimeStamp {
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ArticleEntity> articles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<CommentEntity> comments = new ArrayList<>();
 
 

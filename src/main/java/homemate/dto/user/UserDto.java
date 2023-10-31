@@ -1,15 +1,16 @@
 package homemate.dto.user;
+
 import homemate.constant.Role;
 import homemate.constant.SocialType;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
+
 
 public class UserDto {
 
