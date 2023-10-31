@@ -5,6 +5,7 @@ import homemate.dto.user.UserDto;
 import homemate.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final AdminService adminService;
+    private final int PAGE = 0;
+    private final int SIZE = 5;
 
 
 
@@ -49,7 +52,8 @@ public class AdminController {
      */
     @GetMapping("/user/chart")
     public ResponseEntity<?> getAllUser(){
-        return ResponseEntity.ok().body(adminService.getAllUser(100, 100));
+        Page<UserDto.UserResponseDto> userList = adminService.getAllUser(PAGE, SIZE);
+        return ResponseEntity.ok().body(userList);
     }
 
     /**

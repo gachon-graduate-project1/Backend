@@ -1,6 +1,5 @@
 package homemate.dto.admin;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
@@ -52,5 +51,6 @@ public class AdminDto {
         private String adminName; //로그인 아이디
 
     }
+
 
 }
