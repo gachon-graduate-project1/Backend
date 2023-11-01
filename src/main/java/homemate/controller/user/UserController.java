@@ -1,7 +1,9 @@
 package homemate.controller.user;
 
+import homemate.config.jwt.service.JwtService;
 import homemate.dto.user.UserDto;
 import homemate.service.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +20,8 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final JwtService jwtService;
 
-    //TODO: 소셜로그인 구현 후 join, login 작성
     /**
      * 회원가입 시 추가 정보 저장 api
      */
@@ -27,11 +30,25 @@ public class UserController {
         return "user/sign-up"; // signup.html 또는 다른 뷰 페이지를 반환
     }
     @PostMapping("/sign-up")
-    public ResponseEntity<?> joinUser(@RequestBody UserDto.UserRequestDto userRequestDto){
+    public ResponseEntity<?> joinUser(HttpServletRequest request, @RequestBody UserDto.UserRequestDto userRequestDto){
         log.info("회원가입 api 실행");
         try{
-            userService.addJoinUserInfo(userRequestDto.getEmail(), userRequestDto.getNickName());
-            return ResponseEntity.ok().body("sign-up complete");
+            // Header에서 Bearer부분을 제외한 jwt 추출
+            String authorizationHeader = request.getHeader("Authorization");
+
+
+            // 추출한 jwt에서 이메일값 추출
+            Optional<String> email = jwtService.extractEmail(authorizationHeader.substring(7));
+
+            // 이메일 값이 null이 아니면 회원가입 진행
+            if(email.isPresent()){
+                String value = email.get();
+                userService.addJoinUserInfo(value, userRequestDto.getNickName());
+                return ResponseEntity.ok().body("sign-up complete");
+            } else{
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("empty email");
+            }
+
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("sign-up error");
         }
