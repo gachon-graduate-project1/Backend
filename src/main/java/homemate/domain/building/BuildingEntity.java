@@ -35,11 +35,11 @@ public class BuildingEntity {
 
     private String floor; // 층수
 
-    private String warantPrice; //보증금
+    private Integer warantPrice; //보증금
 
-    private String dealPrice; //매매가
+    private Long dealPrice; //매매가
 
-    private String rentPrice; //임대료
+    private Integer rentPrice; //임대료
 
     private String moveInDate; //입주가능일
 
@@ -47,22 +47,19 @@ public class BuildingEntity {
 
     private String direction; //방향
 
-    private String numberOfParking; //주차 가능 수
+    private Integer numberOfParking; //주차 가능 수
 
     private String realterName; //중개소이름
 
     private String realterNumber; //중개소번호
 
-    private BuildingField buildingField; //매물종류
+    private String buildingField; //매물종류
 
-    private String buildingName;  //매물이름
+    private Long buildingName;  //매물이름
 
     private String numberOfRoom; // 방수/욕실수
 
-
-
-    @Enumerated(EnumType.STRING)
-    private TransactionType transactioonType; //거래유형
+    private String transactioonType; //거래유형
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
