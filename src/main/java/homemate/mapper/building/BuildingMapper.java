@@ -20,19 +20,16 @@ public interface BuildingMapper {
      * Dto -> Entity
      */
     @Mapping(target="id", ignore = true)
-    @Mapping(target="status", ignore = true)
     BuildingEntity toResponseEntity(BuildingDto.BuildingResponseDto buildingResponseDto);
 
 
     @Mapping(target="id", ignore = true)
-    @Mapping(target="status", ignore = true)
     BuildingEntity toReqeustEntity(BuildingDto.BuildingRequestDto buildingRequestDto, AdminEntity adminEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     //@Mapping(target="id", ignore = true)
 //    @Mapping(target="createAt", ignore = true)
 //    @Mapping(target="modifiedAt", ignore = true)
-    @Mapping(target="status", ignore = true)
     @Mapping(target="id", ignore = true)
     void updateFromPatchDto(BuildingDto.BuildingPatchDto buildingPatchDto, @MappingTarget BuildingEntity buildingEntity);
 
