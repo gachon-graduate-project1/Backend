@@ -1,5 +1,7 @@
 package homemate.config.oauth2.userinfo;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Map;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Map;
  * OAuth2UserInfo 추상 클래스를 상속받아 구현합니다.
  */
 
+@Slf4j
 public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
 
     public KakaoOAuth2UserInfo(Map<String, Object> attributes){
@@ -14,6 +17,7 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
     }
     @Override
     public String getId() {
+
         return String.valueOf(attributes.get("id"));
     }
 
