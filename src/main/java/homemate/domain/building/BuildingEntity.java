@@ -19,7 +19,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BuildingEntity extends TimeStamp {
+public class BuildingEntity {
 
     @Id
     @Column(name = "building_id")
