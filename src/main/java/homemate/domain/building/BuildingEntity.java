@@ -59,8 +59,7 @@ public class BuildingEntity {
 
     private String numberOfRoom; // 방수/욕실수
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+
 
     @Enumerated(EnumType.STRING)
     private TransactionType transactioonType; //거래유형
