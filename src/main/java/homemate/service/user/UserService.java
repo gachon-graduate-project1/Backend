@@ -67,7 +67,7 @@ public class UserService {
         // 닉네임 중복성 확인.
         if (newNickName != null) {
 
-            boolean isNickNameUnique = userRepository.existsByNickName(newNickName);
+            boolean isNickNameUnique = !userRepository.existsByNickName(newNickName);
 
             if (!isNickNameUnique) {
                 throw new BusinessLogicException(ExceptionCode.DUPLICATE_NICKNAME);
