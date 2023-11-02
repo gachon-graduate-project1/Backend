@@ -69,7 +69,6 @@ public class BuildingDto {
     @Builder
     public static class BuildingResponseDto {
 
-        private District district;
 
         private String address;  //소재지(매물 세부 주소)
 
