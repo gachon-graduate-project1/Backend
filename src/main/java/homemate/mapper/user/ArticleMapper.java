@@ -30,6 +30,7 @@ public interface ArticleMapper {
 
 
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "complain", ignore = true)
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
 
 

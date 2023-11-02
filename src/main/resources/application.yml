@@ -17,7 +17,7 @@ spring:
       #      jdbc:
       #          time_zone: Asia/Seoul
       #        #dialect: org.hibernate.dialect.MariaDBDialect
-      ddl-auto: update
+      ddl-auto: none
     #open-in-view: false
   security:
     oauth2:
