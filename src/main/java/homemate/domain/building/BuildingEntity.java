@@ -26,8 +26,8 @@ public class BuildingEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private District district;
+//    @Enumerated(EnumType.STRING)
+//    private District district;
 
     private String address;  //소재지(매물 세부 주소)
 
@@ -35,11 +35,11 @@ public class BuildingEntity {
 
     private String floor; // 층수
 
-    private Integer warantPrice; //보증금
+    private String warantPrice; //보증금
 
-    private Long dealPrice; //매매가
+    private String dealPrice; //매매가
 
-    private Integer rentPrice; //임대료
+    private String rentPrice; //임대료
 
     private String moveInDate; //입주가능일
 
@@ -47,7 +47,7 @@ public class BuildingEntity {
 
     private String direction; //방향
 
-    private Integer numberOfParking; //주차 가능 수
+    private String numberOfParking; //주차 가능 수
 
     private String realterName; //중개소이름
 
@@ -55,7 +55,7 @@ public class BuildingEntity {
 
     private String buildingField; //매물종류
 
-    private Long buildingName;  //매물이름
+    private String buildingName;  //매물이름
 
     private String numberOfRoom; // 방수/욕실수
 
