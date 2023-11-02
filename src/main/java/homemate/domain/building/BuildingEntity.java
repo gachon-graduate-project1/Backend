@@ -23,7 +23,7 @@ public class BuildingEntity {
 
     @Id
     @Column(name = "building_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 //    @Enumerated(EnumType.STRING)
