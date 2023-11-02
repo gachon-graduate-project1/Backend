@@ -14,22 +14,11 @@ spring:
         show_sql: true
         format_sql: true
     hibernate:
-#      jdbc:
-#          time_zone: Asia/Seoul
-#        #dialect: org.hibernate.dialect.MariaDBDialect
-      ddl-auto: create
+      #      jdbc:
+      #          time_zone: Asia/Seoul
+      #        #dialect: org.hibernate.dialect.MariaDBDialect
+      ddl-auto: update
     #open-in-view: false
-
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2-console
-#
-#  datasource:
-#    url: jdbc:h2:mem:homemate
-#    username: root
-#    password: 1234
-#    driver-class-name: org.h2.Driver
   security:
     oauth2:
       client:
@@ -37,7 +26,7 @@ spring:
           naver:
             client-id: GlRRzCrwLEtzQw_l6iMO
             client-secret: GxpKohcy7M
-#            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            #            redirect-uri: http://localhost:8080/login/oauth2/code/naver
             redirect-uri: http://ceprj.gachon.ac.kr:60006/login/oauth2/code/naver
             authorization-grant-type: authorization_code
             scope: name, email
@@ -46,7 +35,7 @@ spring:
           kakao:
             client-id: e7ddd0b4b6b094437e32ead506281677
             client-secret: w3TuYpxLScw9uEW4BmB6dDGhGZqCvYvh
-#            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            #            redirect-uri: http://localhost:8080/login/oauth2/code/naver
             redirect-uri: http://ceprj.gachon.ac.kr:60006/login/oauth2/code/kakao
             client-authentication-method: client_secret_post
             authorization-grant-type: authorization_code
