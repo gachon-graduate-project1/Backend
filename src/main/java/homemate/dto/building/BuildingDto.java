@@ -1,6 +1,4 @@
 package homemate.dto.building;
-import homemate.constant.District;
-import homemate.constant.TransactionType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -15,7 +13,7 @@ public class BuildingDto {
     @Builder
     public static class BuildingRequestDto {
 
-        private District district;
+        private String district;
 
         private String address;  //소재지(매물 세부 주소)
 
@@ -53,7 +51,7 @@ public class BuildingDto {
         private String numberOfRoom; // 방수/욕실수
 
         @NotBlank
-        private TransactionType transactioonType;
+        private String transactioonType;
 
         private List<String> images; //매물 사진
 
@@ -101,7 +99,7 @@ public class BuildingDto {
 
         private List<String> images; //매물 사진
 
-        private TransactionType transactioonType;
+        private String transactioonType;
 
     }
 
@@ -112,7 +110,7 @@ public class BuildingDto {
     @Builder
     public static class BuildingPatchDto {
 
-        private District district;
+        private String district;
 
         private String address;  //소재지(매물 세부 주소)
 
@@ -150,7 +148,7 @@ public class BuildingDto {
         private String numberOfRoom; // 방수/욕실수
 
         @NotBlank
-        private TransactionType transactioonType;
+        private String transactioonType;
 
         private List<String> images; //매물 사진
 
