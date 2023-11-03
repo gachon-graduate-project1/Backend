@@ -1,5 +1,4 @@
 package homemate.dto.building;
-import homemate.constant.BuildingField;
 import homemate.constant.District;
 import homemate.constant.TransactionType;
 import jakarta.validation.constraints.NotBlank;
@@ -45,7 +44,7 @@ public class BuildingDto {
         private String realterNumber; //중개소번호
 
         @NotBlank
-        private BuildingField buildingField; //매물종류
+        private String buildingField; //매물종류
 
         @NotBlank
         private String buildingName;  //매물이름
@@ -94,7 +93,7 @@ public class BuildingDto {
 
         private String realterNumber; //중개소번호
 
-        private BuildingField buildingField; //매물종류
+        private String buildingField; //매물종류
 
         private String buildingName;  //매물이름
 
@@ -142,7 +141,7 @@ public class BuildingDto {
         private String realterNumber; //중개소번호
 
         @NotBlank
-        private BuildingField buildingField; //매물종류
+        private String buildingField; //매물종류
 
         @NotBlank
         private String buildingName;  //매물이름
