@@ -1,6 +1,7 @@
 package homemate.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import homemate.constant.Status;
 import homemate.domain.TimeStamp;
@@ -25,7 +26,8 @@ public class ArticleEntity extends TimeStamp {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
+    //@JsonManagedReference
+    @JsonIgnore
     private UserEntity user;
 
     private String title; //제목
