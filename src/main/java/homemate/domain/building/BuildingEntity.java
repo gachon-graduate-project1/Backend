@@ -1,12 +1,6 @@
 package homemate.domain.building;
-import homemate.constant.BuildingField;
-import homemate.constant.District;
-import homemate.constant.Status;
-import homemate.constant.TransactionType;
-import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
