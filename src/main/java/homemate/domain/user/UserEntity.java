@@ -1,6 +1,7 @@
 package homemate.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
 import homemate.constant.Status;
