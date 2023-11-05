@@ -3,10 +3,7 @@ package homemate.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
@@ -30,4 +27,15 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/images/")
                 .setCachePeriod(60 * 60 * 24 * 365);
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoggerInterceptor())
+//                .excludePathPatterns("/css/**", "/images/**", "/js/**");
+
+        registry.addInterceptor(new LoginCheckInterceptor())
+                //.addPathPatterns("/*")
+                .excludePathPatterns("/log*");
+    }
+
 }

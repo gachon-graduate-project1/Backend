@@ -61,33 +61,23 @@ public class UserController {
 
 
 
-    @GetMapping("/getUser")
-    public ResponseEntity<?> getUser (@RequestParam("userId") Long userId) {
-        UserDto.UserResponseDto user = userService.getUser(userId);
-        return ResponseEntity.ok().body(user);
-    }
-
     /**
      *
-     * update -> 닉네임만 수정 가능 -> 온보딩 
+     * update -> 닉네임만 설정 및 수정 가능 -> 온보딩
      */
     @PatchMapping("/update")
     public ResponseEntity<?> updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.UserPatchDto userPatchDto) {
         return ResponseEntity.ok().body(userService.updateUser(userId, userPatchDto));
     }
 
+    /**
+     * 사용자 탈퇴 기능
+     */
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(@RequestParam("userId") long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok().body("Deleted UserId: " + userId);
     }
 
-    /**
-     * 전체 회원 조회
-     */
-    @GetMapping("/getAll")
-    public ResponseEntity<List<UserDto.UserResponseDto>> getAllUser() {
-        List<UserDto.UserResponseDto> users = userService.getAllUser();
-        return ResponseEntity.ok().body(users);
-    }
+
 }

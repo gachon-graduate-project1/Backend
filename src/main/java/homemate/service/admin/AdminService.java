@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.NoSuchElementException;
 
@@ -33,9 +34,30 @@ public class AdminService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
+
     /**
-     * admin 회원가입 create x (한 개의 계정으로 비밀번호만 변경 가능)
+     * 로그인 기능
      */
+
+    @Transactional
+    public AdminDto.AdminResponseDto login(AdminDto.AdminRequestDto adminRequestDto) {
+
+        AdminEntity adminEntity = adminRepository.findByAdminName(adminRequestDto.getAdminName())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.UNAUTHRORIZED_ADMIN));
+
+
+        // 비밀번호 비교
+        if (!adminRequestDto.getPassword().equals(adminEntity.getPassword())) {
+
+            throw new BusinessLogicException(ExceptionCode.UNAUTHRORIZED_ADMIN);
+        }
+
+        //사용자 정보 반환
+        AdminDto.AdminResponseDto responseDto = adminMapper.toResponseDto(adminEntity);
+
+        return responseDto;
+    }
+
 
 
 
@@ -65,11 +87,11 @@ public class AdminService {
         return adminMapper.toResponseDto(adminEntity);
     }
 
-    @Transactional
-    public void deleteAdmin(Long adminId) {
-        adminRepository.deleteById(adminId);
-        log.info("삭제된 아이디: {}",adminId);
-    }
+//    @Transactional
+//    public void deleteAdmin(Long adminId) {
+//        adminRepository.deleteById(adminId);
+//        log.info("삭제된 아이디: {}",adminId);
+//    }
 
     public Page<UserDto.UserResponseDto> getAllUser(int page, int size){
         // 페이지 설정
@@ -125,4 +147,7 @@ public class AdminService {
         log.info("삭제된 아이디: {}", userId);
     }
 
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
+    }
 }

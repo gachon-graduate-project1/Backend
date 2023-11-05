@@ -1,11 +1,16 @@
 package homemate.controller.admin;
 
+import homemate.domain.admin.AdminEntity;
 import homemate.dto.admin.AdminDto;
 import homemate.dto.user.UserDto;
+import homemate.exception.BusinessLogicException;
 import homemate.service.admin.AdminService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +24,44 @@ public class AdminController {
     private final int PAGE = 0;
     private final int SIZE = 5;
 
+    /**
+     * 관리자 로그인
+     */
+    @PostMapping("/login")
+    @ResponseBody
+    public ResponseEntity<?> login(@RequestBody AdminDto.AdminRequestDto adminRequestDto, HttpServletRequest request) {
+
+
+        try {
+            AdminDto.AdminResponseDto loginResponse = adminService.login(adminRequestDto);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("loginAdmin", loginResponse);
+
+            // 세션 만료 시간 30분
+            session.setMaxInactiveInterval(60 * 30);
+
+            return ResponseEntity.ok("Login Successful!");
+        } catch (BusinessLogicException e) {
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+        }
+    }
+
+
+    /**
+     * 관리자 로그아웃
+     */
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
+
+
+
+
+
 
 
     /**
@@ -31,7 +74,7 @@ public class AdminController {
         if (adminResponseDto != null) {
             return ResponseEntity.ok(adminResponseDto);
         } else {
-            //TODO: 나중에 에러처리 변수 따로 설정 후 수정할 것
+
             log.info("등록되지 않은 admin!");
             return ResponseEntity.notFound().build();
         }
