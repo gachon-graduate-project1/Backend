@@ -1,14 +1,17 @@
 package homemate.service.admin;
 
 import homemate.domain.admin.AdminEntity;
+import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.admin.AdminDto;
+import homemate.dto.building.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.admin.AdminMapper;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.admin.AdminRepository;
+import homemate.repository.building.BuildingRepository;
 import homemate.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.NoSuchElementException;
 
@@ -33,6 +35,7 @@ public class AdminService {
     private final AdminMapper adminMapper;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final BuildingRepository buildingRepository;
 
 
     /**
@@ -45,6 +48,8 @@ public class AdminService {
         AdminEntity adminEntity = adminRepository.findByAdminName(adminRequestDto.getAdminName())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.UNAUTHRORIZED_ADMIN));
 
+
+        log.info("adminName: {}", adminEntity.getAdminName());
 
         // 비밀번호 비교
         if (!adminRequestDto.getPassword().equals(adminEntity.getPassword())) {
@@ -116,6 +121,40 @@ public class AdminService {
 
 
         return userList;
+    }
+
+    public Page<BuildingDto.BuildingResponseDto> getAllBuilding(int page, int size){
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<BuildingEntity> buildingEntities = buildingRepository.getAllBuilding(pageable);
+        // 페이지를 Dto로 변환
+
+        log.info("dto 변환 시작");
+        Page<BuildingDto.BuildingResponseDto> buildingList = buildingEntities.map(m ->
+                BuildingDto.BuildingResponseDto.builder()
+                        .id(m.getId())
+                        .address(m.getAddress())
+                        .content(m.getContent())
+                        .floor(m.getFloor())
+                        .warantPrice(m.getWarantPrice())
+                        .dealPrice(m.getDealPrice())
+                        .rentPrice(m.getRentPrice())
+                        .moveInDate(m.getMoveInDate())
+                        .checkDuplex(m.getCheckDuplex())
+                        .direction(m.getDirection())
+                        .numberOfParking(m.getNumberOfParking())
+                        .realterName(m.getRealterName())
+                        .realterNumber(m.getRealterNumber())
+                        .buildingField(m.getBuildingField())
+                        .buildingName(m.getBuildingName())
+                        .numberOfRoom(m.getNumberOfRoom())
+                        .images(m.getImages())
+                        .transactioonType(m.getTransactioonType())
+                        .build());
+
+
+        return buildingList;
     }
 
     public UserDto.UserResponseDto getDetailUser(Long userId){

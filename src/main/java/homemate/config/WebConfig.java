@@ -33,9 +33,10 @@ public class WebConfig implements WebMvcConfigurer {
 //        registry.addInterceptor(new LoggerInterceptor())
 //                .excludePathPatterns("/css/**", "/images/**", "/js/**");
 
-        registry.addInterceptor(new LoginCheckInterceptor())
-                //.addPathPatterns("/*")
-                .excludePathPatterns("/log*");
+//        registry.addInterceptor(new LoginCheckInterceptor())
+//                //.addPathPatterns("/*")
+//                .excludePathPatterns("/admin/log*");
     }
+
 
 }

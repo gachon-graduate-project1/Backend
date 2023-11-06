@@ -1,7 +1,8 @@
 package homemate;
-import homemate.constant.*;
+
+import homemate.constant.SocialType;
+import homemate.constant.Status;
 import homemate.domain.admin.AdminEntity;
-import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
@@ -54,16 +55,16 @@ public class Init {
 
     @Transactional
     public void initUsers() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 20; i++) {
             UserEntity user = new UserEntity();
-            user.setUserName("user" + i);
-            user.setNickName("userNickname" + i);
-            user.setPassword("userPs" + i);
-            user.setEmail("user" + i + "@example.com");
+            user.setUserName("user" + (i+1));
+            user.setNickName("userNickname" + (i+1));
+            user.setPassword("userPs" + (i+1));
+            user.setEmail("user" + (i+1) + "@example.com");
             user.setStatus(Status.ACTIVE);
             user.setSocialType(SocialType.KAKAO);
-            user.setSocialId("userSocialId" + i);
-            user.setRefreshToken("userRefreshToken" + i);
+            user.setSocialId("userSocialId" + (i+1));
+            user.setRefreshToken("userRefreshToken" + (i+1));
             userRepository.save(user);
         }
     }
