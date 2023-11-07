@@ -52,72 +52,51 @@
       <a class="nav-link" data-bs-toggle="tab" href="#buildingForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/building/chart}">매물관리</a>
     </li>
     <li class="nav-item" role of="presentation">
-      <a class="nav-link" data-bs-toggle="tab" href="#ArticleForm" aria-selected="false" role="tab" tabindex="-1">게시글관리</a>
+      <a class="nav-link" data-bs-toggle="tab" href="#ArticleForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/article/chart}">게시글관리</a>
     </li>
   </ul>
 
-  <table class="table" style="width: 5000px;">
+  <table class="table" style="width: 3000px;">
     <thead>
     <tr>
       <th scope="col">번호</th>
       <th scope="col">이름</th>
       <th scope="col">주소</th>
-      <th scope="col">내용</th>
-      <th scope="col">층수</th>
-      <th scope="col">보증금</th>
-      <th scope="col">매매가</th>
-      <th scope="col">임대료</th>
-      <th scope="col">입주가능일</th>
-      <th scope="col">복층여부</th>
-      <th scope="col">방향</th>
-      <th scope="col">주차가능수</th>
-      <th scope="col">중개소이름</th>
-      <th scope="col">중개소번호</th>
-      <th scope="col">매물종류</th>
-      <th scope="col">매물이름</th>
-      <th scope="col">방수/욕실수</th>
-      <th scope="col">거래유형</th>
-
-
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="building : ${buildingList}">
       <td th:text="${building.id}" scope="row"></td>
-      <td th:text="${building.address}"></td>
-      <td th:text="${building.content}"></td>
-      <td th:text="${building.floor}"></td>
-      <td th:text="${building.warantPrice}"></td>
-      <td th:text="${building.dealPrice}"></td>
-      <td th:text="${building.rentPrice}"></td>
-      <td th:text="${building.moveInDate}"></td>
-      <td th:text="${building.checkDuplex}"></td>
-      <td th:text="${building.direction}"></td>
-      <td th:text="${building.numberOfParking}"></td>
-      <td th:text="${building.realterName}"></td>
-      <td th:text="${building.realterNumber}"></td>
-      <td th:text="${building.buildingField}"></td>
       <td th:text="${building.buildingName}"></td>
-      <td th:text="${building.numberOfRoom}"></td>
-      <td th:text="${building.transactioonType}"></td>
+      <td th:text="${building.address}"></td>
+      <td class="row">
+        <div class="col">
+          <!-- 수정 버튼 -->
+          <button type="button" class="btn btn-primary" style="font-size: 24px; padding: 10px 20px;">
+            수정
+          </button>
+          <button type="button" class="btn btn-danger" style="font-size: 24px; padding: 10px 20px;">
+            삭제
+          </button>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
-
   <div style="margin-top: 300px;">
     <ul class="pagination pagination-lg">
-      <li class="page-item" th:class="${currentPage == 0} ? 'page-item disabled' : 'page-item'">
-        <a class="page-link" th:href="@{/admin/building/chart(page=0, size=${pageSize})}">&laquo;</a>
+      <li th:if="${currentPage > 0}" class="page-item">
+        <a class="page-link" th:href="@{/admin/building/chart(page=${currentPage - 5}, size=${pageSize})}">&laquo;</a>
       </li>
-      <li th:each="i : ${#numbers.sequence(0, buildingList.totalPages - 1)}" th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
-        <a class="page-link" th:href="@{/admin/building/chart(page=${i}, size=${pageSize})}" th:text="${i + 1}"></a>
+      <li th:each="i : ${#numbers.sequence(currentPage, currentPage + 4)}" class="page-item">
+        <a class="page-link" th:if="${i < buildingList.totalPages}" th:href="@{/admin/building/chart(page=${i}, size=${pageSize})}" th:text="${i + 1}"></a>
       </li>
-      <li class="page-item" th:class="${currentPage == buildingList.totalPages - 1} ? 'page-item disabled' : 'page-item'">
-        <a class="page-link" th:href="@{/admin/building/chart(page=${buildingList.totalPages - 1}, size=${pageSize})}">&raquo;</a>
+      <li th:if="${currentPage + 5 < buildingList.totalPages}" class="page-item">
+        <a class="page-link" th:href="@{/admin/building/chart(page=${currentPage + 5}, size=${pageSize})}">&raquo;</a>
       </li>
     </ul>
   </div>
-
 
 </div>
 </body>

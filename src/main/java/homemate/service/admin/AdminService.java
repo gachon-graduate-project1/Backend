@@ -2,9 +2,11 @@ package homemate.service.admin;
 
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.building.BuildingEntity;
+import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.admin.AdminDto;
 import homemate.dto.building.BuildingDto;
+import homemate.dto.user.ArticleDto;
 import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
@@ -12,6 +14,7 @@ import homemate.mapper.admin.AdminMapper;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.admin.AdminRepository;
 import homemate.repository.building.BuildingRepository;
+import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +35,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
+    private final ArticleRepository articleRepository;
     private final AdminMapper adminMapper;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
@@ -157,6 +161,27 @@ public class AdminService {
         return buildingList;
     }
 
+    public Page<ArticleDto.ArticleResponseDto> getAllArticle(int page, int size){
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<ArticleEntity> articleEntities = articleRepository.getAllArticle(pageable);
+        // 페이지를 Dto로 변환
+
+        log.info("dto 변환 시작");
+        Page<ArticleDto.ArticleResponseDto> articleList = articleEntities.map(m ->
+                ArticleDto.ArticleResponseDto.builder()
+                        .id(m.getId())
+                        .userId(m.getUser().getId())
+                        .title(m.getTitle())
+                        .complain(m.getComplain())
+                        .build());
+
+
+        return articleList;
+    }
+
+
     public UserDto.UserResponseDto getDetailUser(Long userId){
         // UserEntity 조회
         UserEntity userEntity = userRepository.findById(userId)
@@ -179,6 +204,7 @@ public class AdminService {
 
 
     }
+
 
     @Transactional
     public void deleteUser(Long userId){

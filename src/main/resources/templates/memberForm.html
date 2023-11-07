@@ -52,7 +52,7 @@
       <a class="nav-link" data-bs-toggle="tab" href="#buildingForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/building/chart}">매물관리</a>
     </li>
     <li class="nav-item" role of="presentation">
-      <a class="nav-link" data-bs-toggle="tab" href="#ArticleForm" aria-selected="false" role="tab" tabindex="-1">게시글관리</a>
+      <a class="nav-link" data-bs-toggle="tab" href="#ArticleForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/article/chart}">게시글관리</a>
     </li>
   </ul>
 
@@ -66,6 +66,7 @@
       <th scope="col">소셜 id</th>
       <th scope="col">이메일</th>
       <th scope="col">비밀번호</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -77,24 +78,37 @@
       <td th:text="${member.socialId}"></td>
       <td th:text="${member.email}"></td>
       <td th:text="${member.password}"></td>
+      <td class="row">
+        <div class="col">
+          <!-- 수정 버튼 -->
+          <button type="button" class="btn btn-primary" style="font-size: 24px; padding: 10px 20px;">
+            수정
+          </button>
+          <button type="button" class="btn btn-danger" style="font-size: 24px; padding: 10px 20px;">
+            삭제
+          </button>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
 
   <div style="margin-top: 300px;">
     <ul class="pagination pagination-lg">
-      <li class="page-item" th:class="${currentPage == 0} ? 'page-item disabled' : 'page-item'">
-        <a class="page-link" th:href="@{/admin/user/chart(page=0, size=${pageSize})}">&laquo;</a>
+      <!-- 좌측 화살표 (이전 페이지뭉치로 이동) -->
+      <li th:if="${currentPage > 0}" class="page-item">
+        <a class="page-link" th:href="@{/admin/user/chart(page=${currentPage - 5}, size=${pageSize})}">&laquo;</a>
       </li>
-      <li th:each="i : ${#numbers.sequence(0, userList.totalPages - 1)}" th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
-        <a class="page-link" th:href="@{/admin/user/chart(page=${i}, size=${pageSize})}" th:text="${i + 1}"></a>
+      <!-- 현재 페이지의 앞 5개 페이지 표시 -->
+      <li th:each="i : ${#numbers.sequence(currentPage, currentPage + 4)}" class="page-item">
+        <a class="page-link" th:if="${i < userList.totalPages}" th:href="@{/admin/user/chart(page=${i}, size=${pageSize})}" th:text="${i + 1}"></a>
       </li>
-      <li class="page-item" th:class="${currentPage == userList.totalPages - 1} ? 'page-item disabled' : 'page-item'">
-        <a class="page-link" th:href="@{/admin/user/chart(page=${userList.totalPages - 1}, size=${pageSize})}">&raquo;</a>
+      <!-- 우측 화살표 (다음 페이지뭉치로 이동) -->
+      <li th:if="${currentPage + 5 < userList.totalPages}" class="page-item">
+        <a class="page-link" th:href="@{/admin/user/chart(page=${currentPage + 5}, size=${pageSize})}">&raquo;</a>
       </li>
     </ul>
   </div>
-
 
 </div>
 </body>

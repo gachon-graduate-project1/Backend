@@ -2,6 +2,7 @@ package homemate.controller.admin;
 
 import homemate.dto.admin.AdminDto;
 import homemate.dto.building.BuildingDto;
+import homemate.dto.user.ArticleDto;
 import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.service.admin.AdminService;
@@ -11,12 +12,10 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 //@RestController
 @Controller
@@ -28,6 +27,7 @@ public class AdminController {
     private final AdminService adminService;
 
     private final BuildingService buildingService;
+
     private final int PAGE = 0;
     private final int SIZE = 5;
 
@@ -35,7 +35,7 @@ public class AdminController {
     /**
      * 관리자 로그인 페이지로 이동
      */
-    @RequestMapping("/form")
+    @GetMapping("/form")
     public String loginPage() {
 
         return "adminLogin"; // adminLogin.html 페이지의 파일명
@@ -156,6 +156,17 @@ public class AdminController {
         return "buildingForm";
     }
 
+    @GetMapping("/article/chart")
+    public String getAllArticle(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model) {
+        Page<ArticleDto.ArticleResponseDto> articleList = adminService.getAllArticle(page, size);
+
+        model.addAttribute("articleList", articleList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", size);
+
+        return "articleForm";
+    }
+
 
 //    @GetMapping("/user/chart")
 //    public ResponseEntity<?> getAllUser(){
@@ -163,26 +174,46 @@ public class AdminController {
 //        return ResponseEntity.ok().body(userList);
 //    }
 
-//    /**
-//     * 관리자 - 특정 사용자 조회
-//     * @param userId
-//     * @return
-//     */
-//    @GetMapping("/user")
-//    public ResponseEntity<?> getDetailUser(@RequestParam("userId") Long userId){
-//        return ResponseEntity.ok().body(adminService.getDetailUser(userId));
-//    }
-//
-//    /**
-//     * 관리자 - 사용자 정보 수정
-//     * @param userId
-//     * @return
-//     */
-//
-//    @PatchMapping("/user")
+    /**
+     * 관리자 페이지 검색 기능
+     */
+
+    /**
+     * 관리자 - 특정 사용자 조회
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getUser")
+    public ResponseEntity<?> getDetailUser(@RequestParam("userId") Long userId){
+        return ResponseEntity.ok().body(adminService.getDetailUser(userId));
+    }
+
+    /**
+     * 관리자 - 사용자 정보 수정
+     * @param userId
+     * @return
+     */
+
+//    @PatchMapping("/updateUser")
 //    public ResponseEntity<?> updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto){
 //        return ResponseEntity.ok().body(adminService.updateUser(userId, adminPatchUserDto));
 //    }
+
+    @PatchMapping("/updateUser")
+    public String updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
+        adminService.updateUser(userId, adminPatchUserDto);
+        return "redirect:/admin/user/chart"; // 리다이렉트할 URL
+    }
+
+
+    @PatchMapping("/update/building")
+    public String updateBuilding(@RequestParam("buildingId") Long buildingId,
+                                            @RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
+
+        buildingService.updateBuilding(buildingId, buildingPatchDto);
+        return "buildingUpdate";
+    }
+
 //
 //    /**
 //     * 관리자 - 사용자 삭제

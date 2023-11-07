@@ -20,10 +20,6 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
     @Query("SELECT u FROM UserEntity u")
     Page<UserEntity> getAllUser(Pageable pageable);
 
-    //@Query("SELECT new homemate.dto.user.UserDto.UserResponseDto(u.id, u.userName, u.nickName, u.password, u.email, u.articles, u.comments, u.role, u.socialType, u.socialId, u.refreshToken) FROM UserEntity u")
-    //Page<UserDto.UserResponseDto> findAllByCreateAtDesc(Pageable pageable);
-
-
 
 
     UserEntity findBySocialTypeAndSocialId(SocialType socialType, String socialId);
