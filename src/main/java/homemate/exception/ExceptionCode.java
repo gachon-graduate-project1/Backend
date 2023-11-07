@@ -30,6 +30,7 @@ public enum ExceptionCode {
      */
     INVALID_AUTH_TOKEN(UNAUTHORIZED, "권한 정보가 없는 토큰입니다."),
     UNAUTHORIZED_USER(UNAUTHORIZED, "존재하지 않는 계정 정보입니다"),
+    UNAUTHRORIZED_ADMIN(UNAUTHORIZED, "존재하지 않는 관리자 정보입니다."),
 
 
 

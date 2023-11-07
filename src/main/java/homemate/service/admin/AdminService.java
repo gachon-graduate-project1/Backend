@@ -1,14 +1,20 @@
 package homemate.service.admin;
 
 import homemate.domain.admin.AdminEntity;
+import homemate.domain.building.BuildingEntity;
+import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.admin.AdminDto;
+import homemate.dto.building.BuildingDto;
+import homemate.dto.user.ArticleDto;
 import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.admin.AdminMapper;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.admin.AdminRepository;
+import homemate.repository.building.BuildingRepository;
+import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,13 +35,38 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     private final UserRepository userRepository;
+    private final ArticleRepository articleRepository;
     private final AdminMapper adminMapper;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final BuildingRepository buildingRepository;
+
 
     /**
-     * admin 회원가입 create x (한 개의 계정으로 비밀번호만 변경 가능)
+     * 로그인 기능
      */
+
+    @Transactional
+    public AdminDto.AdminResponseDto login(AdminDto.AdminRequestDto adminRequestDto) {
+
+        AdminEntity adminEntity = adminRepository.findByAdminName(adminRequestDto.getAdminName())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.UNAUTHRORIZED_ADMIN));
+
+
+        log.info("adminName: {}", adminEntity.getAdminName());
+
+        // 비밀번호 비교
+        if (!adminRequestDto.getPassword().equals(adminEntity.getPassword())) {
+
+            throw new BusinessLogicException(ExceptionCode.UNAUTHRORIZED_ADMIN);
+        }
+
+        //사용자 정보 반환
+        AdminDto.AdminResponseDto responseDto = adminMapper.toResponseDto(adminEntity);
+
+        return responseDto;
+    }
+
 
 
 
@@ -65,11 +96,11 @@ public class AdminService {
         return adminMapper.toResponseDto(adminEntity);
     }
 
-    @Transactional
-    public void deleteAdmin(Long adminId) {
-        adminRepository.deleteById(adminId);
-        log.info("삭제된 아이디: {}",adminId);
-    }
+//    @Transactional
+//    public void deleteAdmin(Long adminId) {
+//        adminRepository.deleteById(adminId);
+//        log.info("삭제된 아이디: {}",adminId);
+//    }
 
     public Page<UserDto.UserResponseDto> getAllUser(int page, int size){
         // 페이지 설정
@@ -96,6 +127,61 @@ public class AdminService {
         return userList;
     }
 
+    public Page<BuildingDto.BuildingResponseDto> getAllBuilding(int page, int size){
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<BuildingEntity> buildingEntities = buildingRepository.getAllBuilding(pageable);
+        // 페이지를 Dto로 변환
+
+        log.info("dto 변환 시작");
+        Page<BuildingDto.BuildingResponseDto> buildingList = buildingEntities.map(m ->
+                BuildingDto.BuildingResponseDto.builder()
+                        .id(m.getId())
+                        .address(m.getAddress())
+                        .content(m.getContent())
+                        .floor(m.getFloor())
+                        .warantPrice(m.getWarantPrice())
+                        .dealPrice(m.getDealPrice())
+                        .rentPrice(m.getRentPrice())
+                        .moveInDate(m.getMoveInDate())
+                        .checkDuplex(m.getCheckDuplex())
+                        .direction(m.getDirection())
+                        .numberOfParking(m.getNumberOfParking())
+                        .realterName(m.getRealterName())
+                        .realterNumber(m.getRealterNumber())
+                        .buildingField(m.getBuildingField())
+                        .buildingName(m.getBuildingName())
+                        .numberOfRoom(m.getNumberOfRoom())
+                        .images(m.getImages())
+                        .transactioonType(m.getTransactioonType())
+                        .build());
+
+
+        return buildingList;
+    }
+
+    public Page<ArticleDto.ArticleResponseDto> getAllArticle(int page, int size){
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<ArticleEntity> articleEntities = articleRepository.getAllArticle(pageable);
+        // 페이지를 Dto로 변환
+
+        log.info("dto 변환 시작");
+        Page<ArticleDto.ArticleResponseDto> articleList = articleEntities.map(m ->
+                ArticleDto.ArticleResponseDto.builder()
+                        .id(m.getId())
+                        .userId(m.getUser().getId())
+                        .title(m.getTitle())
+                        .complain(m.getComplain())
+                        .build());
+
+
+        return articleList;
+    }
+
+
     public UserDto.UserResponseDto getDetailUser(Long userId){
         // UserEntity 조회
         UserEntity userEntity = userRepository.findById(userId)
@@ -119,10 +205,14 @@ public class AdminService {
 
     }
 
+
     @Transactional
     public void deleteUser(Long userId){
         userRepository.deleteById(userId);
         log.info("삭제된 아이디: {}", userId);
     }
 
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
+    }
 }

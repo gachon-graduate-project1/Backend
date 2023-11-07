@@ -1,7 +1,6 @@
 package homemate.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
 import homemate.constant.Status;
@@ -22,7 +21,7 @@ public class UserEntity extends TimeStamp {
 
     @Id
     @Column(name = "user_Id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String userName; //소셜로그인 아이디

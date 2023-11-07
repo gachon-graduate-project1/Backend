@@ -1,5 +1,7 @@
 package homemate;
-import homemate.constant.*;
+
+import homemate.constant.SocialType;
+import homemate.constant.Status;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
@@ -35,7 +37,7 @@ public class Init {
     private void initFirst(){
         initAdmins();
         initUsers();
-        //initBuildings();
+        initBuildings();
         initArticles();
         initComments();
     }
@@ -45,7 +47,7 @@ public class Init {
 
         AdminEntity admin = new AdminEntity();
         admin.setAdminName("admin");
-        admin.setPassword("homematePassword");
+        admin.setPassword("homemate");
         admin.setStatus(Status.ACTIVE);
         adminRepository.save(admin);
 
@@ -54,50 +56,45 @@ public class Init {
 
     @Transactional
     public void initUsers() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             UserEntity user = new UserEntity();
-            user.setUserName("user" + i);
-            user.setNickName("userNickname" + i);
-            user.setPassword("userPs" + i);
-            user.setEmail("user" + i + "@example.com");
+            user.setUserName("user" + (i+1));
+            user.setNickName("userNickname" + (i+1));
+            user.setPassword("userPs" + (i+1));
+            user.setEmail("user" + (i+1) + "@example.com");
             user.setStatus(Status.ACTIVE);
             user.setSocialType(SocialType.KAKAO);
-            user.setSocialId("userSocialId" + i);
-            user.setRefreshToken("userRefreshToken" + i);
+            user.setSocialId("userSocialId" + (i+1));
+            user.setRefreshToken("userRefreshToken" + (i+1));
             userRepository.save(user);
         }
     }
 
 
 
-//    @Transactional
-//    public void initBuildings() {
-//        for (int i = 0; i < 5; i++) {
-//            BuildingEntity building = new BuildingEntity();
-//            building.setBuildingName("가천건물" + i);
-//            building.setDistrict(District.Gyeonggi);
-//            building.setAddress("성남시 수정구 - " + i);
-//            building.setContent("건물" + i + "입니다.");
-//            building.setFloor(i + "층");
-//            building.setCost("월세 5" + i );
-//            building.setMoveInDate("2024-01-0" + i);
-//            building.setCheckDuplex("복층 없음");
-//            building.setDirection("남동");
-//            building.setNumberOfRoom("방" + i + "개");
-//            building.setNumberOfParking("주차 가능 " + i + "대");
-//            building.setRealterName("가천중개사" + i);
-//            building.setRealterNumber("010-0000-000" + i);
-//            building.setBuildingField(BuildingField.APARTMENT);
-//            building.setStatus(Status.ACTIVE);
-//            building.setTransactioonType(TransactionType.MONTHLY_RENT);
-//            buildingRepository.save(building);
-//        }
-//    }
+    @Transactional
+    public void initBuildings() {
+        for (int i = 0; i < 50; i++) {
+            BuildingEntity building = new BuildingEntity();
+            building.setBuildingName("가천건물" + i);
+            building.setAddress("성남시 수정구 - " + i);
+            building.setContent("건물" + i + "입니다.");
+            building.setFloor(i + "층");
+            building.setMoveInDate("2024-01-0" + i);
+            building.setCheckDuplex("복층 없음");
+            building.setDirection("남동");
+            building.setNumberOfRoom("방" + i + "개");
+            building.setNumberOfParking("주차 가능 " + i + "대");
+            building.setRealterName("가천중개사" + i);
+            building.setRealterNumber("010-0000-000" + i);
+            buildingRepository.save(building);
+        }
+    }
 
     @Transactional
     public void initArticles() {
         List<UserEntity> user = userRepository.findAll();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             ArticleEntity article = new ArticleEntity();
             article.setUser(user.get(i));
             article.setTitle("게시글" + i);

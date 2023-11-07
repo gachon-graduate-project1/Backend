@@ -45,10 +45,24 @@ public class WebConfig implements WebMvcConfigurer {
                     }
                 });
 
+
+
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/index.html");
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoggerInterceptor())
+//                .excludePathPatterns("/css/**", "/images/**", "/js/**");
+
+//        registry.addInterceptor(new LoginCheckInterceptor())
+//                //.addPathPatterns("/*")
+//                .excludePathPatterns("/admin/log*");
+    }
+
+
 }

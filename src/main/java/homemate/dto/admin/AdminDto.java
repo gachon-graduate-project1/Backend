@@ -11,7 +11,7 @@ public class AdminDto {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class AdminPostDto {
+    public static class AdminRequestDto {
 
         @NotBlank
         @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$",

@@ -18,6 +18,9 @@ public class BuildingController {
 
     private final BuildingService buildingService;
 
+    /**
+     * 관리자 매물 등록 기능
+     */
     @PostMapping("/create")
     public ResponseEntity<BuildingDto.BuildingResponseDto> createBuilding(@RequestParam("adminId") Long adminId, @RequestBody BuildingDto.BuildingRequestDto buildingRequestDto) {
         BuildingDto.BuildingResponseDto responseDto = buildingService.createBuilding(adminId, buildingRequestDto);
