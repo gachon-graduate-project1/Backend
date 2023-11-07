@@ -13,6 +13,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
 
     private final WebSocketHandler webSocketHandler;
+
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         // handler 등록, js에서 new Websocket할 때 경로 지정

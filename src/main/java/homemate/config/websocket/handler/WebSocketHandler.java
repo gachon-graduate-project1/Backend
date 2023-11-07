@@ -34,6 +34,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+
+        log.info("웹소켓 시작");
         // 사용자의 대답을 세션에 저장
         String question = message.getPayload();
 
@@ -56,7 +58,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
         }
 
         // 사용자가 '아니요'를 보낼 때 Flask 서버에 질문 이력을 전송
-        if ("아니요".equals(question)) {
+        if ("no".equals(question)) {
+            log.info("소켓 종료!");
             String responseFlask = sendQuestionsToFlask(questions);
             session.sendMessage(new TextMessage(responseFlask));
             session.close();
