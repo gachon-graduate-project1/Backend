@@ -1,6 +1,8 @@
 package homemate.config;
 
 
+
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -42,6 +44,14 @@ public class WebConfig implements WebMvcConfigurer {
                                 : new ClassPathResource("/static/index.html");
                     }
                 });
+
+
+
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("forward:/index.html");
     }
 
     @Override
