@@ -197,8 +197,10 @@ public class AdminService {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + userId));
 
-        userEntity.setPassword(adminPatchUserDto.getPassword());
+        //userEntity.setPassword(adminPatchUserDto.getPassword());
         userEntity.setNickName(adminPatchUserDto.getNickName());
+
+        userRepository.save(userEntity);
 
         return userMapper.toResponseDto(userEntity);
 
@@ -210,6 +212,18 @@ public class AdminService {
     public void deleteUser(Long userId){
         userRepository.deleteById(userId);
         log.info("삭제된 아이디: {}", userId);
+    }
+
+    @Transactional
+    public void deleteBuilding(Long buildingId){
+        buildingRepository.deleteById(buildingId);
+        log.info("삭제된 아이디: {}", buildingId);
+    }
+
+    @Transactional
+    public void deleteArticle(Long articleId){
+        articleRepository.deleteById(articleId);
+        log.info("삭제된 아이디: {}", articleId);
     }
 
     public PasswordEncoder getPasswordEncoder() {
