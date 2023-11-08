@@ -5,6 +5,7 @@ module.exports = function(app) {
         '/api',
         createProxyMiddleware({
             target: 'http://ceprj.gachon.ac.kr:60006',
+            // target: 'http://localhost:8080',
             changeOrigin: true,
         })
     );
