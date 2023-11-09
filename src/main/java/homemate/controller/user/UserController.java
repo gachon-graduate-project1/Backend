@@ -26,7 +26,7 @@ public class UserController {
      */
     @GetMapping("/login/oauth2/code/user/sign-up")
     public String redirectHandler() {
-        return "redirect:/Onboarding.js";
+        return "redirect:/login/oauth2/code/user/sign-up";
     }
 
     /**
