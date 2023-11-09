@@ -10,7 +10,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-top: 200px; /* 더 작은 값으로 수정 */
+      margin-top: 100px; /* 조정 */
     }
     .nav-item {
       max-width: 200px; /* 최대 너비 설정 */
@@ -19,20 +19,20 @@
       margin: 10px; /* 여백 추가 */
     }
     .nav-item .nav-link {
-      font-size: 30px; /* 더 작은 폰트 크기로 수정 */
+      font-size: 24px;
       text-align: center;
-      margin-top: 20px;
-      padding-top: 10px; /* 더 작은 여백 추가 */
+      margin-top: 10px;
+      padding-top: 5px;
     }
     table {
-      margin-top: 50px;
+      margin-top: 20px; /* 조정 */
       max-width: 100%; /* 테이블이 화면 크기를 넘어가지 않도록 최대 너비 설정 */
     }
     table.table th {
-      font-size: 30px;
+      font-size: 24px;
     }
     table.table td {
-      font-size: 30px;
+      font-size: 24px;
     }
     th, td {
       word-wrap: break-word;
@@ -41,13 +41,13 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="height: 130px; font-size: 80px;">HOMEMATE</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
+<nav class "navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+<div class="container-fluid">
+  <a class="navbar-brand" href="#" style="height: 80px; font-size: 60px;">HOMEMATE</a> <!-- 크기 조정 -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</div>
 </nav>
 
 <div class="admin-page">
@@ -63,7 +63,8 @@
     </li>
   </ul>
 
-<!--  <form class="d-flex" style="margin-top: 150px; margin-left: 1000px;" th:action="@{/admin/user/search}" method="get">-->
+
+  <!--  <form class="d-flex" style="margin-top: 150px; margin-left: 1000px;" th:action="@{/admin/user/search}" method="get">-->
 <!--    <input class="form-control me-2" type="search" placeholder="닉네임 조회" aria-label="Search" name="nickname">-->
 <!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
 <!--  </form>-->
