@@ -68,6 +68,7 @@ public class UserDto {
     @Builder
     public static class UserPatchDto {
 
+
         /**
          * 소셜 로그인으로 인한 다른 항목 수정 불가
          */
@@ -82,10 +83,10 @@ public class UserDto {
     @NoArgsConstructor
     @Builder
     public static class AdminPatchUserDto{
-        @NotNull
-        private String password;
 
-        @NotNull
+        private Long id;
+
+
         private String nickName;
     }
 }

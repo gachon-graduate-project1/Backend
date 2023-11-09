@@ -55,8 +55,8 @@ public class OAuthAttributes {
                 .email(oAuth2UserInfo.getEmail())
                 .password(PasswordUtil.generateRandomPassword())
                 .role(Role.GUEST)
-                .nickName("aaa")
-                .userName("")
+//                .nickName("")
+//                .userName("")
                 .status(Status.ACTIVE)
                 .build();
     }

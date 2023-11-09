@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
     .admin-page {
@@ -23,7 +23,7 @@
       text-align: center;
     }
     table {
-      margin-top: 300px;
+      margin-top: 150px;
     }
     table.table th {
       font-size: 50px;
@@ -46,15 +46,45 @@
 <div class="admin-page">
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item" role="presentation">
-      <a class="nav-link" data-bs-toggle="tab" href="#memberForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/user/chart}">회원관리</a>
+      <a class="nav-link" th:href="@{/admin/user/chart}">회원관리</a>
     </li>
     <li class="nav-item" role="presentation">
-      <a class="nav-link" data-bs-toggle="tab" href="#buildingForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/building/chart}">매물관리</a>
+      <a class="nav-link" th:href="@{/admin/building/chart}">매물관리</a>
     </li>
-    <li class="nav-item" role of="presentation">
-      <a class="nav-link" data-bs-toggle="tab" href="#ArticleForm" aria-selected="false" role="tab" tabindex="-1" th:href="@{/admin/article/chart}">게시글관리</a>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" th:href="@{/admin/article/chart}">게시글관리</a>
     </li>
   </ul>
+
+<!--  <form class="d-flex" style="margin-top: 150px; margin-left: 1000px;" th:action="@{/admin/user/search}" method="get">-->
+<!--    <input class="form-control me-2" type="search" placeholder="닉네임 조회" aria-label="Search" name="nickname">-->
+<!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--  </form>-->
+
+<!--  &lt;!&ndash; 수정 모달 &ndash;&gt;-->
+<!--  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel0" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-lg">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title" id="exampleModalLabel3" style="font-size: 30px;">사용자 정보</h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <p>이름: <span th:text="${userInfo.userName}"></span></p>-->
+<!--          <p>닉네임: <span th:text="${userInfo.nickName}"></span></p>-->
+<!--          <p>로그인 타입: <span th:text="${userInfo.socialType}"></span></p>-->
+<!--          <p>소셜 id: <span th:text="${userInfo.socialId}"></span></p>-->
+<!--          <p>이메일: <span th:text="${userInfo.email}"></span></p>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px; padding: 10px 20px;">닫기</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
 
   <table class="table" style="width: 3000px;">
     <thead>
@@ -80,14 +110,108 @@
       <td th:text="${member.password}"></td>
       <td class="row">
         <div class="col">
-          <!-- 수정 버튼 -->
-          <button type="button" class="btn btn-primary" style="font-size: 24px; padding: 10px 20px;">
-            수정
-          </button>
-          <button type="button" class="btn btn-danger" style="font-size: 24px; padding: 10px 20px;">
-            삭제
-          </button>
+          <div class="col">
+            <button type="button" class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal0"
+                    th:attr="data-user-id=${member.id}"
+                    style="font-size: 24px; padding: 10px 20px;">
+              수정
+            </button>
+            <button type="button" class="btn btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    th:attr="data-user-id=${member.id}"
+                    style="font-size: 24px; padding: 10px 20px;">
+              삭제
+            </button>
+
+            <!-- 수정 모달 -->
+            <div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel0" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel0" style="font-size: 30px;">사용자 수정</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- 사용자 닉네임을 표시 -->
+                    <p>기존 닉네임: <span th:text="${member.nickName}"></span></p>
+
+                    <form id="updateUserForm" onsubmit="event.preventDefault(); saveUserData();">
+                      <input type="hidden" id="userId" th:value="${member.id}" />
+                      <label for="nickName" style="font-size: 24px;">닉네임:</label>
+                      <input type="text" id="nickName" th:value="${member.nickName}" style="font-size: 24px;" />
+                      <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
+                    </form>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px; padding: 10px 20px;">취소</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              function saveUserData() {
+                var userId = document.getElementById("userId").value;
+                var newNickname = document.getElementById("nickname").value;
+
+                var data = {
+                  userId: userId,
+                  nickname: newNickname
+                };
+
+                fetch("/admin/update/user", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  body: new URLSearchParams(data).toString()
+                })
+                        .then(response => {
+                          if (response.ok) {
+                            $('#exampleModal0').modal('hide');
+                            location.reload();
+                          } else {
+                            console.error("오류 발생");
+                          }
+                        })
+                        .catch(error => {
+                          console.error("오류 발생: " + error);
+                        });
+              }
+            </script>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="font-size: 30px;">사용자 삭제</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  정말 삭제하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                          style="font-size: 30px; padding: 10px 20px;">
+                    취소
+                  </button>
+                  <form th:action="@{/admin/delete/user}" method="post">
+                    <input type="hidden" th:name="userId" th:value="${member.id}" />
+                    <button type="submit" class="btn btn-danger" style="font-size: 30px; padding: 10px 20px;">삭제</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        </div>
+
       </td>
     </tr>
     </tbody>
@@ -111,5 +235,7 @@
   </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

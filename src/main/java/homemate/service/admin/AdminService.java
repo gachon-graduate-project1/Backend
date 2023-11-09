@@ -102,6 +102,8 @@ public class AdminService {
 //        log.info("삭제된 아이디: {}",adminId);
 //    }
 
+
+
     public Page<UserDto.UserResponseDto> getAllUser(int page, int size){
         // 페이지 설정
         Pageable pageable = PageRequest.of(page, size);
@@ -191,14 +193,31 @@ public class AdminService {
         return userMapper.toResponseDto(userEntity);
 
     }
+
+    /**
+     * 관리자 닉네임 기준 정보 조회
+     *
+     */
+
+//    public UserDto.UserResponseDto getUserByNickname(String nickName) {
+//        // UserEntity 조회
+//        UserEntity userEntity = userRepository.findByNickname(nickName)
+//                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + nickName));
+//
+//        // Entity -> Dto 변환
+//        return userMapper.toResponseDto(userEntity);
+//    }
+
     @Transactional
     public UserDto.UserResponseDto updateUser(Long userId, UserDto.AdminPatchUserDto adminPatchUserDto){
         // UserEntity 조회
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + userId));
 
-        userEntity.setPassword(adminPatchUserDto.getPassword());
+        //userEntity.setPassword(adminPatchUserDto.getPassword());
         userEntity.setNickName(adminPatchUserDto.getNickName());
+
+        userRepository.save(userEntity);
 
         return userMapper.toResponseDto(userEntity);
 
@@ -210,6 +229,18 @@ public class AdminService {
     public void deleteUser(Long userId){
         userRepository.deleteById(userId);
         log.info("삭제된 아이디: {}", userId);
+    }
+
+    @Transactional
+    public void deleteBuilding(Long buildingId){
+        buildingRepository.deleteById(buildingId);
+        log.info("삭제된 아이디: {}", buildingId);
+    }
+
+    @Transactional
+    public void deleteArticle(Long articleId){
+        articleRepository.deleteById(articleId);
+        log.info("삭제된 아이디: {}", articleId);
     }
 
     public PasswordEncoder getPasswordEncoder() {
