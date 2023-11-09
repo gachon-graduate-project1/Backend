@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("user")
+//@RequestMapping("user")
 @Slf4j
 public class UserController {
 
@@ -22,13 +22,20 @@ public class UserController {
     private final JwtService jwtService;
 
     /**
-     * 회원가입 시 추가 정보 저장 api
+     * 회원가입 시 리다이렉트 주소 api
      */
-//    @GetMapping("/sign-up")
-//    public String signUpForm() {
-//        return "user/sign-up"; // signup.html 또는 다른 뷰 페이지를 반환
-//    }
     @GetMapping("/login/oauth2/code/user/sign-up")
+    public String redirectHandler() {
+        return "This is onboarding page"; // signup.html 또는 다른 뷰 페이지를 반환
+    }
+
+    /**
+     * 회원가입 시 최초 닉네임 설정 api
+     * @param request
+     * @param userRequestDto
+     * @return
+     */
+    @PostMapping("/user/sign-up")
     public ResponseEntity<?> joinUser(HttpServletRequest request, @RequestBody UserDto.UserRequestDto userRequestDto){
         log.info("회원가입 api 실행");
         try{
@@ -55,8 +62,9 @@ public class UserController {
 
 
     /**
-     * logout api -> 시큐리티에서 처리
+     * logout -> 시큐리티에서 처리
      */
+
 
 
 
@@ -64,7 +72,7 @@ public class UserController {
      *
      * update -> 닉네임만 설정 및 수정 가능 -> 온보딩
      */
-    @PatchMapping("/update")
+    @PatchMapping("/user/update")
     public ResponseEntity<?> updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.UserPatchDto userPatchDto) {
         return ResponseEntity.ok().body(userService.updateUser(userId, userPatchDto));
     }
@@ -72,7 +80,7 @@ public class UserController {
     /**
      * 사용자 탈퇴 기능
      */
-    @DeleteMapping("/delete")
+    @DeleteMapping("/user/delete")
     public ResponseEntity<?> deleteUser(@RequestParam("userId") long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok().body("Deleted UserId: " + userId);
