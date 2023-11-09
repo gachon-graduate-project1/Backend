@@ -86,35 +86,36 @@ public class BuildingController {
     /**
      * 전체 매물 조회 (페이징 처리)
      */
-//    @GetMapping("/getAll")
-//    public Page<BuildingDto.BuildingResponseDto> getAllBuilding(int page, int size) {
-//        // 페이지 설정
-//        Pageable pageable = PageRequest.of(page, size);
-//
-//        Page<BuildingEntity> buildingEntities = buildingRepository.findAll(pageable);
-//        // 페이지를 Dto로 변환
-//        Page<BuildingDto.BuildingResponseDto> buildingList = buildingEntities.map(m ->
-//                BuildingDto.BuildingResponseDto.builder()
-//                        .id(m.getId())
-//                        .address(m.getAddress())
-//                        .content(m.getContent())
-//                        .floor(m.getFloor())
-//                        .warantPrice(m.getWarantPrice())
-//                        .dealPrice(m.getDealPrice())
-//                        .rentPrice(m.getRentPrice())
-//                        .moveInDate(m.getMoveInDate())
-//                        .checkDuplex(m.getCheckDuplex())
-//                        .direction(m.getDirection())
-//                        .numberOfParking(m.getNumberOfParking())
-//                        .realterName(m.getRealterName())
-//                        .realterNumber(m.getRealterNumber())
-//                        .buildingField(m.getBuildingField())
-//                        .buildingName(m.getBuildingName())
-//                        .numberOfRoom(m.getNumberOfRoom())
-//                        .images(m.getImages())
-//                        .transactioonType(m.getTransactioonType())
-//        return buildingList;
-//    }
+    @GetMapping("/getAll")
+    public Page<BuildingDto.BuildingResponseDto> getAllBuilding(int page, int size) {
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<BuildingEntity> buildingEntities = buildingRepository.findAll(pageable);
+        // 페이지를 Dto로 변환
+        Page<BuildingDto.BuildingResponseDto> buildingList = buildingEntities.map(m ->
+                BuildingDto.BuildingResponseDto.builder()
+                        .id(m.getId())
+                        .address(m.getAddress())
+                        .content(m.getContent())
+                        .floor(m.getFloor())
+                        .warantPrice(m.getWarantPrice())
+                        .dealPrice(m.getDealPrice())
+                        .rentPrice(m.getRentPrice())
+                        .moveInDate(m.getMoveInDate())
+                        .checkDuplex(m.getCheckDuplex())
+                        .direction(m.getDirection())
+                        .numberOfParking(m.getNumberOfParking())
+                        .realterName(m.getRealterName())
+                        .realterNumber(m.getRealterNumber())
+                        .buildingField(m.getBuildingField())
+                        .buildingName(m.getBuildingName())
+                        .numberOfRoom(m.getNumberOfRoom())
+                        .images(m.getImages())
+                        .transactioonType(m.getTransactioonType())
+                        .build());
+        return buildingList;
+    }
 
     /**
      * 매물 검색
