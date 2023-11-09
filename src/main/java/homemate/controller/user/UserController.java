@@ -53,8 +53,8 @@ public class UserController {
             // 이메일 값이 null이 아니면 회원가입 진행
             if(email.isPresent()){
                 String value = email.get();
-                userService.addJoinUserInfo(value, userRequestDto.getNickName());
-                return ResponseEntity.ok().body("sign-up complete");
+                Long userId = userService.addJoinUserInfo(value, userRequestDto.getNickName());
+                return ResponseEntity.ok().body("sign-up complete & userId: " + userId);
             } else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("empty email");
             }

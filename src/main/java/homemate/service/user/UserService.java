@@ -25,7 +25,7 @@ public class UserService {
 
     //회원가입은 소셜로그인 통해 createUser X
     @Transactional
-    public void addJoinUserInfo(String email, String nickName){
+    public Long addJoinUserInfo(String email, String nickName){
 
         log.info("회원가입 service 실행");
         UserEntity userEntity = userRepository.findByEmail(email)
@@ -39,6 +39,8 @@ public class UserService {
             userEntity.setNickName(nickName);
             userRepository.save(userEntity);
         }
+
+        return userMapper.toResponseDto(userEntity).getId();
 
 
     }
