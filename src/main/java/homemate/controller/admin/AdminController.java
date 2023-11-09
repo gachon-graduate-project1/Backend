@@ -190,7 +190,7 @@ public class AdminController {
 
 
 
-    @PatchMapping("/update/building")
+    @PostMapping("/update/building")
     public String updateBuilding(@RequestParam("buildingId") Long buildingId,
                                             @RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
 
@@ -220,7 +220,7 @@ public class AdminController {
 //        return "redirect:/admin/user/chart";
 //    }
 
-    @PostMapping(value = "/update/user")
+    @PostMapping (value = "/update/user")
     public String updateUser(@RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
         adminService.updateUser(adminPatchUserDto.getId(), adminPatchUserDto);
         return "redirect:/admin/user/chart";

@@ -3,6 +3,11 @@ package homemate.config.oauth2.handler;
 import homemate.config.jwt.service.JwtService;
 import homemate.config.oauth2.CustomOAuth2User;
 import homemate.constant.Role;
+import homemate.domain.user.UserEntity;
+import homemate.exception.BusinessLogicException;
+import homemate.exception.ExceptionCode;
+import homemate.mapper.user.UserMapper;
+import homemate.repository.user.UserRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +25,8 @@ import java.io.IOException;
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtService jwtService;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
 
     @Override
@@ -50,8 +57,15 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
     private void loginSuccess(HttpServletResponse response, CustomOAuth2User oAuth2User) throws IOException {
         String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
         String refreshToken = jwtService.createRefreshToken();
+
+        //userId 가져오기
+        UserEntity userEntity = userRepository.findByEmail(oAuth2User.getEmail())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+        Long userId = userEntity.getId();
+
         response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
         response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
+        response.addHeader("userId", String.valueOf(userId));
 
         jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
         jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
