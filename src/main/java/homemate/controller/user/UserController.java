@@ -24,11 +24,11 @@ public class UserController {
     /**
      * 회원가입 시 추가 정보 저장 api
      */
-    @GetMapping("/sign-up")
-    public String signUpForm() {
-        return "user/sign-up"; // signup.html 또는 다른 뷰 페이지를 반환
-    }
-    @PostMapping("/sign-up")
+//    @GetMapping("/sign-up")
+//    public String signUpForm() {
+//        return "user/sign-up"; // signup.html 또는 다른 뷰 페이지를 반환
+//    }
+    @GetMapping("/login/oauth2/code/user/sign-up")
     public ResponseEntity<?> joinUser(HttpServletRequest request, @RequestBody UserDto.UserRequestDto userRequestDto){
         log.info("회원가입 api 실행");
         try{
