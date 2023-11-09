@@ -26,7 +26,7 @@ public class UserController {
      */
     @GetMapping("/login/oauth2/code/user/sign-up")
     public String redirectHandler() {
-        return "This is onboarding page"; // signup.html 또는 다른 뷰 페이지를 반환
+        return "redirect:/Onboarding.js";
     }
 
     /**
