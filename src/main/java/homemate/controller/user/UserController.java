@@ -35,7 +35,7 @@ public class UserController {
      * @param userRequestDto
      * @return
      */
-    @PostMapping("/user/sign-up")
+    @PatchMapping("/user/sign-up")
     public ResponseEntity<?> joinUser(HttpServletRequest request, @RequestBody UserDto.UserRequestDto userRequestDto){
         log.info("회원가입 api 실행");
         try{
