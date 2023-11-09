@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Optional;
 
@@ -25,8 +26,10 @@ public class UserController {
      * 회원가입 시 리다이렉트 주소 api
      */
     @GetMapping("/login/oauth2/code/user/sign-up")
-    public String redirectHandler() {
-        return "redirect:http://ceprj.gachon.ac.kr:60006/login/oauth2/code/user/sign-up";
+    public RedirectView redirectHandler() {
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://ceprj.gachon.ac.kr:60006/login/oauth2/code/user/sign-up");
+        return redirectView;
     }
 
 
