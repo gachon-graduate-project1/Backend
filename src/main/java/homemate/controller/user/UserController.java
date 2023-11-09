@@ -26,7 +26,7 @@ public class UserController {
      */
     @GetMapping("/login/oauth2/code/user/sign-up")
     public String redirectHandler() {
-        return "redirect:/login/oauth2/code/user/sign-up";
+        return "redirect:/http://ceprj.gachon.ac.kr:60006/login/oauth2/code/user/sign-up";
     }
 
     /**
