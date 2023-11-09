@@ -37,6 +37,8 @@ public class AdminController {
      */
     @GetMapping("/form")
     public String loginPage() {
+        log.info("----------");
+
 
         return "adminLogin"; // adminLogin.html 페이지의 파일명
     }
