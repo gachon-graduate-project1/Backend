@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +34,9 @@ public class AdminController {
     /**
      * 관리자 로그인 페이지로 이동
      */
-    @GetMapping("/form")
+    @RequestMapping("/form")
     public String loginPage() {
-        log.info("----------");
-
+        log.info("------");
 
         return "adminLogin"; // adminLogin.html 페이지의 파일명
     }
@@ -169,43 +167,27 @@ public class AdminController {
         return "articleForm";
     }
 
+    /**
+     * 관리자 - 검색(사용자, 매물, 게시글)
+     * 페이지 번호가 있으므로 cursor가 아닌 OFFSET으로 처리
+     */
 
-//    @GetMapping("/user/chart")
-//    public ResponseEntity<?> getAllUser(){
-//        Page<UserDto.UserResponseDto> userList = adminService.getAllUser(PAGE, SIZE);
-//        return ResponseEntity.ok().body(userList);
+//    @GetMapping("/user/search")
+//    public String getUserSearch(@RequestParam("userId") Long userId, UserDto.UserResponseDto userResponseDto, Model model) {
+//        userResponseDto = adminService.getDetailUser(userId);
+//        model.addAttribute("userInfo", userResponseDto);
+//        return "memberForm"; // 회원 정보를 표시할 뷰 페이지
 //    }
 
-    /**
-     * 관리자 페이지 검색 기능
-     */
-
-    /**
-     * 관리자 - 특정 사용자 조회
-     * @param userId
-     * @return
-     */
-    @GetMapping("/getUser")
-    public ResponseEntity<?> getDetailUser(@RequestParam("userId") Long userId){
-        return ResponseEntity.ok().body(adminService.getDetailUser(userId));
-    }
-
-    /**
-     * 관리자 - 사용자 정보 수정
-     * @param userId
-     * @return
-     */
-
-//    @PatchMapping("/updateUser")
-//    public ResponseEntity<?> updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto){
-//        return ResponseEntity.ok().body(adminService.updateUser(userId, adminPatchUserDto));
+//    @GetMapping("/user/search")
+//    public String getUserSearch(@RequestParam("nickname") String nickName, Model model) {
+//        UserDto.UserResponseDto userResponseDto = adminService.getUserByNickname(nickName);
+//        model.addAttribute("userInfo", userResponseDto);
+//        return "memberForm"; // 관리자 페이지
 //    }
 
-    @PatchMapping("/updateUser")
-    public String updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
-        adminService.updateUser(userId, adminPatchUserDto);
-        return "redirect:/admin/user/chart"; // 리다이렉트할 URL
-    }
+
+
 
 
     @PatchMapping("/update/building")
@@ -216,18 +198,61 @@ public class AdminController {
         return "buildingUpdate";
     }
 
-//
 //    /**
-//     * 관리자 - 사용자 삭제
+//     * 관리자 - 사용자 정보 수정
 //     * @param userId
 //     * @return
 //     */
 //
-//    @DeleteMapping("/user")
-//    public ResponseEntity<?> deleteUser(@RequestParam("userId") Long userId){
-//        adminService.deleteUser(userId);
-//        return ResponseEntity.ok().body("삭제된 유저 아이디: " + userId);
+//    @PatchMapping("/user")
+//    public ResponseEntity<?> updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto){
+//        return ResponseEntity.ok().body(adminService.updateUser(userId, adminPatchUserDto));
 //    }
+//
+    /**
+     * 관리자 - 수정(사용자, 매물, 게시글/댓글)
+     */
+
+    //사용자 닉네임만 수정 가능
+//    @PostMapping(value = "/update/user")
+//    public String updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
+//        adminService.updateUser(userId, adminPatchUserDto);
+//        return "redirect:/admin/user/chart";
+//    }
+
+    @PostMapping(value = "/update/user")
+    public String updateUser(@RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
+        adminService.updateUser(adminPatchUserDto.getId(), adminPatchUserDto);
+        return "redirect:/admin/user/chart";
+    }
+
+
+
+
+    /**
+     * 관리자 -  삭제(사용자, 매물, 게시글)
+     * @param userId
+     * @return
+     */
+
+    @PostMapping("/delete/user")
+    public String deleteUser(@RequestParam("userId") Long userId) {
+        adminService.deleteUser(userId);
+        return "redirect:/admin/user/chart";
+    }
+
+    @PostMapping("/delete/building")
+    public String deleteBuilding(@RequestParam("buildingId") Long buildingId) {
+        adminService.deleteBuilding(buildingId);
+        return "redirect:/admin/building/chart";
+    }
+
+    @PostMapping("/delete/article")
+    public String deleteArticle(@RequestParam("articleId") Long articleId) {
+        adminService.deleteArticle(articleId);
+        return "redirect:/admin/article/chart";
+    }
+
 
 
 }
