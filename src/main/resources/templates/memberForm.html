@@ -23,7 +23,7 @@
       text-align: center;
     }
     table {
-      margin-top: 300px;
+      margin-top: 150px;
     }
     table.table th {
       font-size: 50px;
@@ -55,6 +55,36 @@
       <a class="nav-link" th:href="@{/admin/article/chart}">게시글관리</a>
     </li>
   </ul>
+
+<!--  <form class="d-flex" style="margin-top: 150px; margin-left: 1000px;" th:action="@{/admin/user/search}" method="get">-->
+<!--    <input class="form-control me-2" type="search" placeholder="닉네임 조회" aria-label="Search" name="nickname">-->
+<!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--  </form>-->
+
+<!--  &lt;!&ndash; 수정 모달 &ndash;&gt;-->
+<!--  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel0" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-lg">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title" id="exampleModalLabel3" style="font-size: 30px;">사용자 정보</h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <p>이름: <span th:text="${userInfo.userName}"></span></p>-->
+<!--          <p>닉네임: <span th:text="${userInfo.nickName}"></span></p>-->
+<!--          <p>로그인 타입: <span th:text="${userInfo.socialType}"></span></p>-->
+<!--          <p>소셜 id: <span th:text="${userInfo.socialId}"></span></p>-->
+<!--          <p>이메일: <span th:text="${userInfo.email}"></span></p>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px; padding: 10px 20px;">닫기</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
 
   <table class="table" style="width: 3000px;">
     <thead>
@@ -110,8 +140,8 @@
 
                     <form id="updateUserForm" onsubmit="event.preventDefault(); saveUserData();">
                       <input type="hidden" id="userId" th:value="${member.id}" />
-                      <label for="nickname" style="font-size: 24px;">닉네임:</label>
-                      <input type="text" id="nickname" th:value="${member.nickName}" style="font-size: 24px;" />
+                      <label for="nickName" style="font-size: 24px;">닉네임:</label>
+                      <input type="text" id="nickName" th:value="${member.nickName}" style="font-size: 24px;" />
                       <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
                     </form>
 

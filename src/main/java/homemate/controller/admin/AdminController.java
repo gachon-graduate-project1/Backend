@@ -1,5 +1,7 @@
 package homemate.controller.admin;
 
+import com.nimbusds.openid.connect.sdk.claims.UserInfo;
+import homemate.domain.user.UserEntity;
 import homemate.dto.admin.AdminDto;
 import homemate.dto.building.BuildingDto;
 import homemate.dto.user.ArticleDto;
@@ -73,16 +75,6 @@ public class AdminController {
     }
 
 
-//
-//    /**
-//     * 관리자 정보 수정
-//     */
-//
-//    @PatchMapping("/update")
-//    public ResponseEntity<?> updateAdmin(@RequestParam("adminId") Long adminId, @RequestBody AdminDto.AdminPatchDto adminPatchDto) {
-//        return ResponseEntity.ok().body(adminService.updateAdmin(adminId, adminPatchDto));
-//    }
-//
 
 
     /**
@@ -123,25 +115,29 @@ public class AdminController {
         return "articleForm";
     }
 
+    /**
+     * 관리자 - 검색(사용자, 매물, 게시글)
+     * 페이지 번호가 있으므로 cursor가 아닌 OFFSET으로 처리
+     */
 
-
-
-//    @GetMapping("/user/chart")
-//    public ResponseEntity<?> getAllUser(){
-//        Page<UserDto.UserResponseDto> userList = adminService.getAllUser(PAGE, SIZE);
-//        return ResponseEntity.ok().body(userList);
+//    @GetMapping("/user/search")
+//    public String getUserSearch(@RequestParam("userId") Long userId, UserDto.UserResponseDto userResponseDto, Model model) {
+//        userResponseDto = adminService.getDetailUser(userId);
+//        model.addAttribute("userInfo", userResponseDto);
+//        return "memberForm"; // 회원 정보를 표시할 뷰 페이지
 //    }
 
-//    /**
-//     * 관리자 - 특정 사용자 조회
-//     * @param userId
-//     * @return
-//     */
-//    @GetMapping("/user")
-//    public ResponseEntity<?> getDetailUser(@RequestParam("userId") Long userId){
-//        return ResponseEntity.ok().body(adminService.getDetailUser(userId));
+//    @GetMapping("/user/search")
+//    public String getUserSearch(@RequestParam("nickname") String nickName, Model model) {
+//        UserDto.UserResponseDto userResponseDto = adminService.getUserByNickname(nickName);
+//        model.addAttribute("userInfo", userResponseDto);
+//        return "memberForm"; // 관리자 페이지
 //    }
-//
+
+
+
+
+
 //    /**
 //     * 관리자 - 사용자 정보 수정
 //     * @param userId

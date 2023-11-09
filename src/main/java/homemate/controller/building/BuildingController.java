@@ -1,5 +1,6 @@
 package homemate.controller.building;
 
+import homemate.config.S3.S3Service;
 import homemate.dto.building.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.service.building.BuildingService;
@@ -17,6 +18,7 @@ import java.util.List;
 public class BuildingController {
 
     private final BuildingService buildingService;
+    private S3Service s3Service;
 
     /**
      * 관리자 매물 등록 기능
@@ -66,6 +68,14 @@ public class BuildingController {
         List<BuildingDto.BuildingResponseDto> buildings = buildingService.searchBuilding(keyword);
         return ResponseEntity.ok().body(buildings);
 
+    }
+
+    /**
+     * S3로부터 매물 사진 Get
+     */
+    @GetMapping("/getFile")
+    public ResponseEntity<?> getFile(@RequestParam String fileName) {
+        return ResponseEntity.ok(s3Service.getFile(fileName));
     }
 
     /**
