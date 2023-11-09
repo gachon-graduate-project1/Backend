@@ -29,6 +29,7 @@ public class UserController {
         return "redirect:http://ceprj.gachon.ac.kr:60006/login/oauth2/code/user/sign-up";
     }
 
+
     /**
      * 회원가입 시 최초 닉네임 설정 api
      * @param request
