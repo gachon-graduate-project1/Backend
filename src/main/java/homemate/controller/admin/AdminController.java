@@ -127,12 +127,22 @@ public class AdminController {
 //        return "memberForm"; // 회원 정보를 표시할 뷰 페이지
 //    }
 
-//    @GetMapping("/user/search")
-//    public String getUserSearch(@RequestParam("nickname") String nickName, Model model) {
-//        UserDto.UserResponseDto userResponseDto = adminService.getUserByNickname(nickName);
-//        model.addAttribute("userInfo", userResponseDto);
-//        return "memberForm"; // 관리자 페이지
-//    }
+
+    @GetMapping("/admin/user/search")
+    public String searchUser(@ModelAttribute("searchForm") UserDto.UserResponseDto user, Model model) {
+        model.addAttribute("searchForm", new UserDto.UserResponseDto()); // 추가
+        user = adminService.getUserByNickname(user.getNickName());
+        model.addAttribute("searchResult", user);
+        return "redirect:/admin/user/chart";
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -153,7 +163,7 @@ public class AdminController {
      * 관리자 - 수정(사용자, 매물, 게시글/댓글)
      */
 
-    //사용자 닉네임만 수정 가능
+//    사용자 닉네임만 수정 가능
 //    @PostMapping(value = "/update/user")
 //    public String updateUser(@RequestParam("userId") Long userId, @RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
 //        adminService.updateUser(userId, adminPatchUserDto);

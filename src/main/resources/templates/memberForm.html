@@ -56,32 +56,42 @@
     </li>
   </ul>
 
-<!--  <form class="d-flex" style="margin-top: 150px; margin-left: 1000px;" th:action="@{/admin/user/search}" method="get">-->
-<!--    <input class="form-control me-2" type="search" placeholder="닉네임 조회" aria-label="Search" name="nickname">-->
-<!--    <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--  </form>-->
 
-<!--  &lt;!&ndash; 수정 모달 &ndash;&gt;-->
-<!--  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel0" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-lg">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title" id="exampleModalLabel3" style="font-size: 30px;">사용자 정보</h5>-->
-<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          <p>이름: <span th:text="${userInfo.userName}"></span></p>-->
-<!--          <p>닉네임: <span th:text="${userInfo.nickName}"></span></p>-->
-<!--          <p>로그인 타입: <span th:text="${userInfo.socialType}"></span></p>-->
-<!--          <p>소셜 id: <span th:text="${userInfo.socialId}"></span></p>-->
-<!--          <p>이메일: <span th:text="${userInfo.email}"></span></p>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px; padding: 10px 20px;">닫기</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+
+  <!-- HTML with Thymeleaf -->
+  <div class="input-group" style="margin-top: 150px; width:400px; margin-left: 1000px">
+    <!-- 모델에 searchForm을 추가 -->
+    <form th:action="@{/admin/user/search}" th:object="${searchForm}" method="get">
+      <input type="text" th:field="*{nickName}" class="form-control rounded" placeholder="닉네임 검색" aria-label="Search" aria-describedby="search-addon" style="width: 200px; height: 40px; font-size: 16px;">
+      <button type="submit" class="btn btn-outline-primary" style="height: 40px; font-size: 16px" data-bs-toggle="modal" data-bs-target="#Modal">
+        Search
+      </button>
+    </form>
+  </div>
+
+  <!-- 검색 모달 -->
+  <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true" th:if="${searchForm != null}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel" style="font-size: 30px;">사용자 검색</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- 사용자 정보 -->
+          <p th:text="'닉네임: ' + ${searchForm.nickName}"></p>
+          <!-- Add other user details as needed -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px; padding: 10px 20px;"> 취소 </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
 
 
@@ -184,6 +194,7 @@
               }
             </script>
 
+            <!-- 삭제 모달 -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">

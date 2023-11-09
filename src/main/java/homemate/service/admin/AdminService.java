@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -199,14 +200,25 @@ public class AdminService {
      *
      */
 
+    public UserDto.UserResponseDto getUserByNickname(String nickName) {
+        // UserEntity 조회
+        UserEntity userEntity = userRepository.findByNickName(nickName)
+                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + nickName));
+
+        // Entity -> Dto 변환
+        return userMapper.toResponseDto(userEntity);
+    }
+
 //    public UserDto.UserResponseDto getUserByNickname(String nickName) {
-//        // UserEntity 조회
-//        UserEntity userEntity = userRepository.findByNickname(nickName)
-//                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + nickName));
+//        Optional<UserEntity> userEntityOptional = userRepository.findByNickName(nickName);
 //
-//        // Entity -> Dto 변환
-//        return userMapper.toResponseDto(userEntity);
+//        if (userEntityOptional.isPresent()) {
+//            return userMapper.toResponseDto(userEntityOptional.get());
+//        } else {
+//            return null;
+//        }
 //    }
+
 
     @Transactional
     public UserDto.UserResponseDto updateUser(Long userId, UserDto.AdminPatchUserDto adminPatchUserDto){
