@@ -22,6 +22,9 @@ public class UserController {
     private final UserService userService;
     private final JwtService jwtService;
 
+
+
+
     /**
      * 회원가입 시 리다이렉트 주소 api
      */
@@ -39,7 +42,7 @@ public class UserController {
      * @param userRequestDto
      * @return
      */
-    @PatchMapping("/user/sign-up")
+    @PostMapping("/user/sign-up")
     public ResponseEntity<?> joinUser(HttpServletRequest request, @RequestBody UserDto.UserRequestDto userRequestDto){
         log.info("회원가입 api 실행");
         try{

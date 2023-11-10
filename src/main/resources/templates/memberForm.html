@@ -10,7 +10,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin-top: 100px; /* 조정 */
+      margin-top: 200px; /* 더 작은 값으로 수정 */
     }
     .nav-item {
       max-width: 200px; /* 최대 너비 설정 */
@@ -19,20 +19,20 @@
       margin: 10px; /* 여백 추가 */
     }
     .nav-item .nav-link {
-      font-size: 24px;
+      font-size: 30px; /* 더 작은 폰트 크기로 수정 */
       text-align: center;
-      margin-top: 10px;
-      padding-top: 5px;
+      margin-top: 20px;
+      padding-top: 10px; /* 더 작은 여백 추가 */
     }
     table {
-      margin-top: 20px; /* 조정 */
+      margin-top: 50px;
       max-width: 100%; /* 테이블이 화면 크기를 넘어가지 않도록 최대 너비 설정 */
     }
     table.table th {
-      font-size: 24px;
+      font-size: 30px;
     }
     table.table td {
-      font-size: 24px;
+      font-size: 30px;
     }
     th, td {
       word-wrap: break-word;
@@ -41,13 +41,13 @@
   </style>
 </head>
 <body>
-<nav class "navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-<div class="container-fluid">
-  <a class="navbar-brand" href="#" style="height: 80px; font-size: 60px;">HOMEMATE</a> <!-- 크기 조정 -->
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</div>
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="height: 130px; font-size: 80px;">HOMEMATE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
 </nav>
 
 <div class="admin-page">
@@ -162,9 +162,11 @@
             </div>
 
             <script>
+
               function saveUserData() {
                 var userId = document.getElementById("userId").value;
                 var newNickname = document.getElementById("nickname").value;
+
 
                 var data = {
                   userId: userId,
@@ -193,6 +195,7 @@
                         .catch(error => {
                           console.error("오류 발생: " + error);
                         });
+
               }
             </script>
 
