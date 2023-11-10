@@ -195,6 +195,16 @@ public class AdminService {
 
     }
 
+    public UserDto.UserResponseDto getDetailUser2(String nickName) {
+        // UserEntity 조회
+        UserEntity userEntity = userRepository.findByNickName(nickName)
+                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + nickName));
+
+        // Entity -> Dto 변환
+        return userMapper.toResponseDto(userEntity);
+    }
+
+
     /**
      * 관리자 닉네임 기준 정보 조회
      *

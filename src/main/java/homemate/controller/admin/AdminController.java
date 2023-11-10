@@ -121,21 +121,19 @@ public class AdminController {
      */
 
 //    @GetMapping("/user/search")
-//    public String getUserSearch(@RequestParam("userId") Long userId, UserDto.UserResponseDto userResponseDto, Model model) {
-//        userResponseDto = adminService.getDetailUser(userId);
+//    public String getUserSearch(@RequestParam("nickName") String nickName, UserDto.UserResponseDto userResponseDto, Model model) {
+//        userResponseDto = adminService.getDetailUser2(nickName);
 //        model.addAttribute("userInfo", userResponseDto);
-//        return "memberForm"; // 회원 정보를 표시할 뷰 페이지
+//        return "membderDetail"; // 회원 정보를 표시할 뷰 페이지
 //    }
 
 
-    @GetMapping("/admin/user/search")
-    public String searchUser(@ModelAttribute("searchForm") UserDto.UserResponseDto user, Model model) {
-        model.addAttribute("searchForm", new UserDto.UserResponseDto()); // 추가
-        user = adminService.getUserByNickname(user.getNickName());
-        model.addAttribute("searchResult", user);
+    @GetMapping("/user/search")
+    public String searchUser(@RequestParam("nickName") String nickName, Model model) {
+        UserDto.UserResponseDto user = adminService.getUserByNickname(nickName); // 사용자의 닉네임으로 검색
+        model.addAttribute("searchForm", user);
         return "redirect:/admin/user/chart";
     }
-
 
 
 

@@ -56,11 +56,17 @@
     </li>
   </ul>
 
+<!--  <form th:action="@{/user/search}" method="get" th:object="${userInfo}">-->
+<!--    <div class="input-group" style="margin-top: 150px; width:400px; margin-left: 1000px">-->
+<!--      <input type="search" class="form-control rounded" th:field="*{nickName}" placeholder="닉네임 검색" aria-label="Search" aria-describedby="search-addon" style="width: 200px; height: 40px; font-size: 16px;">-->
+<!--      <button type="submit" class="btn btn-outline-primary" style="height: 40px; font-size: 16px;">Search</button>-->
+<!--    </div>-->
+<!--  </form>-->
 
 
-  <!-- HTML with Thymeleaf -->
+
+
   <div class="input-group" style="margin-top: 150px; width:400px; margin-left: 1000px">
-    <!-- 모델에 searchForm을 추가 -->
     <form th:action="@{/admin/user/search}" th:object="${searchForm}" method="get">
       <input type="text" th:field="*{nickName}" class="form-control rounded" placeholder="닉네임 검색" aria-label="Search" aria-describedby="search-addon" style="width: 200px; height: 40px; font-size: 16px;">
       <button type="submit" class="btn btn-outline-primary" style="height: 40px; font-size: 16px" data-bs-toggle="modal" data-bs-target="#Modal">
@@ -88,6 +94,41 @@
       </div>
     </div>
   </div>
+
+
+
+
+<!--  <div class="input-group" style="margin-top: 150px; width:400px; margin-left: 1000px">-->
+<!--    <input type="search" class="form-control rounded" placeholder="닉네임 검색" aria-label="Search" aria-describedby="search-addon" style="width: 200px; height: 40px; font-size: 16px;">-->
+<!--    <button type="button" class="btn btn-outline-primary" style="height: 40px; font-size: 16px;"-->
+<!--            data-bs-toggle="modal"-->
+<!--            data-bs-target="#Modal">-->
+<!--      &lt;!&ndash;            th:attr="data-user-id=${member.id}"&ndash;&gt;-->
+<!--      Search-->
+<!--    </button>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash;검색 모달&ndash;&gt;-->
+<!--  <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-lg">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title" id="ModalLabel" style="font-size: 30px;">사용자 검색</h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          사용자 정보-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-secondary"-->
+<!--                  data-bs-dismiss="modal"-->
+<!--                  style="font-size: 30px; padding: 10px 20px;">-->
+<!--            취소-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
 
 
