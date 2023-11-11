@@ -35,6 +35,23 @@ public class UserController {
         return redirectView;
     }
 
+    /**
+     * 로그인 시 반환되는 페이지
+     */
+    @GetMapping("/signin")
+    public RedirectView redirectHandler(@RequestParam("accessToken") String token, @RequestParam("userId") String userId) {
+        RedirectView redirectView = new RedirectView();
+
+        String url = "http://ceprj.gachon.ac.kr:60006/signin";
+
+        String paramAccessToken = "accessToken=" + token;
+        String paramUserId = "userId=" + userId;
+
+        url += "?" + paramAccessToken + "&" + paramUserId;
+        redirectView.setUrl(url);
+        return redirectView;
+    }
+
 
     /**
      * 회원가입 시 최초 닉네임 설정 api

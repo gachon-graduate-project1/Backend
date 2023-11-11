@@ -69,5 +69,14 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
         jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
+
+        String redirecturl = "/signin";
+        String paramAccessToken = "accessToken=" + accessToken;
+        String paramUserId = "userId=" + userId;
+
+        redirecturl += "?" + paramAccessToken + "&" + paramUserId;
+
+        response.sendRedirect(redirecturl);
+
     }
 }

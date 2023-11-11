@@ -165,18 +165,20 @@
 
               function saveUserData() {
                 var userId = document.getElementById("userId").value;
-                var newNickname = document.getElementById("nickname").value;
+                var newNickname = document.getElementById("nickName").value;
 
 
                 var data = {
                   userId: userId,
-                  nickname: newNickname
+                  nickName: newNickname
                 };
 
                 fetch("/admin/update/user", {
                   method: "POST",
                   headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    // "Content-Type": "application/x-www-form-urlencoded"
+                    "Content-Type" : "application/json; charset=utf-8"
+
                   },
                   body: new URLSearchParams(data).toString()
                 })
@@ -189,7 +191,7 @@
                             document.getElementById("nickName").innerText = newNickname;
                           } else {
                             console.error("오류 발생");
-                            alert("오류 발생!")
+                            alert("닉네임을 수정할 수 없습니다.")
                           }
                         })
                         .catch(error => {
