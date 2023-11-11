@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Optional;
 
@@ -28,10 +29,10 @@ public class UserController {
      * 회원가입 시 주소에 jwt 반환
      */
     @GetMapping("/login/oauth2/code/user/sign-up")
-    public void redirectHandler() {
-//        RedirectView redirectView = new RedirectView();
-//        redirectView.setUrl("http://ceprj.gachon.ac.kr:60006/login/oauth2/code/user/sign-up");
-//        return redirectView;
+    public RedirectView redirectHandler(@RequestParam("accessToken") String token) {
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://ceprj.gachon.ac.kr:60006/login/oauth2/code/user/sign-up?accessToken=" + token);
+        return redirectView;
     }
 
 
