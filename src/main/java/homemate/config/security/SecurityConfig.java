@@ -89,7 +89,7 @@ public class SecurityConfig {
                             }
                         })
                         .logoutSuccessHandler((request, response, authentication) -> {
-                            response.sendRedirect("/login");
+                            response.sendRedirect("/");
                         })
                         .deleteCookies("remember-me")
                 );
