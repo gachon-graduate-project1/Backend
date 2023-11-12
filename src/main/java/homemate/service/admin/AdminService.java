@@ -209,7 +209,7 @@ public class AdminService {
 //    }
 
     @Transactional
-    public UserDto.UserResponseDto updateUser(Long userId, UserDto.AdminPatchUserDto adminPatchUserDto){
+    public void updateUser(Long userId, UserDto.AdminPatchUserDto adminPatchUserDto){
         // UserEntity 조회
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("등록되지 않은 회원: " + userId));
@@ -219,7 +219,7 @@ public class AdminService {
 
         userRepository.save(userEntity);
 
-        return userMapper.toResponseDto(userEntity);
+        // return userMapper.toResponseDto(userEntity);
 
 
     }

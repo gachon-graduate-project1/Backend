@@ -169,18 +169,19 @@
 
 
                 var data = {
-                  userId: userId,
-                  nickName: newNickname
+                  nickName: newNickname,
+                  userId: userId
                 };
 
                 fetch("/admin/update/user", {
+                  credentials: 'include',
                   method: "POST",
                   headers: {
-                    // "Content-Type": "application/x-www-form-urlencoded"
-                    "Content-Type" : "application/json; charset=utf-8"
+                    "Content-Type": "application/json"
 
                   },
-                  body: new URLSearchParams(data).toString()
+                  // body: new URLSearchParams(data).toString()
+                  body: JSON.stringify(data)
                 })
                         .then(response => {
                           if (response.ok) {

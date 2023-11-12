@@ -74,7 +74,7 @@ public class UserController {
             if(email.isPresent()){
                 String value = email.get();
                 Long userId = userService.addJoinUserInfo(value, userRequestDto.getNickName());
-                return ResponseEntity.ok().body("sign-up complete & userId: " + userId);
+                return ResponseEntity.ok().body("userId=" + userId);
             } else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("empty email");
             }
