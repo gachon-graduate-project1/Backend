@@ -70,14 +70,6 @@ public class BuildingController {
     }
 
     /**
-     * S3로부터 매물 사진 Get
-     */
-    @GetMapping("/getFile")
-    public ResponseEntity<?> getFile(@RequestParam String fileName) {
-        return ResponseEntity.ok(s3Service.getFile(fileName));
-    }
-
-    /**
      * 매물 사진 수정
      */
 
