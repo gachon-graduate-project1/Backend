@@ -78,6 +78,7 @@ public class Init {
             BuildingEntity building = new BuildingEntity();
             building.setBuildingName("가천건물" + i);
             building.setAddress("성남시 수정구 - " + i);
+            building.setBuildingField("원룸");
             building.setContent("건물" + i + "입니다.");
             building.setFloor(i + "층");
             building.setMoveInDate("2024-01-0" + i);
