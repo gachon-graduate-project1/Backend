@@ -11,6 +11,7 @@ import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.admin.AdminMapper;
+import homemate.mapper.building.BuildingMapper;
 import homemate.mapper.user.UserMapper;
 import homemate.repository.admin.AdminRepository;
 import homemate.repository.building.BuildingRepository;
@@ -38,6 +39,7 @@ public class AdminService {
     private final ArticleRepository articleRepository;
     private final AdminMapper adminMapper;
     private final UserMapper userMapper;
+    private final BuildingMapper buildingMapper;
     private final PasswordEncoder passwordEncoder;
     private final BuildingRepository buildingRepository;
 
@@ -222,6 +224,35 @@ public class AdminService {
         // return userMapper.toResponseDto(userEntity);
 
 
+    }
+
+    @Transactional
+    public void updateBuilding(BuildingDto.AdminPatchBuildingDto adminPatchBuildingDto){
+        // BuildingEntity 조회
+        BuildingEntity buildingEntity = buildingRepository.findById(adminPatchBuildingDto.getBuildingId())
+                .orElseThrow(() -> new NoSuchElementException("등록되지 않은 매물: " + adminPatchBuildingDto.getBuildingId()));
+
+
+        buildingEntity.setAddress(adminPatchBuildingDto.getAddress());
+        buildingEntity.setContent(adminPatchBuildingDto.getContent());
+        buildingEntity.setFloor(adminPatchBuildingDto.getFloor());
+        buildingEntity.setWarantPrice(adminPatchBuildingDto.getWarantPrice());
+        buildingEntity.setDealPrice(adminPatchBuildingDto.getDealPrice());
+        buildingEntity.setRentPrice(adminPatchBuildingDto.getRentPrice());
+        buildingEntity.setMoveInDate(adminPatchBuildingDto.getMoveInDate());
+        buildingEntity.setCheckDuplex(adminPatchBuildingDto.getCheckDuplex());
+        buildingEntity.setDirection(adminPatchBuildingDto.getDirection());
+        buildingEntity.setNumberOfParking(adminPatchBuildingDto.getNumberOfParking());
+        buildingEntity.setRealterName(adminPatchBuildingDto.getRealterName());
+        buildingEntity.setRealterNumber(adminPatchBuildingDto.getRealterNumber());
+        buildingEntity.setNumberOfRoom(adminPatchBuildingDto.getNumberOfRoom());
+        buildingEntity.setTransactioonType(adminPatchBuildingDto.getTransactioonType());
+
+        buildingRepository.save(buildingEntity);
+
+
+
+        //buildingMapper.updateFromAdminPatchDto(adminPatchBuildingDto, buildingEntity);
     }
 
 

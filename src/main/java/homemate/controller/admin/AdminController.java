@@ -191,11 +191,10 @@ public class AdminController {
 
 
     @PostMapping("/update/building")
-    public String updateBuilding(@RequestParam("buildingId") Long buildingId,
-                                            @RequestBody BuildingDto.BuildingPatchDto buildingPatchDto) {
+    public String updateBuilding(@RequestBody BuildingDto.AdminPatchBuildingDto adminPatchBuildingDto) {
 
-        buildingService.updateBuilding(buildingId, buildingPatchDto);
-        return "buildingUpdate";
+        adminService.updateBuilding(adminPatchBuildingDto);
+        return "redirect:/admin/building/chart";
     }
 
 //    /**
@@ -222,7 +221,7 @@ public class AdminController {
 
     @PostMapping ("/update/user")
     public String updateUser(@RequestBody UserDto.AdminPatchUserDto adminPatchUserDto) {
-        adminService.updateUser(adminPatchUserDto.getId(), adminPatchUserDto);
+        adminService.updateUser(adminPatchUserDto.getUserId(), adminPatchUserDto);
         return "redirect:/admin/user/chart";
     }
 

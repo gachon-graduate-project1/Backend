@@ -1,10 +1,9 @@
 package homemate.service.building;
+
 import homemate.config.S3.S3Service;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.building.BuildingEntity;
-import homemate.domain.user.UserEntity;
 import homemate.dto.building.BuildingDto;
-import homemate.dto.user.UserDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.building.BuildingMapper;
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -64,7 +62,7 @@ public class BuildingService {
 //        UserEntity userEntity = userRepository.findById(userId)
 //                .orElseThrow(() ->new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
 
-        @Transactional
+    @Transactional
     public BuildingDto.BuildingResponseDto updateBuilding(Long buildingId, BuildingDto.BuildingPatchDto buildingPatchDto) {
 
 
