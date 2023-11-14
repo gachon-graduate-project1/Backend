@@ -84,7 +84,7 @@ public class UserDto {
     @Builder
     public static class AdminPatchUserDto{
 
-        private Long id;
+        private Long userId;
 
 
         private String nickName;

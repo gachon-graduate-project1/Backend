@@ -144,11 +144,11 @@
                     <!-- 사용자 닉네임을 표시 -->
                     <p>기존 닉네임: <span th:text="${member.nickName}"></span></p>
 
-                    <form id="updateUserForm" onsubmit="event.preventDefault(); saveUserData();">
+                    <form id="updateUserForm" onsubmit="event.preventDefault(); saveUserData()">
                       <input type="hidden" id="userId" th:value="${member.id}" />
                       <label for="nickName" style="font-size: 24px;">닉네임:</label>
                       <input type="text" id="nickName" th:value="${member.nickName}" style="font-size: 24px;" />
-                      <button type="submit" class="btn btn-primary" style="font-size: 15px; padding: 10px 20px;">저장</button>
+                      <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
                     </form>
 
                   </div>
@@ -159,11 +159,13 @@
               </div>
             </div>
 
+            <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
             <script>
 
               function saveUserData() {
                 var userId = document.getElementById("userId").value;
                 var newNickname = document.getElementById("nickName").value;
+
 
 
                 var data = {
