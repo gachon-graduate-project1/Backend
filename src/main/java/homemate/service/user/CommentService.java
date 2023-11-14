@@ -40,6 +40,9 @@ public class CommentService {
 
         CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity));
         CommentDto.CommentResponseDto responseDto = commentMapper.toResponseDto(savedComment);
+        responseDto.setUserId(userId);
+        responseDto.setArticleId(commentRequestDto.getArticleId());
+
 
         return responseDto;
     }

@@ -13,7 +13,7 @@ public class CommentDto {
     @Builder
     public static class CommentRequestDto {
 
-        private CommentDto articleDto; //댓글이 달린 게시글 dto
+        private Long articleId; //댓글이 달린 게시글 dto
 
         private String content; //내용
 
