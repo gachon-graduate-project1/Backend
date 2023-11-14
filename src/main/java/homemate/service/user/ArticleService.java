@@ -39,7 +39,10 @@ public class ArticleService {
 
 
         ArticleEntity savedArticle = articleRepository.save(articleMapper.toReqeustEntity(articleRequestDto, userEntity));
+
         ArticleDto.ArticleResponseDto responseDto = articleMapper.toResponseDto(savedArticle);
+        responseDto.setUserId(userId);
+        responseDto.setComplain(0);
 
         return responseDto;
     }

@@ -20,7 +20,7 @@ import java.util.List;
 public class UserEntity extends TimeStamp {
 
     @Id
-    @Column(name = "user_Id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

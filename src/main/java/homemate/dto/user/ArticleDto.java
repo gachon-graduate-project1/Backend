@@ -17,15 +17,13 @@ public class ArticleDto {
     @Builder
     public static class ArticleRequestDto {
 
+
         @NotBlank
         private String title; //제목
 
         private String content; //내용
 
         private Integer complain; // 게시글 신고 횟수 (최대 10회)
-
-
-
 
 
     }

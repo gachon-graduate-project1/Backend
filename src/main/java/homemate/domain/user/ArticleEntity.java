@@ -26,7 +26,7 @@ public class ArticleEntity extends TimeStamp {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     //@JsonManagedReference
-    @JsonIgnore
+    //@JsonIgnore
     private UserEntity user;
 
     private String title; //제목
