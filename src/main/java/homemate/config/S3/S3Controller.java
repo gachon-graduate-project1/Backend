@@ -11,11 +11,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/file")
-public class S3TestController {
+public class S3Controller {
 
     private final S3Service s3Service;
 
+    @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> uploadFile(@RequestPart MultipartFile multipartFile) {
+        return ResponseEntity.ok(s3Service.uploadFile(multipartFile));
+    }
 
+    @PostMapping(value = "/uploadFileList", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> uploadFileList(@RequestPart List<MultipartFile> multipartFiles) {
+        return ResponseEntity.ok(s3Service.uploadFileList(multipartFiles));
+    }
 
     @DeleteMapping("/deleteFileList")
     public ResponseEntity<?> deleteFileList(@RequestParam List<String> fileNameList) {
@@ -36,12 +44,13 @@ public class S3TestController {
 
 //    @GetMapping("/getFileList")
 //    public ResponseEntity<?> getFileList(@RequestParam List<String> fileNameList) {
-//        return ResponseEntity.ok(s3Service.getFileList(fNameList));
+//        return ResponseEntity.ok(s3Service.getFileList(fileNameList));
 //    }
 
-    @GetMapping("/getFileList")
+
+    @GetMapping("/getFolderList")
     public ResponseEntity<?> getFileList(@RequestParam String folderName) {
-        return ResponseEntity.ok(s3Service.getFileList(folderName));
+        return ResponseEntity.ok(s3Service.getFolderList(folderName));
     }
 
 
