@@ -42,9 +42,15 @@ public class S3TestController {
         return ResponseEntity.ok(s3Service.getFile(fileName));
     }
 
+//    @GetMapping("/getFileList")
+//    public ResponseEntity<?> getFileList(@RequestParam List<String> fileNameList) {
+//        return ResponseEntity.ok(s3Service.getFileList(fNameList));
+//    }
+
     @GetMapping("/getFileList")
-    public ResponseEntity<?> getFileList(@RequestParam List<String> fileNameList) {
-        return ResponseEntity.ok(s3Service.getFileList(fileNameList));
+    public ResponseEntity<?> getFileList(@RequestParam String folderName) {
+        return ResponseEntity.ok(s3Service.getFileList(folderName));
     }
+
 
 }

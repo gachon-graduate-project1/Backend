@@ -1,10 +1,7 @@
 package homemate.config.S3;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.DeleteObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -65,13 +62,38 @@ public class S3Service {
         fileNameList.forEach(this::deleteFile);
     }
 
-    public List<String> getFileList(List<String> fileNameList) {
+//    public List<String> getFileList(List<String> fileNameList) {
+//        List<String> fileUriList = new ArrayList<>();
+//        fileNameList.forEach(file-> {
+//            fileUriList.add(getFile(file));
+//        });
+//        return fileUriList;
+//    }
+
+    /**
+     * 폴더 안에 이미지 각각 반환
+     */
+    public List<String> getFileList(String folderName) {
+        ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucket).withPrefix(folderName);
+        ListObjectsV2Result result;
         List<String> fileUriList = new ArrayList<>();
-        fileNameList.forEach(file-> {
-            fileUriList.add(getFile(file));
-        });
+
+        do {
+            result = amazonS3.listObjectsV2(req);
+
+            for (S3ObjectSummary objectSummary : result.getObjectSummaries()) {
+                String fileName = objectSummary.getKey();
+                fileUriList.add(getFile(fileName));
+            }
+            String token = result.getNextContinuationToken();
+            req.setContinuationToken(token);
+        } while(result.isTruncated());
+
         return fileUriList;
     }
+
+
+
     public String getFile(String fileName) {
         try{
             return amazonS3.getUrl(bucket, fileName).toString();
