@@ -53,7 +53,7 @@ public class BuildingEntity {
 
     private String numberOfRoom; // 방수/욕실수
 
-    private String transactioonType; //거래유형
+    private String transactionType; //거래유형
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(

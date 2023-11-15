@@ -70,10 +70,7 @@ public class S3Service {
 //        return fileUriList;
 //    }
 
-    /**
-     * 폴더 안에 이미지 각각 반환
-     */
-    public List<String> getFileList(String folderName) {
+    public List<String> getFolderList(String folderName) {
         ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucket).withPrefix(folderName);
         ListObjectsV2Result result;
         List<String> fileUriList = new ArrayList<>();
@@ -93,7 +90,6 @@ public class S3Service {
     }
 
 
-
     public String getFile(String fileName) {
         try{
             return amazonS3.getUrl(bucket, fileName).toString();
@@ -103,12 +99,12 @@ public class S3Service {
     }
 
 
-
+    // 먼저 파일 업로드시, 파일명을 난수화하기 위해 UUID 를 활용하여 난수를 돌린다.
     public String createFileName(String fileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(fileName));
     }
 
-
+    // file 형식이 잘못된 경우를 확인하기 위해 만들어진 로직이며, 파일 타입과 상관없이 업로드할 수 있게 하기위해, "."의 존재 유무만 판단하였습니다.
     private String getFileExtension(String fileName) {
         try {
             return fileName.substring(fileName.lastIndexOf("."));

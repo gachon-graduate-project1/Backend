@@ -51,7 +51,7 @@ public class BuildingDto {
         private String numberOfRoom; // 방수/욕실수
 
         @NotBlank
-        private String transactioonType;
+        private String transactionType;
 
         private List<String> images; //매물 사진
 
@@ -100,7 +100,7 @@ public class BuildingDto {
 
         private List<String> images; //매물 사진
 
-        private String transactioonType;
+        private String transactionType;
 
     }
 
@@ -149,7 +149,7 @@ public class BuildingDto {
         private String numberOfRoom; // 방수/욕실수
 
         @NotBlank
-        private String transactioonType;
+        private String transactionType;
 
         private List<String> images; //매물 사진
 
@@ -200,7 +200,7 @@ public class BuildingDto {
         private String numberOfRoom; // 방수/욕실수
 
         @NotBlank
-        private String transactioonType;
+        private String transactionType;
 
         //private final List<String> images = null; //매물 사진
 

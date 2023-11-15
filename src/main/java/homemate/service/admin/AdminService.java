@@ -158,7 +158,7 @@ public class AdminService {
                         .buildingName(m.getBuildingName())
                         .numberOfRoom(m.getNumberOfRoom())
                         .images(m.getImages())
-                        .transactioonType(m.getTransactioonType())
+                        .transactionType(m.getTransactionType())
                         .build());
 
 
@@ -246,7 +246,7 @@ public class AdminService {
         buildingEntity.setRealterName(adminPatchBuildingDto.getRealterName());
         buildingEntity.setRealterNumber(adminPatchBuildingDto.getRealterNumber());
         buildingEntity.setNumberOfRoom(adminPatchBuildingDto.getNumberOfRoom());
-        buildingEntity.setTransactioonType(adminPatchBuildingDto.getTransactioonType());
+        buildingEntity.setTransactionType(adminPatchBuildingDto.getTransactionType());
 
         buildingRepository.save(buildingEntity);
 
