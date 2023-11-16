@@ -126,6 +126,7 @@
       <th scope="col">종류</th>
       <th scope="col">방수/욕실수</th>
       <th scope="col">거래유형</th>
+      <th scope="col">제목</th>
       <th scope="col"></th>
     </tr>
     </thead>
@@ -147,7 +148,8 @@
       <td th:text="${building.realterNumber}"></td>
       <td th:text="${building.buildingField}"></td>
       <td th:text="${building.numberOfRoom}"></td>
-      <td th:text="${building.transactioonType}"></td>
+      <td th:text="${building.transactionType}"></td>
+      <td th:text="${building.title}"></td>
       <td class="row">
         <div class="col">
           <div class="col">
@@ -242,8 +244,12 @@
                         <input type="text" id="numberOfRoom" th:value="${building.numberOfRoom}" style="font-size: 24px;" />
                       </div>
                       <div>
-                        <label for="transactioonType" style="font-size: 24px;">거래유형:</label>
-                        <input type="text" id="transactioonType" th:value="${building.transactioonType}" style="font-size: 24px;" />
+                        <label for="transactionType" style="font-size: 24px;">거래유형:</label>
+                        <input type="text" id="transactionType" th:value="${building.transactionType}" style="font-size: 24px;" />
+                      </div>
+                      <div>
+                        <label for="title" style="font-size: 24px;">제목:</label>
+                        <input type="text" id="title" th:value="${building.title}" style="font-size: 24px;" />
                       </div>
                       <div>
                         <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
@@ -281,7 +287,8 @@
                 var newrealterNumber = document.getElementById("realterNumber").value;
                 var newBuildingField = document.getElementById("buildingField").value;
                 var newNumberOfRoom = document.getElementById("numberOfRoom").value;
-                var newTransactioonType = document.getElementById("transactioonType").value;
+                var newTransactionType = document.getElementById("transactioonType").value;
+                var newTitle = document.getElementById("title").value;
 
                 $('#'+modalId).modal('hide');
 
@@ -304,7 +311,8 @@
                   realterNumber: newrealterNumber,
                   buildingField: newBuildingField,
                   numberOfRoom: newNumberOfRoom,
-                  transactioonType: newTransactioonType
+                  transactionType: newTransactionType,
+                  title: newTitle
                 };
 
                 fetch("/admin/update/building", {
@@ -338,7 +346,9 @@
                             document.getElementById("realterNumber").innerText = newrealterNumber;
                             document.getElementById("buildingField").innerText = newBuildingField;
                             document.getElementById("numberOfRoom").innerText = newNumberOfRoom;
-                            document.getElementById("transactioonType").innerText = newTransactioonType;
+                            document.getElementById("transactionType").innerText = newTransactionType;
+                            document.getElementById("title").innerText = newTitle;
+
                           } else {
                             console.error("오류 발생");
                             alert("매물을 수정할 수 없습니다.")
@@ -405,7 +415,7 @@
     const page_elements = document.getElementsByClassName("page-link");
     Array.from(page_elements).forEach(function(element) {
       element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
+        //document.getElementById('page').value = this.dataset.page;
         document.getElementById('searchForm').submit();
       });
     });
