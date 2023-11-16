@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<!--  &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />-->
+
+
   <style>
     .admin-page {
       display: flex;
@@ -45,6 +49,29 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <div class="d-flex align-items-center ml-auto">
+      <a href="javascript:void(0);" onclick="logout()" style="color: white;">로그아웃</a>
+    </div>
+
+    <script>
+      function logout() {
+        fetch('/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }).then(function(response) {
+          if (response.ok) {
+            // Perform any additional actions after logout if needed
+            console.log('Logout successful');
+            window.location.href = '/';
+          } else {
+            console.error('Logout failed');
+          }
+        });
+      }
+    </script>
   </div>
 </nav>
 
@@ -63,6 +90,21 @@
       <a class="nav-link" th:href="@{/admin/article/chart}">게시글관리</a>
     </li>
   </ul>
+  <!-- 검색 컴포넌트 추가 -->
+  <div class="row my-3">
+    <div class="col-6">
+      <a th:href="@{/building/create}" class="btn btn-primary">매물 등록하기</a>
+    </div>
+    <div class="col-6">
+      <div class="input-group">
+        <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+        <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+      </div>
+    </div>
+  </div>
+
+
+
 
   <table class="table" style="width: 3000px;">
     <thead>
@@ -353,7 +395,27 @@
         <a class="page-link" th:href="@{/admin/building/chart(page=${currentPage + 5}, size=${pageSize})}">&raquo;</a>
       </li>
     </ul>
+    <!-- 페이징처리 끝 -->
+    <form th:action="@{/building/list}" method="get" id="searchForm">
+      <input type="hidden" id="kw" name="kw" th:value="${kw}">
+    </form>
   </div>
+
+  <script>
+    const page_elements = document.getElementsByClassName("page-link");
+    Array.from(page_elements).forEach(function(element) {
+      element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+      });
+    });
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+      document.getElementById('kw').value = document.getElementById('search_kw').value;
+      document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+      document.getElementById('searchForm').submit();
+    });
+  </script>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

@@ -82,6 +82,7 @@ public class SecurityConfig {
         http
                 .logout(logout -> logout
                         .logoutUrl("/logout")
+                        //.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .addLogoutHandler((request, response, authentication) -> {
                             HttpSession session = request.getSession(false);
                             if (session != null) {
