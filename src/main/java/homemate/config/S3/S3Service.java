@@ -111,7 +111,7 @@ public class S3Service {
         } while(result.isTruncated());
 
         if(fileUriList.isEmpty()) {
-            fileUriList.add("https://palgongtea.s3.ap-northeast-2.amazonaws.com/ex/ex.png");
+            fileUriList.add("https://palgongtea.s3.ap-northeast-2.amazonaws.com/ex/1.png");
         }
 
         return fileUriList;
