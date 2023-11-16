@@ -102,7 +102,9 @@ public class S3Service {
 
             for (S3ObjectSummary objectSummary : result.getObjectSummaries()) {
                 String fileName = objectSummary.getKey();
-                fileUriList.add(getFile(fileName));
+                if (!fileName.endsWith(".DS_Store")) {
+                    fileUriList.add(getFile(fileName));
+                }
             }
             String token = result.getNextContinuationToken();
             req.setContinuationToken(token);
@@ -114,6 +116,7 @@ public class S3Service {
 
         return fileUriList;
     }
+
 
 
 
