@@ -55,6 +55,8 @@ public class BuildingEntity {
 
     private String transactionType; //거래유형
 
+    private String title; //제목
+
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
             name = "building_images",
