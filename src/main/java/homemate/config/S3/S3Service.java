@@ -111,7 +111,7 @@ public class S3Service {
         } while(result.isTruncated());
 
         if(fileUriList.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            fileUriList.add("https://palgongtea.s3.ap-northeast-2.amazonaws.com/ex/ex.png");
         }
 
         return fileUriList;
