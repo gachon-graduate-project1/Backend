@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -70,6 +71,27 @@ public class S3Service {
 //        return fileUriList;
 //    }
 
+//    public List<String> getFolderList(String folderName) {
+//        ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucket).withPrefix(folderName);
+//        ListObjectsV2Result result;
+//        List<String> fileUriList = new ArrayList<>();
+//
+//        do {
+//            result = amazonS3.listObjectsV2(req);
+//
+//            for (S3ObjectSummary objectSummary : result.getObjectSummaries()) {
+//                String fileName = objectSummary.getKey();
+//                fileUriList.add(getFile(fileName));
+//            }
+//            String token = result.getNextContinuationToken();
+//            req.setContinuationToken(token);
+//        } while(result.isTruncated());
+//
+//        return fileUriList;
+//    }
+
+
+
     public List<String> getFolderList(String folderName) {
         ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucket).withPrefix(folderName);
         ListObjectsV2Result result;
@@ -86,8 +108,16 @@ public class S3Service {
             req.setContinuationToken(token);
         } while(result.isTruncated());
 
+        if(fileUriList.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
         return fileUriList;
     }
+
+
+
+
 
 
     public String getFile(String fileName) {
