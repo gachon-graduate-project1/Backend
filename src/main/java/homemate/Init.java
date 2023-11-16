@@ -86,6 +86,7 @@ public class Init {
 //            building.setNumberOfParking("주차 가능 " + i + "대");
 //            building.setRealterName("가천중개사" + i);
 //            building.setRealterNumber("010-0000-000" + i);
+//            building.setTransactionType("전세");
 //            buildingRepository.save(building);
 //        }
 //    }
