@@ -54,13 +54,17 @@ public class BuildingService {
 
     }
 
+    public BuildingDto.BuildingResponseDto getBuilding(String buildingName) {
+        //Entity 조회
+        BuildingEntity buildingEntity = buildingRepository.findByBuildingName(buildingName)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.BUILDING_IS_NOT_EXIST));
+
+        //Entity를 DTO로 변환 후 return
+        return buildingMapper.toResponseDto(buildingEntity);
+    }
 
 
-//    @Transactional
-//    public UserDto.UserResponseDto updateUser(Long userId, UserDto.UserPatchDto userPatchDto) {
-//
-//        UserEntity userEntity = userRepository.findById(userId)
-//                .orElseThrow(() ->new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
 
     @Transactional
     public BuildingDto.BuildingResponseDto updateBuilding(Long buildingId, BuildingDto.BuildingPatchDto buildingPatchDto) {

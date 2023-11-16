@@ -28,9 +28,10 @@ public class BuildingController {
         return ResponseEntity.ok().body(responseDto);
     }
 
+
     @GetMapping("/get")
-    public ResponseEntity<?> getBuilding(@RequestParam("buildingId") Long buildingId) {
-        BuildingDto.BuildingResponseDto building = buildingService.getBuilding(buildingId);
+    public ResponseEntity<?> getBuilding(@RequestParam("buildingName") String buildingName) {
+        BuildingDto.BuildingResponseDto building = buildingService.getBuilding(buildingName);
         return ResponseEntity.ok().body(building);
     }
 
