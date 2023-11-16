@@ -88,6 +88,14 @@ public class UserController {
     /**
      * logout -> 시큐리티에서 처리
      */
+    @GetMapping("/")
+    public RedirectView redirectHandler() {
+        log.info("로그아웃 시작");
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://ceprj.gachon.ac.kr:60006");
+        return redirectView;
+    }
+
 
 
 

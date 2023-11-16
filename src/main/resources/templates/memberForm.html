@@ -45,6 +45,28 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="d-flex align-items-center ml-auto">
+      <a href="javascript:void(0);" onclick="logout()" style="color: white;">로그아웃</a>
+    </div>
+
+    <script>
+      function logout() {
+        fetch('/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }).then(function(response) {
+          if (response.ok) {
+            // Perform any additional actions after logout if needed
+            console.log('Logout successful');
+            window.location.href = '/';
+          } else {
+            console.error('Logout failed');
+          }
+        });
+      }
+    </script>
   </div>
 </nav>
 

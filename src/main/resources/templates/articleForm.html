@@ -50,8 +50,27 @@
         </button>
 
         <div class="d-flex align-items-center ml-auto">
-            <a href="/logout" style="color: white;">로그아웃</a>
+            <a href="javascript:void(0);" onclick="logout()" style="color: white;">로그아웃</a>
         </div>
+
+        <script>
+            function logout() {
+                fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                }).then(function(response) {
+                    if (response.ok) {
+                        // Perform any additional actions after logout if needed
+                        console.log('Logout successful');
+                        window.location.href = '/';
+                    } else {
+                        console.error('Logout failed');
+                    }
+                });
+            }
+        </script>
     </div>
 </nav>
 
