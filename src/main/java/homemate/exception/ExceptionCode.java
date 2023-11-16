@@ -45,6 +45,7 @@ public enum ExceptionCode {
     COMMENT_IS_NOT_EXIST(NOT_FOUND, "해당 댓글이 존재하지 않습니다"),
     KEYWORD_IS_NOT_EXIST(NOT_FOUND, "해당 키워드가 존재하지 않습니다"),
     FILE_IS_NOT_EXIST(NOT_FOUND, "해당 파일이 존재하지 않습니다"),
+    IMAGE_IS_NOT_EXIST(NOT_FOUND, "해당 이미지가 존재하지 않습니다"),
 
 
     /**
