@@ -27,9 +27,8 @@ public interface BuildingMapper {
     BuildingEntity toReqeustEntity(BuildingDto.BuildingRequestDto buildingRequestDto, AdminEntity adminEntity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    //@Mapping(target="id", ignore = true)
-//    @Mapping(target="createAt", ignore = true)
-//    @Mapping(target="modifiedAt", ignore = true)
+
+
     @Mapping(target="id", ignore = true)
     void updateFromPatchDto(BuildingDto.BuildingPatchDto buildingPatchDto, @MappingTarget BuildingEntity buildingEntity);
 

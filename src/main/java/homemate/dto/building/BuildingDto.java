@@ -53,6 +53,8 @@ public class BuildingDto {
         @NotBlank
         private String transactionType;
 
+        private String title;
+
         private List<String> images; //매물 사진
 
 
@@ -101,6 +103,9 @@ public class BuildingDto {
         private List<String> images; //매물 사진
 
         private String transactionType;
+
+        private String title; //제목
+
 
     }
 
@@ -153,6 +158,10 @@ public class BuildingDto {
 
         private List<String> images; //매물 사진
 
+        @NotBlank
+        private String title; //제목
+
+
     }
 
     @Getter
@@ -201,6 +210,9 @@ public class BuildingDto {
 
         @NotBlank
         private String transactionType;
+
+        private String title; //제목
+
 
         //private final List<String> images = null; //매물 사진
 

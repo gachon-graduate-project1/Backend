@@ -47,26 +47,7 @@ public class AdminController {
     /**
          * 관리자 로그인
          */
-//    @PostMapping("/login")
-//    @ResponseBody
-//    public ResponseEntity<?> login(@RequestBody AdminDto.AdminRequestDto adminRequestDto, HttpServletRequest request) {
-//
-//
-//        try {
-//            AdminDto.AdminResponseDto loginResponse = adminService.login(adminRequestDto);
-//
-//            HttpSession session = request.getSession();
-//            session.setAttribute("loginAdmin", loginResponse);
-//
-//            // 세션 만료 시간 30분
-//            session.setMaxInactiveInterval(60 * 30);
-//
-//            return ResponseEntity.ok("Login Successful!");
-//        } catch (BusinessLogicException e) {
-//
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
-//        }
-//    }
+
 
     @PostMapping(value = "/login")
     public String login(AdminDto.AdminRequestDto adminRequestDto, HttpServletRequest request, Model model) {
@@ -92,10 +73,10 @@ public class AdminController {
     /**
      * 관리자 로그아웃
      */
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/form";
+        //session.invalidate();
+        return "redirect:/admin/form"; // 변경된 부분
     }
 
 
