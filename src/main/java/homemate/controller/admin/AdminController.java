@@ -127,16 +127,8 @@ public class AdminController {
     }
 
     @GetMapping("/building/chart")
-    public String getAllBuilding(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, String searchKeyword, Model model) {
-
-        Page<BuildingDto.BuildingResponseDto> buildingList = null;
-        // 만약 키워드 값이 null 이면 전체 빌딩 값 페이지로 반환
-        if(searchKeyword == null){
-            buildingList = adminService.getAllBuilding(page, size);
-        } else {
-            buildingList = adminService.getAllSearchBuilding(page, size, searchKeyword);
-        }
-
+    public String getAllBuilding(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model) {
+        Page<BuildingDto.BuildingResponseDto> buildingList = adminService.getAllBuilding(page, size);
 
         model.addAttribute("buildingList", buildingList);
         model.addAttribute("currentPage", page);
@@ -240,16 +232,6 @@ public class AdminController {
         adminService.deleteArticle(articleId);
         return "redirect:/admin/article/chart";
     }
-
-    // 매물 검색
-//    @GetMapping("/building/list")
-//    public String buildingList(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-//                               @RequestParam(value = "kw", defaultValue = "") String kw){
-//        Page<BuildingEntity> paging = adminService.getBuildingList(page, kw);
-//        model.addAttribute("paging", paging);
-//        model.addAttribute("kw", kw);
-//        return "buildingForm";
-//    }
 
 
 
