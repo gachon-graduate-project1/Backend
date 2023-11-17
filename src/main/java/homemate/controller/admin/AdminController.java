@@ -127,8 +127,17 @@ public class AdminController {
     }
 
     @GetMapping("/building/chart")
-    public String getAllBuilding(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, Model model) {
-        Page<BuildingDto.BuildingResponseDto> buildingList = adminService.getAllBuilding(page, size);
+    public String getAllBuilding(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, String searchKeyword, Model model) {
+
+        Page<BuildingDto.BuildingResponseDto> buildingList = null;
+
+        // 키워드 값이 null이면 전체 매물 조회
+        if(searchKeyword == null){
+            buildingList = adminService.getAllBuilding(page, size);
+        } else {
+            buildingList = adminService.getAllSearchBuilding(page, size, searchKeyword);
+        }
+
 
         model.addAttribute("buildingList", buildingList);
         model.addAttribute("currentPage", page);

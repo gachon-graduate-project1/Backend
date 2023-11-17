@@ -165,6 +165,41 @@ public class AdminService {
         return buildingList;
     }
 
+    public Page<BuildingDto.BuildingResponseDto> getAllSearchBuilding(int page, int size, String keyword){
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        // 키워드에 해당하는 엔티티 반환
+        Page<BuildingEntity> buildingEntities = buildingRepository.findKeyword(keyword, pageable);
+
+        log.info("dto 변환 시작");
+        // 페이지를 Dto로 변환
+        Page<BuildingDto.BuildingResponseDto> buildingList = buildingEntities.map(m ->
+                BuildingDto.BuildingResponseDto.builder()
+                        .id(m.getId())
+                        .address(m.getAddress())
+                        .content(m.getContent())
+                        .floor(m.getFloor())
+                        .warantPrice(m.getWarantPrice())
+                        .dealPrice(m.getDealPrice())
+                        .rentPrice(m.getRentPrice())
+                        .moveInDate(m.getMoveInDate())
+                        .checkDuplex(m.getCheckDuplex())
+                        .direction(m.getDirection())
+                        .numberOfParking(m.getNumberOfParking())
+                        .realterName(m.getRealterName())
+                        .realterNumber(m.getRealterNumber())
+                        .buildingField(m.getBuildingField())
+                        .buildingName(m.getBuildingName())
+                        .numberOfRoom(m.getNumberOfRoom())
+                        .images(m.getImages())
+                        .transactionType(m.getTransactionType())
+                        .build());
+
+
+        return buildingList;
+    }
+
     public Page<ArticleDto.ArticleResponseDto> getAllArticle(int page, int size){
         // 페이지 설정
         Pageable pageable = PageRequest.of(page, size);
