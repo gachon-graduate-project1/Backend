@@ -165,6 +165,42 @@ public class AdminService {
         return buildingList;
     }
 
+    public Page<BuildingDto.BuildingResponseDto> getAllSearchBuilding(int page, int size, String searchKeyword){
+        // 페이지 설정
+        Pageable pageable = PageRequest.of(page, size);
+
+        // 키워드를 통한 검색
+        Page<BuildingEntity> buildingEntities = buildingRepository.findKeyword(searchKeyword, pageable);
+
+
+        log.info("dto 변환 시작");
+        // 페이지를 Dto로 변환
+        Page<BuildingDto.BuildingResponseDto> buildingList = buildingEntities.map(m ->
+                BuildingDto.BuildingResponseDto.builder()
+                        .id(m.getId())
+                        .address(m.getAddress())
+                        .content(m.getContent())
+                        .floor(m.getFloor())
+                        .warantPrice(m.getWarantPrice())
+                        .dealPrice(m.getDealPrice())
+                        .rentPrice(m.getRentPrice())
+                        .moveInDate(m.getMoveInDate())
+                        .checkDuplex(m.getCheckDuplex())
+                        .direction(m.getDirection())
+                        .numberOfParking(m.getNumberOfParking())
+                        .realterName(m.getRealterName())
+                        .realterNumber(m.getRealterNumber())
+                        .buildingField(m.getBuildingField())
+                        .buildingName(m.getBuildingName())
+                        .numberOfRoom(m.getNumberOfRoom())
+                        .images(m.getImages())
+                        .transactionType(m.getTransactionType())
+                        .build());
+
+
+        return buildingList;
+    }
+
     public Page<ArticleDto.ArticleResponseDto> getAllArticle(int page, int size){
         // 페이지 설정
         Pageable pageable = PageRequest.of(page, size);
@@ -273,6 +309,22 @@ public class AdminService {
         articleRepository.deleteById(articleId);
         log.info("삭제된 아이디: {}", articleId);
     }
+
+//    public Page<BuildingEntity> getBuildingList(int page, String kw){
+//
+//        List<BuildingEntity> buildingEntities = buildingRepository.findKeyword(kw);
+//        // 페이지 설정
+//        Pageable pageable = PageRequest.of(page, 10);
+//
+//        int start = (int) pageable.getOffset();
+//        int end = Math.min((start + pageable.getPageSize()), buildingEntities.size());
+//
+//        // 리스트를 페이지로 변환
+//        Page<BuildingEntity> buildingEntityPage = new PageImpl<>(buildingEntities.subList(start, end), pageable, buildingEntities.size());
+//
+//
+//        return buildingEntityPage;
+//    }
 
     public PasswordEncoder getPasswordEncoder() {
         return passwordEncoder;
