@@ -19,4 +19,7 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity,Long> {
 
     @Query("SELECT a FROM ArticleEntity a")
     Page<ArticleEntity> getAllArticle(Pageable pageable);
+
+    @Query("SELECT a FROM ArticleEntity a")
+    List<ArticleEntity> getAllArticle();
 }

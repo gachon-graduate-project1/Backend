@@ -26,19 +26,17 @@ public class CommentController {
         return ResponseEntity.ok().body(responseDto);
     }
 
+//    @GetMapping("/get")
+//    public ResponseEntity<?> getComment(@RequestParam("commentId") Long commentId) {
+//        CommentDto.CommentResponseDto comment = commentService.getComment(commentId);
+//        return ResponseEntity.ok().body(comment);
+//    }
 
-
-    @GetMapping("/get")
-    public ResponseEntity<?> getComment(@RequestParam("commentId") Long commentId) {
-        CommentDto.CommentResponseDto comment = commentService.getComment(commentId);
-        return ResponseEntity.ok().body(comment);
-    }
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteComment(@RequestParam Long commentId) {
-        commentService.deleteComment(commentId);
-        return ResponseEntity.ok().body("Deleted Comment Id : " + commentId);
-    }
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteComment(@RequestParam Long commentId) {
+//        commentService.deleteComment(commentId);
+//        return ResponseEntity.ok().body("Deleted Comment Id : " + commentId);
+//    }
 
     /**
      * 댓글 신고
