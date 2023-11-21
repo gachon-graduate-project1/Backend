@@ -26,7 +26,6 @@ public interface AdminMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target="id", ignore = true)
     @Mapping(target="createAt", ignore = true)
-    @Mapping(target="modifiedAt", ignore = true)
     @Mapping(target="status", ignore = true)
     void updateFromPatchDto(AdminDto.AdminPatchDto adminPatchDto, @MappingTarget AdminEntity adminEntity);
 

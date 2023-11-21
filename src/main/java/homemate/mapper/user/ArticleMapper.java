@@ -29,8 +29,8 @@ public interface ArticleMapper {
     ArticleEntity toResponseEntity(ArticleDto.ArticleResponseDto articleResponseDto);
 
 
-    @Mapping(target = "user", ignore = true)
-    @Mapping(target = "complain", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "user", source = "userEntity")
     ArticleEntity toReqeustEntity(ArticleDto.ArticleRequestDto articleRequestDto, UserEntity userEntity);
 
 

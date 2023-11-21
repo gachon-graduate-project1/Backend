@@ -6,7 +6,10 @@ import homemate.domain.admin.AdminEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
+import homemate.exception.BusinessLogicException;
+import homemate.exception.ExceptionCode;
 import homemate.repository.admin.AdminRepository;
+import homemate.repository.building.BuildingRepository;
 import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.CommentRepository;
 import homemate.repository.user.UserRepository;
@@ -37,7 +40,7 @@ public class Init {
         initUsers();
         //initBuildings();
         initArticles();
-        initComments();
+//        initComments();
     }
 
     @Transactional
@@ -54,7 +57,7 @@ public class Init {
 
     @Transactional
     public void initUsers() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 20; i++) {
             UserEntity user = new UserEntity();
             user.setUserName("user" + (i+1));
             user.setNickName("userNickname" + (i+1));
@@ -94,7 +97,7 @@ public class Init {
     @Transactional
     public void initArticles() {
         List<UserEntity> user = userRepository.findAll();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             ArticleEntity article = new ArticleEntity();
             article.setUser(user.get(i));
             article.setTitle("게시글" + i);
@@ -106,20 +109,21 @@ public class Init {
     }
 
 
-    @Transactional
-    public void initComments(){
-        List<UserEntity> user = userRepository.findAll();
-        List<ArticleEntity> article = articleRepository.findAll();
-        for (int i = 0; i < 5; i++) {
-            CommentEntity comment = new CommentEntity();
-            comment.setUser(user.get(i));
-            comment.setArticle(article.get(i));
-            comment.setContent("댓글" + i);
-            comment.setStatus(Status.ACTIVE);
-            comment.setComplain(i);
-            commentRepository.save(comment);
-        }
 
-    }
+//    @Transactional
+//    public void initComments(){
+//        List<UserEntity> user = userRepository.findAll();
+//        List<ArticleEntity> article = articleRepository.findAll();
+//        for (int i = 0; i < 5; i++) {
+//            CommentEntity comment = new CommentEntity();
+//            comment.setUser(user.get(i));
+//            comment.setArticle(article.get(i));
+//            comment.setContent("댓글" + i);
+//            comment.setStatus(Status.ACTIVE);
+//            comment.setComplain(i);
+//            commentRepository.save(comment);
+////        }
+//
+//    }
 
 }

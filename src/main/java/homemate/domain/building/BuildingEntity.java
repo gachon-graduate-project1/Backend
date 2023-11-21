@@ -20,9 +20,6 @@ public class BuildingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Enumerated(EnumType.STRING)
-//    private District district;
-
     private String address;  //소재지(매물 세부 주소)
 
     private String content; //매물특징
