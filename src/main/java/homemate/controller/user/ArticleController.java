@@ -1,4 +1,5 @@
 package homemate.controller.user;
+import homemate.dto.building.BuildingDto;
 import homemate.dto.user.ArticleDto;
 import homemate.service.user.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +25,17 @@ public class ArticleController {
         return ResponseEntity.ok().body(responseDto);
     }
 
-    @GetMapping("/get")
-    public ResponseEntity<?> getArticle(@RequestParam("articleId") Long articleId) {
-        ArticleDto.ArticleResponseDto article = articleService.getArticle(articleId);
-        return ResponseEntity.ok().body(article);
-    }
+//    @GetMapping("/get")
+//    public ResponseEntity<?> getArticle(@RequestParam("articleId") Long articleId) {
+//        ArticleDto.ArticleResponseDto article = articleService.getArticle(articleId);
+//        return ResponseEntity.ok().body(article);
+//    }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
-        articleService.deleteArticle(articleId);
-        return ResponseEntity.ok().body("Deleted Article Id : " + articleId);
-    }
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
+//        articleService.deleteArticle(articleId);
+//        return ResponseEntity.ok().body("Deleted Article Id : " + articleId);
+//    }
 
     /**
      * 게시글 검색
@@ -54,5 +55,14 @@ public class ArticleController {
     @PatchMapping("/addComplain")
     public ResponseEntity<?> addComplain(@RequestParam("articleId") Long articleId) {
         return ResponseEntity.ok().body(articleService.complainArticle(articleId));
+    }
+
+    /**
+     * 전체 매물 조회
+     */
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ArticleDto.ArticleResponseDto>> getAllArticle() {
+        List<ArticleDto.ArticleResponseDto> articles = articleService.getAllArticle();
+        return ResponseEntity.ok().body(articles);
     }
 }

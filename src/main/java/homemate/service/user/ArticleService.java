@@ -1,6 +1,8 @@
 package homemate.service.user;
+import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.UserEntity;
+import homemate.dto.building.BuildingDto;
 import homemate.dto.user.ArticleDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
@@ -108,6 +110,23 @@ public class ArticleService {
             return articleMapper.toResponseDto(articleEntity);
 
         }
+    }
+
+    /**
+     * 전체 게시글 조회
+     */
+    @Transactional
+    public List<ArticleDto.ArticleResponseDto> getAllArticle(){
+
+        List<ArticleEntity> articleEntities = articleRepository.getAllArticle();
+        List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
+
+        for (ArticleEntity articleEntity : articleEntities) {
+            ArticleDto.ArticleResponseDto articleResponseDto = articleMapper.toResponseDto(articleEntity);
+            articleResponseDtos.add(articleResponseDto);
+        }
+
+        return articleResponseDtos;
     }
 
 
