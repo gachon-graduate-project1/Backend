@@ -47,5 +47,8 @@ public class ArticleEntity extends TimeStamp {
 
 
 
+
+
+
 }
 

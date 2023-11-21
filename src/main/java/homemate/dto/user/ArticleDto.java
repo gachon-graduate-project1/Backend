@@ -3,6 +3,7 @@ import homemate.domain.user.CommentEntity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -46,6 +47,9 @@ public class ArticleDto {
         private Integer complain; // 게시글 신고 횟수 (최대 10회)
 
         private List<CommentEntity> comments;
+
+
+        private LocalDateTime createAt;
 
 
 

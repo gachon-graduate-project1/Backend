@@ -1,5 +1,4 @@
 package homemate.mapper.user;
-
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.UserDto;
 import org.mapstruct.*;
@@ -40,21 +39,7 @@ public interface UserMapper {
     UserEntity toRequestEntity(UserDto.UserRequestDto userRequestDto);
 
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target="id", ignore = true)
-    @Mapping(target="createAt", ignore = true)
-    @Mapping(target="modifiedAt", ignore = true)
-    @Mapping(target="status", ignore = true)
-    @Mapping(target="userName", ignore = true)
-    @Mapping(target="password", ignore = true)
-    @Mapping(target="email", ignore = true)
-    @Mapping(target = "role", ignore = true)
-    @Mapping(target="socialType", ignore = true)
-    @Mapping(target="socialId", ignore = true)
-    @Mapping(target="refreshToken", ignore = true)
-    @Mapping(target = "articles", ignore = true)
-    @Mapping(target = "comments", ignore = true)
-    void updateFromPatchDto(UserDto.UserPatchDto userPatchDto, @MappingTarget UserEntity userEntity);
+
 
 
 }

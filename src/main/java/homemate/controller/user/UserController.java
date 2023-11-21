@@ -1,6 +1,7 @@
 package homemate.controller.user;
 
 import homemate.config.jwt.service.JwtService;
+import homemate.dto.building.BuildingDto;
 import homemate.dto.user.UserDto;
 import homemate.service.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -117,6 +118,15 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.ok().body("Deleted UserId: " + userId);
     }
+
+
+    @GetMapping("/getUser")
+    public ResponseEntity<?> getUser (@RequestParam("userId") Long userId) {
+
+        UserDto.UserResponseDto user = userService.getUser(userId);
+        return ResponseEntity.ok().body(user);
+    }
+
 
 
 

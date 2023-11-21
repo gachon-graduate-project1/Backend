@@ -1,6 +1,7 @@
 package homemate.domain;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,11 +15,20 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class) //자동 시간 매핑
 public abstract class TimeStamp {
+
+
     @CreatedDate
     private LocalDateTime createAt;
 
-    @LastModifiedDate
-    private LocalDateTime modifiedAt;
+//    @LastModifiedDate
+//    private LocalDateTime modifiedAt;
+
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        createAt = now;
+//        modifiedAt = now;
+    }
 
 
 }

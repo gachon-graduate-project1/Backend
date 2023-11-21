@@ -49,6 +49,9 @@ public class ArticleService {
         return responseDto;
     }
 
+
+
+
     public ArticleDto.ArticleResponseDto getArticle(Long articleId) {
 
         ArticleEntity articleEntity = articleRepository.findById(articleId)
