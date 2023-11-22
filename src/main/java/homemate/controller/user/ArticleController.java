@@ -25,11 +25,11 @@ public class ArticleController {
         return ResponseEntity.ok().body(responseDto);
     }
 
-//    @GetMapping("/get")
-//    public ResponseEntity<?> getArticle(@RequestParam("articleId") Long articleId) {
-//        ArticleDto.ArticleResponseDto article = articleService.getArticle(articleId);
-//        return ResponseEntity.ok().body(article);
-//    }
+    @GetMapping("/get")
+    public ResponseEntity<?> getArticle(@RequestParam("articleId") Long articleId) {
+        ArticleDto.ArticleResponseDto article = articleService.getArticle(articleId);
+        return ResponseEntity.ok().body(article);
+    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
