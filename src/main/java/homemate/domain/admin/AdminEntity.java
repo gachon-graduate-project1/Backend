@@ -1,6 +1,5 @@
 package homemate.domain.admin;
 import homemate.constant.Role;
-import homemate.constant.Status;
 import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,7 +24,5 @@ public class AdminEntity extends TimeStamp {
     @Enumerated(EnumType.STRING)
     private final Role role = Role.ADMIN;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
 }
 

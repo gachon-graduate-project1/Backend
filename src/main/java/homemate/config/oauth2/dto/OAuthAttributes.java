@@ -1,12 +1,10 @@
 package homemate.config.oauth2.dto;
-
 import homemate.config.jwt.util.PasswordUtil;
 import homemate.config.oauth2.userinfo.KakaoOAuth2UserInfo;
 import homemate.config.oauth2.userinfo.NaverOAuth2UserInfo;
 import homemate.config.oauth2.userinfo.OAuth2UserInfo;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
-import homemate.constant.Status;
 import homemate.domain.user.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,7 +55,6 @@ public class OAuthAttributes {
                 .role(Role.GUEST)
 //                .nickName("")
 //                .userName("")
-                .status(Status.ACTIVE)
                 .build();
     }
 }

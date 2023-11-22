@@ -20,13 +20,11 @@ public interface UserMapper {
      * Dto -> Entity
      */
     @Mapping(target ="password", ignore = true )
-    @Mapping(target ="status", ignore = true )
     UserEntity toResponseEntity(UserDto.UserResponseDto userResponseDto);
 
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target="id", ignore = true)
-    @Mapping(target="status", ignore = true)
     @Mapping(target="userName", ignore = true)
     @Mapping(target="password", ignore = true)
     @Mapping(target="email", ignore = true)
