@@ -31,11 +31,11 @@ public class ArticleController {
 //        return ResponseEntity.ok().body(article);
 //    }
 
-//    @DeleteMapping("/delete")
-//    public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
-//        articleService.deleteArticle(articleId);
-//        return ResponseEntity.ok().body("Deleted Article Id : " + articleId);
-//    }
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteArticle(@RequestParam Long articleId) {
+        articleService.deleteArticle(articleId);
+        return ResponseEntity.ok().body("Deleted Article Id : " + articleId);
+    }
 
     /**
      * 게시글 검색
