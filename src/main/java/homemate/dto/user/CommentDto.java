@@ -40,6 +40,7 @@ public class CommentDto {
 
         private Integer complain; // 게시글 신고 횟수 (최대 10회)
 
+
     }
 
 

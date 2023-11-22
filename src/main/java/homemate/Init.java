@@ -1,15 +1,11 @@
 package homemate;
 
 import homemate.constant.SocialType;
-import homemate.constant.Status;
 import homemate.domain.admin.AdminEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
-import homemate.exception.BusinessLogicException;
-import homemate.exception.ExceptionCode;
 import homemate.repository.admin.AdminRepository;
-import homemate.repository.building.BuildingRepository;
 import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.CommentRepository;
 import homemate.repository.user.UserRepository;
@@ -40,7 +36,7 @@ public class Init {
         initUsers();
         //initBuildings();
         initArticles();
-//        initComments();
+        initComments();
     }
 
     @Transactional
@@ -49,7 +45,6 @@ public class Init {
         AdminEntity admin = new AdminEntity();
         admin.setAdminName("admin");
         admin.setPassword("homemate");
-        admin.setStatus(Status.ACTIVE);
         adminRepository.save(admin);
 
 
@@ -63,7 +58,6 @@ public class Init {
             user.setNickName("userNickname" + (i+1));
             user.setPassword("userPs" + (i+1));
             user.setEmail("user" + (i+1) + "@example.com");
-            user.setStatus(Status.ACTIVE);
             user.setSocialType(SocialType.KAKAO);
             user.setSocialId("userSocialId" + (i+1));
             user.setRefreshToken("userRefreshToken" + (i+1));
@@ -102,7 +96,6 @@ public class Init {
             article.setUser(user.get(i));
             article.setTitle("게시글" + i);
             article.setContent("내용" + i);
-            article.setStatus(Status.ACTIVE);
             article.setComplain(0);
             articleRepository.save(article);
         }
@@ -110,20 +103,17 @@ public class Init {
 
 
 
-//    @Transactional
-//    public void initComments(){
-//        List<UserEntity> user = userRepository.findAll();
-//        List<ArticleEntity> article = articleRepository.findAll();
-//        for (int i = 0; i < 5; i++) {
-//            CommentEntity comment = new CommentEntity();
-//            comment.setUser(user.get(i));
-//            comment.setArticle(article.get(i));
-//            comment.setContent("댓글" + i);
-//            comment.setStatus(Status.ACTIVE);
-//            comment.setComplain(i);
-//            commentRepository.save(comment);
-////        }
-//
-//    }
-
+    @Transactional
+    public void initComments(){
+        List<UserEntity> user = userRepository.findAll();
+        List<ArticleEntity> article = articleRepository.findAll();
+        for (int i = 0; i < 5; i++) {
+            CommentEntity comment = new CommentEntity();
+            comment.setUser(user.get(i));
+            comment.setArticle(article.get(i));
+            comment.setContent("댓글" + i);
+            comment.setComplain(i);
+            commentRepository.save(comment);
+        }
+    }
 }

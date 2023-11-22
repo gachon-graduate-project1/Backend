@@ -1,4 +1,5 @@
 package homemate.mapper.user;
+import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.user.CommentDto;
@@ -25,13 +26,16 @@ public interface CommentMapper {
      * Dto -> Entity
      */
 
-    @Mapping(target ="status", ignore = true )
     @Mapping(source = "userId", target = "user.id") //게시글 작성자 매핑
     @Mapping(source = "articleId", target = "article.id") //게시글 작성자 매핑
     CommentEntity toResponseEntity(CommentDto.CommentResponseDto commentResponseDto);
 
+
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "userEntity")//게시글 작성자 매핑
-    @Mapping(target = "article", ignore = true) //게시글 작성자 매핑
-    CommentEntity toRequestEntity(CommentDto.CommentRequestDto commentRequestDto, UserEntity userEntity);
+    @Mapping(target = "article", source = "articleEntity")
+    @Mapping(target = "complain", source = "commentRequestDto.complain")
+    @Mapping(target = "content", source = "commentRequestDto.content")
+    CommentEntity toRequestEntity(CommentDto.CommentRequestDto commentRequestDto, UserEntity userEntity, ArticleEntity articleEntity);
 
 }

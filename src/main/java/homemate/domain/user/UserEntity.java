@@ -3,7 +3,6 @@ package homemate.domain.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import homemate.constant.Role;
 import homemate.constant.SocialType;
-import homemate.constant.Status;
 import homemate.domain.TimeStamp;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,9 +43,6 @@ public class UserEntity extends TimeStamp {
     @Enumerated(EnumType.STRING)
     private Role role = Role.GUEST;
 
-
-    @Enumerated(EnumType.STRING)
-    private Status status;
 
     @Enumerated(EnumType.STRING)
     private SocialType socialType;

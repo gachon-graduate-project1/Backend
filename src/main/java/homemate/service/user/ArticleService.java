@@ -55,7 +55,7 @@ public class ArticleService {
     public ArticleDto.ArticleResponseDto getArticle(Long articleId) {
 
         ArticleEntity articleEntity = articleRepository.findById(articleId)
-                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_IS_NOT_EXIST));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_NOT_EXIST));
 
         return articleMapper.toResponseDto(articleEntity);
 
@@ -93,7 +93,7 @@ public class ArticleService {
     public ArticleDto.ArticleResponseDto complainArticle(Long articleId) {
 
         ArticleEntity articleEntity = articleRepository.findById(articleId)
-                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_IS_NOT_EXIST));
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_NOT_EXIST));
 
         //신고 + 1
         int complain = articleEntity.getComplain();

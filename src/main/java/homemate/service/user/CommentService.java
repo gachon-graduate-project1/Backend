@@ -2,21 +2,17 @@ package homemate.service.user;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
-import homemate.dto.user.ArticleDto;
 import homemate.dto.user.CommentDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.user.CommentMapper;
+import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.CommentRepository;
 import homemate.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -27,25 +23,27 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;
     private final UserRepository userRepository;
+    private final ArticleRepository articleRepository;
 
     /**
      * 댓글 수정 X, 삭제만 가능
      */
     @Transactional
     public CommentDto.CommentResponseDto createComment(Long userId, CommentDto.CommentRequestDto commentRequestDto) {
-
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
 
+        ArticleEntity articleEntity = articleRepository.findById(commentRequestDto.getArticleId())
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ARTICLE_NOT_EXIST));
 
-        CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity));
+        CommentEntity savedComment = commentRepository.save(commentMapper.toRequestEntity(commentRequestDto, userEntity, articleEntity));
         CommentDto.CommentResponseDto responseDto = commentMapper.toResponseDto(savedComment);
         responseDto.setUserId(userId);
         responseDto.setArticleId(commentRequestDto.getArticleId());
 
-
         return responseDto;
     }
+
 
 
 

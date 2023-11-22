@@ -24,7 +24,6 @@ public interface ArticleMapper {
      * Dto -> Entity
      */
 
-    @Mapping(target ="status", ignore = true )
     @Mapping(source = "userId", target = "user.id") //게시글 작성자 매핑
     ArticleEntity toResponseEntity(ArticleDto.ArticleResponseDto articleResponseDto);
 

@@ -48,25 +48,11 @@ public class ArticleDto {
 
         private List<CommentEntity> comments;
 
-
         private LocalDateTime createAt;
 
 
 
     }
-
-//    @Getter
-//    @Setter
-//    @AllArgsConstructor
-//    @NoArgsConstructor
-//    @Builder
-//    public static class ArticlePatchDto {
-//
-//        private Long id;
-//
-//        private Integer complain; // 게시글 신고 횟수 (최대 10회)
-//
-//    }
 
 
 }
