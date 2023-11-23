@@ -3,6 +3,7 @@ import homemate.domain.user.CommentEntity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ArticleDto {
 
         private List<CommentDto.CommentResponseDto> comments;
 
-        private LocalDateTime createAt;
+        private LocalDate createAt;
 
 
 

@@ -8,7 +8,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Setter
 @Getter
@@ -18,17 +20,14 @@ public abstract class TimeStamp {
 
 
     @CreatedDate
-    private LocalDateTime createAt;
-
-//    @LastModifiedDate
-//    private LocalDateTime modifiedAt;
+    private LocalDate createAt;
 
     @PrePersist
     public void prePersist() {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDate now = LocalDate.now();
         createAt = now;
-//        modifiedAt = now;
     }
+
 
 
 }
