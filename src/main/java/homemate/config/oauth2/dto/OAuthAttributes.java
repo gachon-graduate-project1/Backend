@@ -1,4 +1,5 @@
 package homemate.config.oauth2.dto;
+
 import homemate.config.jwt.util.PasswordUtil;
 import homemate.config.oauth2.userinfo.KakaoOAuth2UserInfo;
 import homemate.config.oauth2.userinfo.NaverOAuth2UserInfo;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
+import java.util.UUID;
 
 @Getter
 @Slf4j
@@ -50,7 +52,7 @@ public class OAuthAttributes {
         return UserEntity.builder()
                 .socialType(socialType)
                 .socialId(oAuth2UserInfo.getId())
-                .email(oAuth2UserInfo.getEmail())
+                .email(UUID.randomUUID() + "@socialUser.com")
                 .password(PasswordUtil.generateRandomPassword())
                 .role(Role.GUEST)
 //                .nickName("")
