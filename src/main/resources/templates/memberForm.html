@@ -141,8 +141,7 @@
           <div class="col">
             <button type="button" class="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal0"
-                    th:attr="data-user-id=${member.id}"
+                    th:attr="data-bs-target='#exampleModal0' + ${member.id}"
                     style="font-size: 15px; padding: 10px 20px;">
               수정
             </button>
@@ -156,44 +155,48 @@
 
 
             <!-- 수정 모달-->
-            <div class="modal fade" id="exampleModal0" tabindex="-1" aria-labelledby="exampleModalLabel0" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel0" style="font-size: 30px;">사용자 수정</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <!-- 사용자 닉네임을 표시 -->
-                    <p>기존 닉네임: <span th:text="${member.nickName}"></span></p>
+            <div th:each="member : ${userList}">
+              <div class="modal fade" th:id="'exampleModal0' + ${member.id}" tabindex="-1" aria-labelledby="'exampleModalLabel0' + ${member.id}" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel0" style="font-size: 30px;">사용자 수정</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- 사용자 닉네임을 표시 -->
+                      <p>기존 닉네임: <span id="originalNickName" th:text="${member.nickName}"></span></p>
 
-                    <form id="updateUserForm" onsubmit="event.preventDefault(); saveUserData()">
-                      <input type="hidden" id="userId" th:value="${member.id}" />
-                      <label for="nickName" style="font-size: 24px;">닉네임:</label>
-                      <input type="text" id="nickName" th:value="${member.nickName}" style="font-size: 24px;" />
-                      <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
-                    </form>
+                      <form id="'updateUserForm' + ${member.id}" onsubmit="event.preventDefault(); saveUserData('${member.id}')">
+                        <input type="hidden" id="'userId' + ${member.id}" th:value="${member.id}" />
+                        <label for="'nickName' + ${member.id}" style="font-size: 24px;">닉네임:</label>
+                        <input type="text" id="'nickName' + ${member.id}" th:value="${member.nickName}" style="font-size: 24px;" />
+                        <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
+                      </form>
 
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 15px; padding: 10px 20px;">취소</button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 15px; padding: 10px 20px;">취소</button>
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
+
 
             <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
             <script>
 
-              function saveUserData() {
-                var userId = document.getElementById("userId").value;
-                var newNickname = document.getElementById("nickName").value;
+              function saveUserData(userId) {
+                var UserId = document.getElementById("'userId' + " + userId).value;
+                var newNickname = document.getElementById("'nickName' + " + userId).value;
 
 
 
                 var data = {
                   nickName: newNickname,
-                  userId: userId
+                  userId: UserId
                 };
 
                 fetch("/admin/update/user", {
@@ -208,11 +211,15 @@
                 })
                         .then(response => {
                           if (response.ok) {
-                            $('#exampleModal0').modal('hide');
+                            $('[id="exampleModal0' + userId + '"]').modal('hide');
                             location.reload();
                             alert("수정 성공!")
 
-                            document.getElementById("nickName").innerText = newNickname;
+                            // document.getElementById("nickName").innerText = newNickname;
+                            document.querySelector("#exampleModal0" + userId + " .modal-body p span").innerText = newNickname;
+
+                            // 해당 모달에서 기존 닉네임을 업데이트
+                            $('#originalNickName').text(newNickname);
                           } else {
                             console.error("오류 발생");
                             alert("닉네임을 수정할 수 없습니다.")
