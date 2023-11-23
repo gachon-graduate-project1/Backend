@@ -1,6 +1,9 @@
 package homemate.dto.user;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * 댓글 수정 불가
  */
@@ -42,6 +45,7 @@ public class CommentDto {
 
         private Integer complain; // 게시글 신고 횟수 (최대 10회)
 
+        private LocalDate createAt;
 
     }
 

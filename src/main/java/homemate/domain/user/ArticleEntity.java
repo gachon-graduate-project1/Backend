@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ArticleEntity extends TimeStamp {
 
+
     @Id
     @Column(name = "article_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
