@@ -1,12 +1,15 @@
 package homemate.service.user;
 import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
+import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
 import homemate.dto.building.BuildingDto;
 import homemate.dto.user.ArticleDto;
+import homemate.dto.user.CommentDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
 import homemate.mapper.user.ArticleMapper;
+import homemate.mapper.user.CommentMapper;
 import homemate.repository.user.ArticleRepository;
 import homemate.repository.user.CommentRepository;
 import homemate.repository.user.UserRepository;
@@ -29,6 +32,7 @@ public class ArticleService {
     private final ArticleMapper articleMapper;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
 
     /**
      * 커뮤니티 게시글 수정 X, 삭제만 가능
@@ -118,19 +122,49 @@ public class ArticleService {
     /**
      * 전체 게시글 조회
      */
-    @Transactional
-    public List<ArticleDto.ArticleResponseDto> getAllArticle(){
+//    @Transactional
+//    public List<ArticleDto.ArticleResponseDto> getAllArticle(){
+//
+//        List<ArticleEntity> articleEntities = articleRepository.getAllArticle();
+//        List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
+//
+//        for (ArticleEntity articleEntity : articleEntities) {
+//            ArticleDto.ArticleResponseDto articleResponseDto = articleMapper.toResponseDto(articleEntity);
+//            articleResponseDtos.add(articleResponseDto);
+//        }
+//
+//        return articleResponseDtos;
+//    }
 
+    @Transactional
+    public List<ArticleDto.ArticleResponseDto> getAllArticle() {
         List<ArticleEntity> articleEntities = articleRepository.getAllArticle();
         List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
 
         for (ArticleEntity articleEntity : articleEntities) {
             ArticleDto.ArticleResponseDto articleResponseDto = articleMapper.toResponseDto(articleEntity);
+
+            // 가져온 댓글들을 매핑할 때 userId와 nickName을 설정
+            List<CommentEntity> comments = articleEntity.getComments();
+            List<CommentDto.CommentResponseDto> commentDtos = new ArrayList<>();
+            for (CommentEntity commentEntity : comments) {
+                CommentDto.CommentResponseDto commentResponseDto = commentMapper.toResponseDto(commentEntity);
+
+                // 추가로 필요한 매핑이 있다면 여기에 계속해서 추가
+                commentResponseDto.setUserId(commentEntity.getUser().getId());
+                commentResponseDto.setNickName(commentEntity.getUser().getNickName());
+
+                commentDtos.add(commentResponseDto);
+            }
+
+            articleResponseDto.setComments(commentDtos);
             articleResponseDtos.add(articleResponseDto);
         }
 
         return articleResponseDtos;
     }
+
+
 
 
 
