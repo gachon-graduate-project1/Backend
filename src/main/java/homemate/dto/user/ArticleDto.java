@@ -40,6 +40,8 @@ public class ArticleDto {
 
         private Long userId; //게시글 작성한 사용자 id
 
+        private String nickName;
+
         private String title; //제목
 
         private String content; //내용
