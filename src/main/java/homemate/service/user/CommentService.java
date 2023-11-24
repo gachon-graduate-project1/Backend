@@ -75,7 +75,7 @@ public class CommentService {
         complain++;
 
         //10회 이상일 경우 게시글 삭제
-        if(complain >= 10){
+        if(complain >= 5){
 
             //댓글 삭제
             deleteComment(commentId);
