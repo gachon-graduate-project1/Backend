@@ -104,7 +104,7 @@ public class ArticleService {
         complain++;
 
         //10회 이상일 경우 게시글 삭제
-        if(complain >= 10){
+        if(complain >= 5){
             //영속성 문제로 게시글에 달린 댓글 먼저 삭제
             commentRepository.deleteByArticle(articleEntity);
             //게시글 삭제
