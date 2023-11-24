@@ -77,6 +77,9 @@ public class CommentService {
         //10회 이상일 경우 게시글 삭제
         if(complain >= 10){
 
+            // 연관된 게시글 참조 해제
+            commentEntity.getArticle().getComments().remove(commentEntity);
+
             //댓글 삭제
             deleteComment(commentId);
             return null;

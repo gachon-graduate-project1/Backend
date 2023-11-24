@@ -184,7 +184,7 @@ public class Init {
             comment6.setUser(user.get(10));
             comment6.setArticle(article.get(3));
             comment6.setContent("저도 여기사는데 완전 추천이요!");
-            comment6.setComplain(0);
+            comment6.setComplain(9);
             commentRepository.save(comment6);
 
 
