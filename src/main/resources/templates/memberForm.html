@@ -108,123 +108,40 @@
       <td class="row">
         <div class="col">
           <div class="col">
-            <button type="button" class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    th:attr="data-bs-target='#exampleModal0' + ${member.id}"
-                    style="font-size: 15px; padding: 10px 20px;">
-              수정
-            </button>
             <button type="button" class="btn btn-danger"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    th:attr="data-user-id=${member.id}"
+                    th:attr="data-bs-target='#deleteModal' + ${member.id}"
                     style="font-size: 15px; padding: 10px 20px;">
               삭제
             </button>
 
-
-            <!-- 수정 모달-->
+            <!-- 삭제 모달-->
             <div th:each="member : ${userList}">
-              <div class="modal fade" th:id="'exampleModal0' + ${member.id}" tabindex="-1" aria-labelledby="'exampleModalLabel0' + ${member.id}" aria-hidden="true">
+              <div class="modal fade" th:id="'deleteModal' + ${member.id}" tabindex="-1" aria-labelledby="'deleteModalLabel' + ${member.id}" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel0" style="font-size: 30px;">사용자 수정</h5>
+                      <h5 class="modal-title" th:id="'deleteModalLabel' + ${member.id}" style="font-size: 15px;">사용자 삭제</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <!-- 사용자 닉네임을 표시 -->
-                      <p>기존 닉네임: <span id="originalNickName" th:text="${member.nickName}"></span></p>
-
-                      <form id="'updateUserForm' + ${member.id}" onsubmit="event.preventDefault(); saveUserData('${member.id}')">
-                        <input type="hidden" id="'userId' + ${member.id}" th:value="${member.id}" />
-                        <label for="'nickName' + ${member.id}" style="font-size: 24px;">닉네임:</label>
-                        <input type="text" id="'nickName' + ${member.id}" th:value="${member.nickName}" style="font-size: 24px;" />
-                        <button type="submit" class="btn btn-primary" style="font-size: 30px; padding: 10px 20px;">저장</button>
-                      </form>
-
+                      정말 삭제하시겠습니까?
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 15px; padding: 10px 20px;">취소</button>
+                      <button type="button" class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                              style="font-size: 15px; padding: 10px 20px;">
+                        취소
+                      </button>
+                      <form th:action="@{/admin/delete/user}" method="post">
+                        <input type="hidden" th:name="userId" th:value="${member.id}" />
+                        <button type="submit" class="btn btn-danger" style="font-size: 15px; padding: 10px 20px;">삭제</button>
+                      </form>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
-
-
-            <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-            <script>
-
-              function saveUserData(userId) {
-                var UserId = document.getElementById("'userId' + " + userId).value;
-                var newNickname = document.getElementById("'nickName' + " + userId).value;
-
-
-
-                var data = {
-                  nickName: newNickname,
-                  userId: UserId
-                };
-
-                fetch("/admin/update/user", {
-                  credentials: 'include',
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json"
-
-                  },
-                  // body: new URLSearchParams(data).toString()
-                  body: JSON.stringify(data)
-                })
-                        .then(response => {
-                          if (response.ok) {
-                            $('[id="exampleModal0' + userId + '"]').modal('hide');
-                            location.reload();
-                            alert("수정 성공!")
-
-                            // document.getElementById("nickName").innerText = newNickname;
-                            document.querySelector("#exampleModal0" + userId + " .modal-body p span").innerText = newNickname;
-
-                            // 해당 모달에서 기존 닉네임을 업데이트
-                            $('#originalNickName').text(newNickname);
-                          } else {
-                            console.error("오류 발생");
-                            alert("닉네임을 수정할 수 없습니다.")
-                          }
-                        })
-                        .catch(error => {
-                          console.error("오류 발생: " + error);
-                        });
-
-              }
-            </script>
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel" style="font-size: 15px;">사용자 삭제</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  정말 삭제하시겠습니까?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                          style="font-size: 15px; padding: 10px 20px;">
-                    취소
-                  </button>
-                  <form th:action="@{/admin/delete/user}" method="post">
-                    <input type="hidden" th:name="userId" th:value="${member.id}" />
-                    <button type="submit" class="btn btn-danger" style="font-size: 15px; padding: 10px 20px;">삭제</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         </div>
