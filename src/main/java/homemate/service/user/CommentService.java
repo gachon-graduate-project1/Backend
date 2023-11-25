@@ -1,7 +1,10 @@
 package homemate.service.user;
+import homemate.domain.building.BuildingEntity;
 import homemate.domain.user.ArticleEntity;
 import homemate.domain.user.CommentEntity;
 import homemate.domain.user.UserEntity;
+import homemate.dto.building.BuildingDto;
+import homemate.dto.user.ArticleDto;
 import homemate.dto.user.CommentDto;
 import homemate.exception.BusinessLogicException;
 import homemate.exception.ExceptionCode;
@@ -13,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -92,4 +98,17 @@ public class CommentService {
         }
     }
 
+    @Transactional
+    public List<CommentDto.CommentResponseDto> getAllComment(){
+
+        List<CommentEntity> commentEntities = commentRepository.getAllComment();
+        List<CommentDto.CommentResponseDto> commentResponseDtos = new ArrayList<>();
+
+        for (CommentEntity commentEntity : commentEntities) {
+            CommentDto.CommentResponseDto commentResponseDto = commentMapper.toResponseDto(commentEntity);
+            commentResponseDtos.add(commentResponseDto);
+        }
+
+        return commentResponseDtos;
+    }
 }
