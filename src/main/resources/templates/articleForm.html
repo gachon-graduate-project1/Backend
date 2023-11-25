@@ -46,7 +46,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">HOMEMATE</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="d-flex align-items-center ml-auto">
@@ -98,7 +98,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="article : ${articleList}">
+        <tr th:each="article, rowStat : ${articleList}">
             <td th:text="${article.id}" scope="row"></td>
             <td th:text="${article.userId}"></td>
             <td th:text="${article.title}"></td>
@@ -107,13 +107,12 @@
                 <div class="col">
                     <button type="button" class="btn btn-danger"
                             data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            th:attr="data-article-id=${article.id}"
+                            th:attr="data-article-id=${article.id}, data-bs-target='#exampleModal-' + ${rowStat.index}"
                             style="font-size: 15px; padding: 10px 20px;">
                         삭제
                     </button>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" th:id="'exampleModal-' + ${rowStat.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
