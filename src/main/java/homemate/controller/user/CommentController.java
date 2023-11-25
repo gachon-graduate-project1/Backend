@@ -1,5 +1,6 @@
 package homemate.controller.user;
 
+import homemate.dto.building.BuildingDto;
 import homemate.dto.user.ArticleDto;
 import homemate.dto.user.CommentDto;
 import homemate.service.user.CommentService;
@@ -47,5 +48,11 @@ public class CommentController {
         return ResponseEntity.ok().body(commentService.complainComment(commentId));
     }
 
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<CommentDto.CommentResponseDto>> getAllComment() {
+        List<CommentDto.CommentResponseDto> comments = commentService.getAllComment();
+        return ResponseEntity.ok().body(comments);
+    }
 
 }
