@@ -107,7 +107,9 @@ public class BuildingService {
     @Transactional
     public List<BuildingDto.BuildingResponseDto> searchBuilding(String keyword) {
 
-        List<BuildingEntity> buildingEntities = buildingRepository.findKeyword(keyword);
+        String processedKeyword = keyword.replaceAll("\\s+","");
+
+        List<BuildingEntity> buildingEntities = buildingRepository.findKeyword(processedKeyword);
         List<BuildingDto.BuildingResponseDto> buildingResponseDtos = new ArrayList<>();
 
 
