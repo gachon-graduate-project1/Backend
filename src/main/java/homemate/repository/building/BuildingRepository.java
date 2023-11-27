@@ -13,10 +13,10 @@ import java.util.Optional;
 @Repository
 public interface BuildingRepository extends JpaRepository<BuildingEntity,Long> {
 
-    @Query("SELECT b FROM BuildingEntity b WHERE REPLACE(b.address, ' ', '') LIKE %:keyword%")
+    @Query("SELECT b FROM BuildingEntity b WHERE b.address LIKE %:keyword%")
     List<BuildingEntity> findKeyword(String keyword);
 
-    @Query("SELECT b FROM BuildingEntity b WHERE REPLACE(b.address, ' ', '') LIKE %:keyword%")
+    @Query("SELECT b FROM BuildingEntity b WHERE b.address LIKE %:keyword%")
     Page<BuildingEntity> findKeyword(String keyword,Pageable pageable);
 
     @Query("SELECT b FROM BuildingEntity b")

@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ArticleRepository extends JpaRepository<ArticleEntity,Long> {
 
-    @Query("SELECT a FROM ArticleEntity a WHERE REPLACE(a.title, ' ', '') LIKE %:keyword%")
+    @Query("SELECT a FROM ArticleEntity a WHERE a.title LIKE %:keyword% ")
     List<ArticleEntity> findKeyword(String keyword);
 
 

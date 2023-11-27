@@ -74,7 +74,9 @@ public class ArticleService {
     @Transactional
     public List<ArticleDto.ArticleResponseDto> searchArticle(String keyword) {
 
-        List<ArticleEntity> articleEntities = articleRepository.findKeyword(keyword);
+        String processedKeyword = keyword.replaceAll("\\s+","");
+
+        List<ArticleEntity> articleEntities = articleRepository.findKeyword(processedKeyword);
         List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
 
         if (articleEntities.isEmpty()) {
@@ -122,19 +124,6 @@ public class ArticleService {
     /**
      * 전체 게시글 조회
      */
-//    @Transactional
-//    public List<ArticleDto.ArticleResponseDto> getAllArticle(){
-//
-//        List<ArticleEntity> articleEntities = articleRepository.getAllArticle();
-//        List<ArticleDto.ArticleResponseDto> articleResponseDtos = new ArrayList<>();
-//
-//        for (ArticleEntity articleEntity : articleEntities) {
-//            ArticleDto.ArticleResponseDto articleResponseDto = articleMapper.toResponseDto(articleEntity);
-//            articleResponseDtos.add(articleResponseDto);
-//        }
-//
-//        return articleResponseDtos;
-//    }
 
     @Transactional
     public List<ArticleDto.ArticleResponseDto> getAllArticle() {
