@@ -54,7 +54,7 @@ public class Init {
 
     @Transactional
     public void initUsers() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             UserEntity user = new UserEntity();
             user.setUserName("user" + (i+1));
             user.setNickName("userNickname" + (i+1));
