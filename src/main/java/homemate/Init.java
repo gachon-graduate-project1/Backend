@@ -197,6 +197,15 @@ public class Init {
             comment6.setComplain(9);
             commentRepository.save(comment6);
 
+            for (int i = 7; i <= 29; i++) {
+                CommentEntity commentEx = new CommentEntity();
+                commentEx.setUser(user.get(2));
+                commentEx.setArticle(article.get(i));
+                commentEx.setContent("반갑습니다!!!");
+                commentEx.setComplain(0);
+                commentRepository.save(commentEx);
+            }
+
 
         }
     }
