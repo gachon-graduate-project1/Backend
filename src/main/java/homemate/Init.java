@@ -129,7 +129,7 @@ public class Init {
             article4.setComplain(0);
             articleRepository.save(article4);
 
-            for (int i = 5; i <= 30; i++) {
+            for (int i = 5; i <= 29; i++) {
                 ArticleEntity articleEx = new ArticleEntity();
                 articleEx.setUser(user.get(i));
                 articleEx.setTitle("안녕하세요 !");
