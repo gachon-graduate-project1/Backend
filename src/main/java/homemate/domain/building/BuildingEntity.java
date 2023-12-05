@@ -54,16 +54,6 @@ public class BuildingEntity {
 
     private String title; //제목
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(
-            name = "building_images",
-            joinColumns = @JoinColumn(name = "building_id")
-    )
-    @Column(name = "image_url")
-    private List<String> images = new ArrayList<>(); //매물 사진
 
-    public void updateBuildingImages(List<String> noticeImages) {
-        this.images = noticeImages;
-    }
 }
 

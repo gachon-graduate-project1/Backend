@@ -70,18 +70,5 @@ public class BuildingController {
 
     }
 
-    /**
-     * 매물 사진 수정
-     */
-
-    @PostMapping(value = "/updateBuildingImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateBuildingImages(@RequestParam Long buildingId, @RequestPart List<MultipartFile> imageList) {
-        return ResponseEntity.ok().body(buildingService.updateBuildingImages(buildingId, imageList));
-    }
-
-
-
-
-
 
 }

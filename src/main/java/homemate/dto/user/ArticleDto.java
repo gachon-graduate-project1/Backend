@@ -25,7 +25,7 @@ public class ArticleDto {
 
         private String content; //내용
 
-        private Integer complain; // 게시글 신고 횟수 (최대 10회)
+        private Integer complain; // 게시글 신고 횟수 (최대 5회)
 
 
     }
@@ -47,7 +47,7 @@ public class ArticleDto {
 
         private String content; //내용
 
-        private Integer complain; // 게시글 신고 횟수 (최대 10회)
+        private Integer complain; // 게시글 신고 횟수 (최대 5회)
 
         private List<CommentDto.CommentResponseDto> comments;
 
