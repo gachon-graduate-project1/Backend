@@ -85,20 +85,6 @@ public class BuildingService {
         log.info("삭제된 building: {}",buildingId);
     }
 
-    @Transactional
-    public List<String> updateBuildingImages(Long buildingId, List<MultipartFile> imageList) {
-        BuildingEntity buildingEntity = buildingRepository.findById(buildingId)
-                .orElseThrow(()->new BusinessLogicException(ExceptionCode.BUILDING_IS_NOT_EXIST));
-
-        //기존 이미지 삭제
-        buildingEntity.getImages().forEach(s3Service::deleteFile);
-
-        //새로운 이미지 업로드
-        List<String> newImageUrls = s3Service.uploadFileList(imageList);
-        buildingEntity.updateBuildingImages(newImageUrls);
-
-        return newImageUrls;
-    }
 
 
     /**

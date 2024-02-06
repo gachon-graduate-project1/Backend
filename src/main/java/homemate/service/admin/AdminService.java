@@ -157,7 +157,6 @@ public class AdminService {
                         .buildingField(m.getBuildingField())
                         .buildingName(m.getBuildingName())
                         .numberOfRoom(m.getNumberOfRoom())
-                        .images(m.getImages())
                         .transactionType(m.getTransactionType())
                         .build());
 
@@ -192,7 +191,6 @@ public class AdminService {
                         .buildingField(m.getBuildingField())
                         .buildingName(m.getBuildingName())
                         .numberOfRoom(m.getNumberOfRoom())
-                        .images(m.getImages())
                         .transactionType(m.getTransactionType())
                         .build());
 

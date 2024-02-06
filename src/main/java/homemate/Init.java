@@ -54,7 +54,7 @@ public class Init {
 
     @Transactional
     public void initUsers() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             UserEntity user = new UserEntity();
             user.setUserName("user" + (i+1));
             user.setNickName("userNickname" + (i+1));
@@ -129,6 +129,15 @@ public class Init {
             article4.setComplain(0);
             articleRepository.save(article4);
 
+            for (int i = 5; i <= 29; i++) {
+                ArticleEntity articleEx = new ArticleEntity();
+                articleEx.setUser(user.get(i));
+                articleEx.setTitle("안녕하세요 !");
+                articleEx.setContent("반갑습니다.");
+                articleEx.setComplain(0);
+                articleRepository.save(articleEx);
+            }
+
 
         }
     }
@@ -187,6 +196,15 @@ public class Init {
             comment6.setContent("저도 여기사는데 완전 추천이요!");
             comment6.setComplain(0);
             commentRepository.save(comment6);
+
+            for (int i = 7; i <= 29; i++) {
+                CommentEntity commentEx = new CommentEntity();
+                commentEx.setUser(user.get(2));
+                commentEx.setArticle(article.get(i));
+                commentEx.setContent("반갑습니다!!!");
+                commentEx.setComplain(0);
+                commentRepository.save(commentEx);
+            }
 
 
         }
