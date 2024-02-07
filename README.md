@@ -8,6 +8,19 @@
 
 <br></br>
 
+# 프로젝트 사용기술
+- Spring Boot
+- Java 17
+- MySQL
+- Gradle
+- AWS S3, S3 Bucket
+- Swagger
+- Spring Security
+- Intellij IDEA
+
+
+<br></br>
+
 # 서비스 구성 및 개요
 
 ![image](https://github.com/gachon-graduate-project1/Backend/assets/109260733/3f50b790-5f18-4388-aa47-e0b012ef0069)
